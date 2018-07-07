@@ -8,4 +8,28 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>mall-manage-service</artifactId>
+
+	<!-- 添加依赖 -->
+	<dependencies>
+		<dependency>
+			<artifactId>mall-manage-mapper</artifactId>
+			<groupId>com.mall.manage</groupId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<!-- 分页助手 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jsqlparser</groupId>
+			<artifactId>jsqlparser</artifactId>
+		</dependency>
+	</dependencies>
 </project>
