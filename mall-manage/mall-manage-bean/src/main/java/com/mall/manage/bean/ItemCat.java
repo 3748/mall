@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Table;
 
 /**
- * @describe 商品类目(TB_ITEM_CAT)
+ * @describe 商品类目
  * @author gp6
  * @date 2018-07-07
  */
