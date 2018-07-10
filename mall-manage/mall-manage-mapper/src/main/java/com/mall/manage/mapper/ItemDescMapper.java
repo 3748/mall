@@ -4,7 +4,7 @@ import com.github.abel533.mapper.Mapper;
 import com.mall.manage.bean.ItemDesc;
 
 /**
- * 商品规格参数
+ * 商品描述
  * 
  * @author gp6
  * @date 2018-07-09

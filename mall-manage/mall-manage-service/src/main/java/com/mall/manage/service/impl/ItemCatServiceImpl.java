@@ -21,7 +21,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 	private ItemCatMapper itemCatMapper;
 	
 	@Override
-	public List<ItemCat> getListByParentId(Long parentId) {
+	public List<ItemCat> getListByParentId(int parentId) {
 		ItemCat itemCat = new ItemCat();
 		itemCat.setParentId(parentId);
 		return itemCatMapper.select(itemCat);

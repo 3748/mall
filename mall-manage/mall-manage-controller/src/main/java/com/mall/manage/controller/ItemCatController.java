@@ -14,7 +14,7 @@ import com.mall.manage.bean.ItemCat;
 import com.mall.manage.service.ItemCatService;
 
 /**
- * @describe 商品类目
+ * 商品类目
  * @author gp6
  * @date 2018-07-07
  */
@@ -27,12 +27,13 @@ public class ItemCatController {
 
 	/**
 	 * 根据父id获取所有的子商品类目
+	 * 
 	 * @param parentId
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ItemCat>> getListByParentId(
-			@RequestParam(value = "id", defaultValue = "0") Long parentId) {
+			@RequestParam(value = "id", defaultValue = "0") int parentId) {
 		try {
 			List<ItemCat> list = itemCatService.getListByParentId(parentId);
 			if (null == list || list.isEmpty()) {

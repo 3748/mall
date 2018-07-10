@@ -1,19 +1,19 @@
 package com.mall.manage.service.impl;
 
-import java.util.Date;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.mall.common.constant.Constant;
+import com.mall.common.utils.DateTimeUtil;
 import com.mall.manage.bean.Item;
 import com.mall.manage.bean.ItemDesc;
-import com.mall.manage.bean.ItemParamItem;
+import com.mall.manage.bean.ItemParam;
 import com.mall.manage.mapper.ItemMapper;
 import com.mall.manage.model.ItemModel;
 import com.mall.manage.service.ItemDescService;
-import com.mall.manage.service.ItemParamItemService;
+import com.mall.manage.service.ItemParamService;
 import com.mall.manage.service.ItemService;
-import com.mall.common.constant.Constant;
 
 /**
  * 商品规格参数
@@ -21,44 +21,45 @@ import com.mall.common.constant.Constant;
  * @author gp6
  * @date 2018-07-07
  */
+@Service
 public class ItemServiceImpl implements ItemService {
-	
+
 	@Autowired
 	private ItemDescService itemDescService;
-	
+
 	@Autowired
-	private ItemParamItemService itemParamItemService;
-	
+	private ItemParamService itemParamService;
+
 	@Autowired
 	private ItemMapper itemMapper;
 
 	@Override
 	public Boolean saveItem(ItemModel itemModel) {
-		itemModel.setCreated(new Date());
-		itemModel.setUpdated(itemModel.getCreated());
-		
+		itemModel.setCreateTime(DateTimeUtil.getCurrentTime());
+		itemModel.setUpdateTime(itemModel.getCreateTime());
+
+		// 保存商品基本信息
 		Item item = new Item();
 		BeanUtils.copyProperties(itemModel, item);
 		item.setStatus(Constant.ITEM_STATUS_NORMAL);
-		Integer count1 = itemMapper.insert(item);
+		Integer countItem = itemMapper.insert(item);
 
+		// 保存商品描述
 		ItemDesc itemDesc = new ItemDesc();
 		itemDesc.setItemId(item.getId());
 		BeanUtils.copyProperties(itemModel, itemDesc);
-		Integer count2 = itemDescService.saveItemDesc(itemDesc);
+		Integer countItemDesc = itemDescService.saveItemDesc(itemDesc);
 
-		ItemParamItem itemParamItem = new ItemParamItem();
-		itemParamItem.setItemId(item.getId());
-		itemParamItem.setParamData(itemModel.getItemParams().toString());
-		Integer count3 = itemParamItemService.saveItemParamItem(itemParamItem);
+		// 保存商品规格参数
+		ItemParam itemParam = new ItemParam();
+		itemParam.setItemId(item.getId());
+		itemParam.setParamData(itemModel.getItemParams().toString());
+		Integer countItemParam = itemParamService.saveItemParam(itemParam);
 
-		//sendMsg(item.getId(), "insert");
+		// sendMsg(item.getId(), "insert");
 
 		return Boolean.valueOf(
-			(count1.intValue() == 1)
-			&& (count2.intValue() == 1) 
-			&& (count3.intValue() == 1)
-		);
+				(countItem.intValue() == 1) && (countItemDesc.intValue() == 1) && (countItemParam.intValue() == 1));
 	}
 
 }

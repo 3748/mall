@@ -1,38 +1,69 @@
 package com.mall.manage.model;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @describe 新增商品时接收前台参数
+ * 新增商品时接收前台参数
  * 
  * @author gp6
- *
  * @date 2018-07-09
  */
 public class ItemModel {
 
+	/**
+	 * 商品标题
+	 */
 	private String title;
 
+	/**
+	 * 商品卖点
+	 */
 	private String sellPoint;
 
+	/**
+	 * 商品价格，单位为：分
+	 */
 	private Long price;
 
+	/**
+	 * 库存数量
+	 */
 	private Integer num;
 
+	/**
+	 * 商品条形码
+	 */
 	private String barcode;
 
+	/**
+	 * 商品图片
+	 */
 	private String image;
 
-	private Long cid;
+	/**
+	 * 所属类目，叶子类目
+	 */
+	private Integer cid;
 
+	/**
+	 * 商品描述
+	 */
 	private String itemDesc;
 
-	private Date created;
+	/**
+	 * 创建时间
+	 */
+	private Long createTime;
 
-	private Date updated;
+	/**
+	 * 更新时间
+	 */
+	private Long updateTime;
 
+	/**
+	 * 商品规格参数
+	 */
 	private List<Map<String, Object>> itemParams;
 
 	public String getTitle() {
@@ -83,11 +114,11 @@ public class ItemModel {
 		this.image = image;
 	}
 
-	public Long getCid() {
+	public Integer getCid() {
 		return cid;
 	}
 
-	public void setCid(Long cid) {
+	public void setCid(Integer cid) {
 		this.cid = cid;
 	}
 
@@ -99,27 +130,27 @@ public class ItemModel {
 		this.itemDesc = itemDesc;
 	}
 
+	public Long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}
+
+	public Long getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Long updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public List<Map<String, Object>> getItemParams() {
 		return itemParams;
 	}
 
 	public void setItemParams(List<Map<String, Object>> itemParams) {
 		this.itemParams = itemParams;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
 	}
 }

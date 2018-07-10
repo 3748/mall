@@ -1,7 +1,5 @@
 package com.mall.manage.bean;
 
-import java.util.Date;
-
 import javax.persistence.Table;
 
 /**
@@ -10,7 +8,7 @@ import javax.persistence.Table;
  * @author gp6
  * @date 2018-07-09
  */
-@Table(name = "tb_item_desc")
+@Table(name = "m_item_desc")
 public class ItemDesc {
 	/**
 	 * 商品ID
@@ -20,12 +18,12 @@ public class ItemDesc {
 	/**
 	 * 创建时间
 	 */
-	private Date created;
+	private Long createTime;
 
 	/**
 	 * 更新时间
 	 */
-	private Date updated;
+	private Long updateTime;
 
 	/**
 	 * 商品描述
@@ -54,39 +52,39 @@ public class ItemDesc {
 	/**
 	 * 创建时间
 	 * 
-	 * @return created 创建时间
+	 * @return create_time 创建时间
 	 */
-	public Date getCreated() {
-		return created;
+	public Long getCreateTime() {
+		return createTime;
 	}
 
 	/**
 	 * 创建时间
 	 * 
-	 * @param created
+	 * @param createTime
 	 *            创建时间
 	 */
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
 	}
 
 	/**
 	 * 更新时间
 	 * 
-	 * @return updated 更新时间
+	 * @return update_time 更新时间
 	 */
-	public Date getUpdated() {
-		return updated;
+	public Long getUpdateTime() {
+		return updateTime;
 	}
 
 	/**
 	 * 更新时间
 	 * 
-	 * @param updated
+	 * @param updateTime
 	 *            更新时间
 	 */
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdateTime(Long updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	/**

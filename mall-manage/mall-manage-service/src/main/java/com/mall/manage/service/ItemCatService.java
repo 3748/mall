@@ -15,5 +15,5 @@ public interface ItemCatService {
 	 * @param parentId
 	 * @return
 	 */
-	public List<ItemCat> getListByParentId(Long parentId);
+	public List<ItemCat> getListByParentId(int parentId);
 }
