@@ -22,6 +22,12 @@
 	</modules>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.mall.common</groupId>
+			<artifactId>mall-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
 		<!-- 单元测试 -->
 		<dependency>
 			<groupId>junit</groupId>

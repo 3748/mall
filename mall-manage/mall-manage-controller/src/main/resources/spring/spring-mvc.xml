@@ -26,5 +26,11 @@
 		<property name="prefix" value="/WEB-INF/"/>
 		<property name="suffix" value=".html"/>
 	</bean>
+	
+	<!-- 文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 限制文件最大为5MB 5*1024*1024-->
+		<property name="maxUploadSize" value="5242880"/>
+	</bean>
 
 </beans>
