@@ -2,4 +2,6 @@
 .classpath
 .project
 .settings
+/bin/
 /src/main/webapp/dist/
+/bin/
