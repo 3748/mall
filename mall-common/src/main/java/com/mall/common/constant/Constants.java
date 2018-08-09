@@ -7,7 +7,7 @@ package com.mall.common.constant;
  * @author gp6
  * @date 2018-07-07
  */
-public interface Constant {
+public interface Constants {
 
 	/*
 	 * 商品状态

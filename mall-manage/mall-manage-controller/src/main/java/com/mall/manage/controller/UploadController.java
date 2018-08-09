@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mall.common.constant.Constant;
+import com.mall.common.constant.Constants;
 import com.mall.manage.service.PropertieService;
 import com.mall.manage.vo.UploadImgResult;
 
@@ -49,7 +49,7 @@ public class UploadController {
 			throws Exception {
 		// 校验图片格式
 		boolean isLegal = false;
-		for (String type : Constant.IMAGE_TYPE) {
+		for (String type : Constants.IMAGE_TYPE) {
 			if (StringUtils.endsWithIgnoreCase(imageFile.getOriginalFilename(), type)) {
 				isLegal = true;
 				break;

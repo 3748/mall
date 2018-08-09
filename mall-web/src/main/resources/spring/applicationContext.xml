@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!-- 使用spring自带的占位符替换功能 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- 允许JVM参数覆盖 -->
+		<!-- java -Djdbc.url=123 -jar xxx.jar -->
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<!-- 忽略没有找到的资源文件 -->
+		<property name="ignoreResourceNotFound" value="true" />
+		<!-- 配置资源文件 -->
+		<property name="locations">
+			<list>
+				<!-- 
+					spring容器是父容器,Service属于父容器
+					SpringMVC容器是子容器,Controller属于子容器
+					
+					子容器可以读取父容器的资源(bean),Service可以注入Controller
+					父容器不能读取子容器的资源
+					
+					@value注解 是在所有bean创建成功之后才执行，且只能在当前容器的查找数据
+					env.properties(该配置文件属于spring容器)属于父容器
+					
+					Controller(子容器)中
+						@Value("${IMAGE_BASE_URL}")
+						private String IMAGE_BASE_URL;
+					
+					@Value只会在子容器中查找数据,所以不能找到
+					
+					
+					此时用Service当做中介,Service属于父容器,可以读取到配置文件中的值,
+					然后将Service注入到Controller中,即可完成上传路径配置文件的读取
+				 -->
+				<value>classpath:env.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 扫描包 -->
+	<context:component-scan base-package="com.tao"/>
+
+</beans>

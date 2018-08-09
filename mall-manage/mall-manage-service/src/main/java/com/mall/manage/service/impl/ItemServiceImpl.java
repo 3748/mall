@@ -4,7 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mall.common.constant.Constant;
+import com.mall.common.constant.Constants;
 import com.mall.common.utils.DateTimeUtil;
 import com.mall.manage.bean.Item;
 import com.mall.manage.bean.ItemDesc;
@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
 		// 保存商品基本信息
 		Item item = new Item();
 		BeanUtils.copyProperties(itemModel, item);
-		item.setStatus(Constant.ITEM_STATUS_NORMAL);
+		item.setStatus(Constants.ITEM_STATUS_NORMAL);
 		Integer countItem = itemMapper.insert(item);
 
 		// 保存商品描述
