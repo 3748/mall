@@ -4,12 +4,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mall.common</groupId>
 	<artifactId>mall-common</artifactId>
-	
+
 	<!-- 加入父依赖 -->
 	<parent>
 		<groupId>com.mall.parent</groupId>
 		<artifactId>mall-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+
+	<dependencies>
+		<!-- Jackson Json处理工具包 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>
