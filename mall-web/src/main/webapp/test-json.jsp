@@ -73,7 +73,7 @@
 		5:
 			通过jQuery使用jsonp请求
 	 -->
-	 <script type="text/javascript">
+	 <!-- <script type="text/javascript">
 	 	$(function() {
 			$.ajax({
 				url : "http://manage.mall.com/json.jsp",
@@ -88,6 +88,20 @@
 		function fun(data){
 			alert(data.abc)
 		}
+	</script>  -->
+	
+	<!-- 测试跨域请求数据 -->
+	<script type="text/javascript">
+	 	$(function() {
+			$.ajax({
+				url : "http://manage.mall.com/rest/api/item/cat",
+				type : "get",
+				dataType : "jsonp",
+				success : function(data) {
+					console.log(data);
+				}
+			})
+		})
 	</script> 
 	
 </body>

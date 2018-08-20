@@ -1,6 +1,5 @@
 package com.mall.manage.controller.api;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.manage.service.ItemCatService;
 import com.mall.manage.vo.ItemCatResult;
 
@@ -30,15 +27,15 @@ public class ItemCatApiController {
 	@Autowired
 	private ItemCatService itemCatService;
 
-	private static final ObjectMapper MAPPER = new ObjectMapper();
+	//private static final ObjectMapper MAPPER = new ObjectMapper();
 
 	/**
-	 * 
+	 * 接口单独支持jsonp
 	 * 首页左侧商品类目
 	 * 
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	/*@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<String> queryAllToTree(@RequestParam(value = "callback", required = false) String callback) {
 		try {
 			ItemCatResult itemCatResult = itemCatService.queryAllToTree();
@@ -57,7 +54,30 @@ public class ItemCatApiController {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	}*/
+
+	/**
+	 * 首页左侧商品类目
+	 * 项目统一支持jsonp后
+	 * 
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<ItemCatResult> queryAllToTree() {
+		try {
+			ItemCatResult itemCatResult = itemCatService.queryAllToTree();
+
+			if (null == itemCatResult) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}
+
+			//String result = MAPPER.writeValueAsString(itemCatResult);
+
+			return ResponseEntity.ok(itemCatResult);
+		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

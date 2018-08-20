@@ -56,8 +56,6 @@ public class ItemServiceImpl implements ItemService {
 		itemParam.setParamData(itemModel.getItemParams().toString());
 		Integer countItemParam = itemParamService.saveItemParam(itemParam);
 
-		// sendMsg(item.getId(), "insert");
-
 		return Boolean.valueOf(
 				(countItem.intValue() == 1) && (countItemDesc.intValue() == 1) && (countItemParam.intValue() == 1));
 	}
