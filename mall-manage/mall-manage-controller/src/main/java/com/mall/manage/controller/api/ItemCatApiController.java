@@ -1,5 +1,6 @@
 package com.mall.manage.controller.api;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ItemCatApiController {
 	@Autowired
 	private ItemCatService itemCatService;
 
-	private static ObjectMapper MAPPER;
+	private static final ObjectMapper MAPPER = new ObjectMapper();
 
 	/**
 	 * 
@@ -47,26 +48,18 @@ public class ItemCatApiController {
 			}
 
 			String result = MAPPER.writeValueAsString(itemCatResult);
-			return ResponseEntity.ok(result); 
-			/*
-			 * 
-			 * 
-			 * if (StringUtils.isEmpty(callback)) { //无需跨域支持 return
-			 * ResponseEntity.ok(result); }else { return ResponseEntity.ok(callback + "(" +
-			 * result + ")"); }
-			 */
+
+			// 无需跨域支持
+			if (StringUtils.isEmpty(callback)) {
+				return ResponseEntity.ok(result);
+			} else {
+				return ResponseEntity.ok(callback + "(" + result + ")");
+			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOGGER.error(e.getMessage());
 		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	}
-	/*
-	 * @RequestMapping(method = RequestMethod.GET) public
-	 * ResponseEntity<ItemCatResult> queryItemCatList() { try { ItemCatResult
-	 * itemCatResult = itemCatService.queryAllToTree(); return
-	 * ResponseEntity.ok(itemCatResult); } catch (Exception e) {
-	 * e.printStackTrace(); } return
-	 * ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); }
-	 */
 }
