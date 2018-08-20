@@ -51,7 +51,7 @@ public class Item {
 	/**
 	 * 所属类目，叶子类目
 	 */
-	private Integer cid;
+	private Integer item_cat_id;
 
 	/**
 	 * 商品状态，1-正常，2-下架，3-删除
@@ -204,20 +204,20 @@ public class Item {
 	/**
 	 * 所属类目，叶子类目
 	 * 
-	 * @return cid 所属类目，叶子类目
+	 * @return item_cat_id 所属类目，叶子类目
 	 */
-	public Integer getCid() {
-		return cid;
+	public Integer getItem_cat_id() {
+		return item_cat_id;
 	}
 
 	/**
 	 * 所属类目，叶子类目
 	 * 
-	 * @param cid
+	 * @param item_cat_id
 	 *            所属类目，叶子类目
 	 */
-	public void setCid(Integer cid) {
-		this.cid = cid;
+	public void setItem_cat_id(Integer item_cat_id) {
+		this.item_cat_id = item_cat_id;
 	}
 
 	/**
