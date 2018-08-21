@@ -2,6 +2,8 @@ package com.mall.manage.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ import com.mall.manage.service.ItemCatService;
 @Controller
 @RequestMapping(value = "item/cat")
 public class ItemCatController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ItemCatController.class);
 
 	@Autowired
 	private ItemCatService itemCatService;
@@ -42,7 +46,7 @@ public class ItemCatController {
 			}
 			return ResponseEntity.status(HttpStatus.OK).body(list);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	}

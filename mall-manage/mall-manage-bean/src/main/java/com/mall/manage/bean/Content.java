@@ -1,5 +1,14 @@
 package com.mall.manage.bean;
 
+import javax.persistence.Table;
+
+/**
+ * 首页内容
+ * 
+ * @author gp6
+ * @date 2018-08-21
+ */
+@Table(name = "m_content")
 public class Content {
     /**
      * 
