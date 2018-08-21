@@ -1,4 +1,4 @@
-package cn.itcast.httpclient;
+package cn.itcast.httpclient.get;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

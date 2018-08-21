@@ -7,7 +7,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
+import org.springframework.http.HttpStatus;
 
+/**
+ * 连接管理器(类似于数据库连接池)
+ * 
+ * @author gp6
+ * @date 2018-08-20
+ */
 public class HttpConnectManager {
 
     public static void main(String[] args) throws Exception {
@@ -32,7 +39,7 @@ public class HttpConnectManager {
             // 执行请求
             response = httpClient.execute(httpGet);
             // 判断返回状态是否为200
-            if (response.getStatusLine().getStatusCode() == 200) {
+            if (response.getStatusLine().getStatusCode() == HttpStatus.OK.value()) {
                 String content = EntityUtils.toString(response.getEntity(), "UTF-8");
                 System.out.println("内容长度：" + content.length());
             }
@@ -41,7 +48,7 @@ public class HttpConnectManager {
                 response.close();
             }
             // 此处不能关闭httpClient，如果关闭httpClient，连接池也会销毁
-            // httpClient.close();
+            //httpClient.close();
         }
     }
 

@@ -1,4 +1,4 @@
-package cn.itcast.httpclient;
+package cn.itcast.httpclient.post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,15 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.http.HttpStatus;
 
-public class DoPOSTParam {
+/**
+ * 带有参数的POST请求
+ * 
+ * @author gp6
+ * @date 2018-08-20
+ */
+public class DoPostParam {
 
     public static void main(String[] args) throws Exception {
 
@@ -36,7 +43,7 @@ public class DoPOSTParam {
             // 执行请求
             response = httpclient.execute(httpPost);
             // 判断返回状态是否为200
-            if (response.getStatusLine().getStatusCode() == 200) {
+            if (response.getStatusLine().getStatusCode() == HttpStatus.MOVED_PERMANENTLY.value()) {
                 String content = EntityUtils.toString(response.getEntity(), "UTF-8");
                 System.out.println(content);
             }
