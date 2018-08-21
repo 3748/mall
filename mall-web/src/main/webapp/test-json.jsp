@@ -19,7 +19,7 @@
 		alert($);
 		$(function() {
 			$.ajax({
-				url : "http://taomanage.com/json.jsp",
+				url : "http://mall.manage.com/json.jsp",
 				type : "get",
 				dataType : "json",
 				success : function(data) {

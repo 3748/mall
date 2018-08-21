@@ -3,12 +3,17 @@ package com.mall.manage.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * @describe 获取env.properties中的信息
+ * @author gp6
+ * @date 2018-07-07
+ */
 @Service
 public class PropertieService {
 
 	@Value("${image_base_url}")
-	public String IMAGE_BASE_URL;
+	public String imageBaseUrl;
 
 	@Value("${upload_dir}")
-	public String UPLOAD_DIR;
+	public String uploadDir;
 }

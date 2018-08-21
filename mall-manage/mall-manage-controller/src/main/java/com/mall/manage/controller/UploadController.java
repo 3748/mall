@@ -70,9 +70,9 @@ public class UploadController {
 		}
 
 		// 生成图片的绝对引用地址
-		String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertieService.UPLOAD_DIR), "\\",
+		String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertieService.uploadDir), "\\",
 				"/");
-		uploadImgResult.setUrl(propertieService.IMAGE_BASE_URL + picUrl);
+		uploadImgResult.setUrl(propertieService.imageBaseUrl + picUrl);
 
 		File newFile = new File(filePath);
 
@@ -105,7 +105,7 @@ public class UploadController {
 	}
 
 	private String getFilePath(String sourceFileName) {
-		String baseFolder = propertieService.UPLOAD_DIR + File.separator + "images";
+		String baseFolder = propertieService.uploadDir + File.separator + "images";
 		Date nowDate = new Date();
 		// yyyy/MM/dd
 		String fileFolder = baseFolder + File.separator + new DateTime(nowDate).toString("yyyy") + File.separator
