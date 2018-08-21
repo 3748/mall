@@ -38,7 +38,8 @@
 					此时用Service当做中介,Service属于父容器,可以读取到配置文件中的值,
 					然后将Service注入到Controller中,即可完成上传路径配置文件的读取
 				 -->
-				<value>classpath:env.properties</value>
+				<value>classpath:properties/env.properties</value>
+				<value>classpath:properties/httpclient.properties</value>
 			</list>
 		</property>
 	</bean>
