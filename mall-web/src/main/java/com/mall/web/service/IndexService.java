@@ -38,7 +38,6 @@ public class IndexService {
 	public String queryIndexAD1() {
 		try {
 			String url = this.manageMallUrl + this.indexAd1Url;
-			// String url ="http://taomanage.com/rest/content?categoryId=33&pageNum=1&pageSize=6";
 			String jsonData = httpClientUtil.doGet(url);
 
 			if (StringUtils.isEmpty(jsonData)) {
