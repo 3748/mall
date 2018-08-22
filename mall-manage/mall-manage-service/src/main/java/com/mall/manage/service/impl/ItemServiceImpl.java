@@ -14,6 +14,7 @@ import com.mall.manage.model.ItemModel;
 import com.mall.manage.service.ItemDescService;
 import com.mall.manage.service.ItemParamService;
 import com.mall.manage.service.ItemService;
+import com.mall.manage.vo.ItemVo;
 
 /**
  * 商品规格参数
@@ -61,8 +62,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public Item getItemInfoById(Long id){
-		return itemMapper.selectByPrimaryKey(id);
+	public ItemVo getItemInfoById(Long id){
+		return itemMapper.getItemInfoById(id);
 	}
 
 }

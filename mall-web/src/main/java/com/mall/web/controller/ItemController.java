@@ -1,4 +1,4 @@
-package com.mall.manage.controller.api;
+package com.mall.web.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,34 +9,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.mall.manage.bean.Item;
-import com.mall.manage.service.ItemService;
 import com.mall.manage.vo.ItemVo;
+import com.mall.web.service.ItemService;
 
 /**
- * 商品接口(供商城前台调用)
+ * 商品
  * 
  * @author gp6
- * @date 2018-08-16
+ * @date 2018-08-21
  */
 @Controller
-@RequestMapping({ "api/item" })
-public class ApiItemController {
+@RequestMapping({ "item" })
+public class ItemController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ApiItemController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
 
 	@Autowired
 	private ItemService itemService;
 
 	/**
-	 * 根据id查询商品信息
+	 * 调用mall.com/item/2.html, 会出现406错误,由于浏览器把数据当成html解析导致
 	 * 
-	 * @param itemId
+	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<Item> getItemInfoById(@PathVariable("id") Long id) {
+	public ResponseEntity<ItemVo> getItemInfoById1(@PathVariable("id") Long id) {
 		ItemVo itemVo = itemService.getItemInfoById(id);
 
 		try {
@@ -50,4 +50,19 @@ public class ApiItemController {
 		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	}
+
+	/**
+	 * 获取商品详情
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public ModelAndView getItemInfoById(@PathVariable("id") Long id) {
+		ItemVo itemVo = itemService.getItemInfoById(id);
+
+		ModelAndView modelAndView = new ModelAndView("item");
+		modelAndView.addObject("itemVo", itemVo);
+		return modelAndView;
+	}
+
 }

@@ -1,1 +1,2 @@
-﻿理解RedisService优化
+﻿1: 理解RedisService优化
+2: SpringMVC 以.html为后缀,返回json数据406问题

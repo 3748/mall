@@ -1,7 +1,7 @@
 package com.mall.manage.service;
 
-import com.mall.manage.bean.Item;
 import com.mall.manage.model.ItemModel;
+import com.mall.manage.vo.ItemVo;
 
 /**
  * @describe 商品管理
@@ -24,5 +24,5 @@ public interface ItemService {
 	 * @param itemId
 	 * @return
 	 */
-	public Item getItemInfoById(Long id);
+	public ItemVo getItemInfoById(Long id);
 }

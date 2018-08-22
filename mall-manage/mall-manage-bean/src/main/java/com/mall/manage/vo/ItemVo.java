@@ -9,5 +9,16 @@ import com.mall.manage.bean.Item;
  * @date 2018-08-22
  */
 public class ItemVo extends Item {
+	/**
+	 * 商品描述
+	 */
+	private String itemDesc;
 
+	public String getItemDesc() {
+		return itemDesc;
+	}
+
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
+	}
 }
