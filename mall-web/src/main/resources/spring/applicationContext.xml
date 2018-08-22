@@ -40,6 +40,7 @@
 				 -->
 				<value>classpath:properties/env.properties</value>
 				<value>classpath:properties/httpclient.properties</value>
+				<value>classpath:properties/redis.properties</value>
 			</list>
 		</property>
 	</bean>
