@@ -6,7 +6,7 @@ package com.mall.manage.vo;
  * @author gp6
  * @date 2018-07-10
  */
-public class UploadImgResult {
+public class UploadImgVo {
 	private Integer error;
 
 	private String url;

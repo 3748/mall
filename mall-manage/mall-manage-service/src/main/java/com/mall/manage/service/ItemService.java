@@ -1,5 +1,6 @@
 package com.mall.manage.service;
 
+import com.mall.manage.bean.Item;
 import com.mall.manage.model.ItemModel;
 
 /**
@@ -17,4 +18,11 @@ public interface ItemService {
 	 * @return
 	 */
 	public Boolean saveItem(ItemModel itemModel);
+	
+	/**
+	 * 获取商品信息
+	 * @param itemId
+	 * @return
+	 */
+	public Item getItemInfoById(Long id);
 }

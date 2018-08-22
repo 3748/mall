@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mall.manage.service.ItemCatService;
-import com.mall.manage.vo.ItemCatResult;
+import com.mall.manage.vo.ItemCatVo;
 
 /**
  * 商品类目接口(供商城前台调用)
@@ -20,9 +20,9 @@ import com.mall.manage.vo.ItemCatResult;
  */
 @Controller
 @RequestMapping({ "api/item/cat" })
-public class ItemCatApiController {
+public class ApiItemCatController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ItemCatApiController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ApiItemCatController.class);
 
 	@Autowired
 	private ItemCatService itemCatService;
@@ -66,9 +66,9 @@ public class ItemCatApiController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<ItemCatResult> queryAllToTree() {
+	public ResponseEntity<ItemCatVo> queryAllToTree() {
 		try {
-			ItemCatResult itemCatResult = itemCatService.queryAllToTree();
+			ItemCatVo itemCatResult = itemCatService.queryAllToTree();
 
 			if (null == itemCatResult) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

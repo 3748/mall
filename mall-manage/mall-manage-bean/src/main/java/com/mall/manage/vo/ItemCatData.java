@@ -5,7 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 商品数据
+ * 商品类目数据
  * 
  * @author gp6
  * @date 2018-07-10

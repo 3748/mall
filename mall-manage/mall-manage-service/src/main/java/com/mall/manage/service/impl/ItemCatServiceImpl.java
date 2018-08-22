@@ -5,14 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mall.common.utils.RedisUtil;
 import com.mall.manage.bean.ItemCat;
 import com.mall.manage.mapper.ItemCatMapper;
 import com.mall.manage.service.ItemCatService;
 import com.mall.manage.vo.ItemCatData;
-import com.mall.manage.vo.ItemCatResult;
+import com.mall.manage.vo.ItemCatVo;
 
 /**
  * @describe 商品类目
@@ -21,6 +26,18 @@ import com.mall.manage.vo.ItemCatResult;
  */
 @Service
 public class ItemCatServiceImpl implements ItemCatService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ItemCatServiceImpl.class);
+
+	/**
+	 * 定义key的规则:项目名_模块名_业务名
+	 */
+	private static final String REDIS_KEY = "MANAGE_MALL_ITEM_CAT_ALL";
+
+	private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
+
+	@Autowired
+	private RedisUtil redisUtil;
 
 	@Autowired
 	private ItemCatMapper itemCatMapper;
@@ -33,12 +50,27 @@ public class ItemCatServiceImpl implements ItemCatService {
 	}
 
 	@Override
-	public ItemCatResult queryAllToTree() {
+	public ItemCatVo queryAllToTree() {
+		// 先从缓存中查询,命中即返回
+		try {
+			String cacheData = redisUtil.get(REDIS_KEY);
+
+			// 查询到结果
+			if (StringUtils.isNotEmpty(cacheData)) {
+				// 此处将cacheData进行反序列化,因为存入的时候序列化存入
+				return OBJECTMAPPER.readValue(cacheData, ItemCatVo.class);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error("获取缓存失败,原因:{}" + e.getMessage());
+		}
+
+		// 缓存未能命中
 		List<ItemCat> cats = itemCatMapper.select(null);
-		ItemCatResult result = new ItemCatResult();
+		ItemCatVo result = new ItemCatVo();
 
 		// 转为map存储，key为父节点ID，value为数据集合
-		Map<Integer, List<ItemCat>> itemCatMap = new HashMap<Integer, List<ItemCat>>();
+		Map<Integer, List<ItemCat>> itemCatMap = new HashMap<Integer, List<ItemCat>>(16);
 		for (ItemCat itemCat : cats) {
 			if (!itemCatMap.containsKey(itemCat.getParentId())) {
 				itemCatMap.put(itemCat.getParentId(), new ArrayList<ItemCat>());
@@ -80,6 +112,14 @@ public class ItemCatServiceImpl implements ItemCatService {
 				break;
 			}
 		}
+
+		// 将查询结果集写入缓存,此处将result进行序列化
+		try {
+			redisUtil.set(REDIS_KEY, OBJECTMAPPER.writeValueAsString(result), 60 * 60 * 24 * 30 * 3);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 

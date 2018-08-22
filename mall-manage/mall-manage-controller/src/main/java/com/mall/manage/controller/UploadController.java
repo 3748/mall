@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.constant.Constants;
 import com.mall.manage.service.PropertieService;
-import com.mall.manage.vo.UploadImgResult;
+import com.mall.manage.vo.UploadImgVo;
 
 /**
  * 图片上传
@@ -57,7 +57,7 @@ public class UploadController {
 		}
 
 		// 封装Result对象，并且将文件的byte数组放置到result对象中
-		UploadImgResult uploadImgResult = new UploadImgResult();
+		UploadImgVo uploadImgResult = new UploadImgVo();
 
 		// 状态
 		uploadImgResult.setError(isLegal ? 0 : 1);

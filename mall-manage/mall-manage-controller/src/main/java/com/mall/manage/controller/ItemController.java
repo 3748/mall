@@ -21,7 +21,7 @@ import com.mall.manage.service.ItemService;
  * @date 2018-07-09
  */
 @Controller
-@RequestMapping({"item"})
+@RequestMapping({ "item" })
 public class ItemController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);

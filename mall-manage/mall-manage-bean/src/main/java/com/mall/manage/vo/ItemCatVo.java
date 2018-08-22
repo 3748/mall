@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author gp6
  * @date 2018-07-10
  */
-public class ItemCatResult {
+public class ItemCatVo {
 	//指定序列化json后的名称
 	@JsonProperty("data") 
 	private List<ItemCatData> itemCats = new ArrayList<ItemCatData>();

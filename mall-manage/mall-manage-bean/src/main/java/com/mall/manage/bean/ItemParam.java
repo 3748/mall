@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * @date 2018-07-09
  */
 @Table(name = "m_item_param")
-public class ItemParam {
+public class ItemParam extends Base {
     /**
      * 
      */
@@ -19,16 +19,6 @@ public class ItemParam {
      * 商品ID
      */
     private Long itemId;
-
-    /**
-     * 创建时间
-     */
-    private Long createTime;
-
-    /**
-     * 修改时间
-     */
-    private Long updateTime;
 
     /**
      * 参数数据，格式为json格式
@@ -65,38 +55,6 @@ public class ItemParam {
      */
     public void setItemId(Long itemId) {
         this.itemId = itemId;
-    }
-
-    /**
-     * 创建时间
-     * @return create_time 创建时间
-     */
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 创建时间
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 
-     * @return update_time 
-     */
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * 
-     * @param updateTime 
-     */
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
     }
 
     /**

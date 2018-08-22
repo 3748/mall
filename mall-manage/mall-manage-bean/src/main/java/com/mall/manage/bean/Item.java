@@ -2,6 +2,7 @@ package com.mall.manage.bean;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -11,11 +12,14 @@ import javax.persistence.Table;
  * @date 2018-07-09
  */
 @Table(name = "m_item")
-public class Item {
+public class Item extends Base {
 	/**
 	 * 商品id，同时也是商品编号
+	 * 
+	 * @GeneratedValue 返回自增主键
 	 */
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private Long id;
 
 	/**
@@ -51,22 +55,12 @@ public class Item {
 	/**
 	 * 所属类目，叶子类目
 	 */
-	private Integer item_cat_id;
+	private Integer itemCatId;
 
 	/**
 	 * 商品状态，1-正常，2-下架，3-删除
 	 */
 	private Integer status;
-
-	/**
-	 * 创建时间
-	 */
-	private Long createTime;
-
-	/**
-	 * 更新时间
-	 */
-	private Long updateTime;
 
 	/**
 	 * 商品id，同时也是商品编号
@@ -204,10 +198,10 @@ public class Item {
 	/**
 	 * 所属类目，叶子类目
 	 * 
-	 * @return item_cat_id 所属类目，叶子类目
+	 * @return itemCatId 所属类目，叶子类目
 	 */
-	public Integer getItem_cat_id() {
-		return item_cat_id;
+	public Integer getItemCatId() {
+		return itemCatId;
 	}
 
 	/**
@@ -216,8 +210,8 @@ public class Item {
 	 * @param item_cat_id
 	 *            所属类目，叶子类目
 	 */
-	public void setItem_cat_id(Integer item_cat_id) {
-		this.item_cat_id = item_cat_id;
+	public void setItemCatId(Integer itemCatId) {
+		this.itemCatId = itemCatId;
 	}
 
 	/**
@@ -237,43 +231,5 @@ public class Item {
 	 */
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-
-	/**
-	 * 创建时间
-	 * 
-	 * @return create_time 创建时间
-	 */
-	public Long getCreateTime() {
-		return createTime;
-	}
-
-	/**
-	 * 创建时间
-	 * 
-	 * @param createTime
-	 *            创建时间
-	 */
-	public void setCreateTime(Long createTime) {
-		this.createTime = createTime;
-	}
-
-	/**
-	 * 更新时间
-	 * 
-	 * @return update_time 更新时间
-	 */
-	public Long getUpdateTime() {
-		return updateTime;
-	}
-
-	/**
-	 * 更新时间
-	 * 
-	 * @param updateTime
-	 *            更新时间
-	 */
-	public void setUpdateTime(Long updateTime) {
-		this.updateTime = updateTime;
 	}
 }

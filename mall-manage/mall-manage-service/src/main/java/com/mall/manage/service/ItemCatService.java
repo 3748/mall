@@ -3,7 +3,7 @@ package com.mall.manage.service;
 import java.util.List;
 
 import com.mall.manage.bean.ItemCat;
-import com.mall.manage.vo.ItemCatResult;
+import com.mall.manage.vo.ItemCatVo;
 
 /**
  * @describe 商品类目
@@ -24,5 +24,5 @@ public interface ItemCatService {
 	 * 
 	 * @return
 	 */
-	public ItemCatResult queryAllToTree();
+	public ItemCatVo queryAllToTree();
 }

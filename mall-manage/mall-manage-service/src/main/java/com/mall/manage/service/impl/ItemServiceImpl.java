@@ -59,5 +59,10 @@ public class ItemServiceImpl implements ItemService {
 		return Boolean.valueOf(
 				(countItem.intValue() == 1) && (countItemDesc.intValue() == 1) && (countItemParam.intValue() == 1));
 	}
+	
+	@Override
+	public Item getItemInfoById(Long id){
+		return itemMapper.selectByPrimaryKey(id);
+	}
 
 }

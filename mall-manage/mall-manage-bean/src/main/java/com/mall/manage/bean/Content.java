@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * @date 2018-08-21
  */
 @Table(name = "m_content")
-public class Content {
+public class Content extends Base{
     /**
      * 
      */
@@ -49,16 +49,6 @@ public class Content {
      * 图片2
      */
     private String pic2;
-
-    /**
-     * 创建时间
-     */
-    private Long createTime;
-
-    /**
-     * 修改时间
-     */
-    private Long updateTime;
 
     /**
      * 内容
@@ -191,38 +181,6 @@ public class Content {
      */
     public void setPic2(String pic2) {
         this.pic2 = pic2 == null ? null : pic2.trim();
-    }
-
-    /**
-     * 创建时间
-     * @return create_time 创建时间
-     */
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 创建时间
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 修改时间
-     * @return update_time 修改时间
-     */
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * 修改时间
-     * @param updateTime 修改时间
-     */
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
     }
 
     /**

@@ -9,21 +9,11 @@ import javax.persistence.Table;
  * @date 2018-07-09
  */
 @Table(name = "m_item_desc")
-public class ItemDesc {
+public class ItemDesc extends Base {
 	/**
 	 * 商品ID
 	 */
 	private Long itemId;
-
-	/**
-	 * 创建时间
-	 */
-	private Long createTime;
-
-	/**
-	 * 更新时间
-	 */
-	private Long updateTime;
 
 	/**
 	 * 商品描述
@@ -47,44 +37,6 @@ public class ItemDesc {
 	 */
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
-	}
-
-	/**
-	 * 创建时间
-	 * 
-	 * @return create_time 创建时间
-	 */
-	public Long getCreateTime() {
-		return createTime;
-	}
-
-	/**
-	 * 创建时间
-	 * 
-	 * @param createTime
-	 *            创建时间
-	 */
-	public void setCreateTime(Long createTime) {
-		this.createTime = createTime;
-	}
-
-	/**
-	 * 更新时间
-	 * 
-	 * @return update_time 更新时间
-	 */
-	public Long getUpdateTime() {
-		return updateTime;
-	}
-
-	/**
-	 * 更新时间
-	 * 
-	 * @param updateTime
-	 *            更新时间
-	 */
-	public void setUpdateTime(Long updateTime) {
-		this.updateTime = updateTime;
 	}
 
 	/**
