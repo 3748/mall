@@ -39,6 +39,11 @@ public class ItemService {
 	@Autowired
 	private RedisUtil redisUtil;
 
+	/**
+	 * 因为缓存原因,当后台更改商品时,前台获取的商品不是最新(用MQ解决该问题)
+	 * @param id
+	 * @return
+	 */
 	public ItemVo getItemInfoById(Long id) {
 
 		// 从缓存中命中
