@@ -9,7 +9,8 @@ import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
 /**
- * 集群式的连接池(分片式集群)
+ * 集群式的连接池(分片式集群) 存在的问题： 无法动态增加减少服务节点。
+ * 如果动态增加或者减少redis数据库时,会导致jedis对key进行的hash运算的结果与之前的结果不一致,导致调用的redis数据库不一致,取不到原来的缓存数据.
  * 
  * @author gp6
  * @date 2018-08-21

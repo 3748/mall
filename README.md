@@ -6,7 +6,7 @@
 		Maven
 		Mysql
 		Redis
-		MQ 
+		RabbitMQ 
 		DUBBO
 		Lucene
 		Solr
