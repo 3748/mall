@@ -35,7 +35,7 @@ public class ItemController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "test/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ItemVo> getItemInfoById1(@PathVariable("id") Long id) {
 		ItemVo itemVo = itemService.getItemInfoById(id);
 
