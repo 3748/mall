@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%
-	String staticUrl = "http://taostatic.com";
+	String staticUrl = "http://static.mall.com";
 	request.setAttribute("staticUrl", staticUrl);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
