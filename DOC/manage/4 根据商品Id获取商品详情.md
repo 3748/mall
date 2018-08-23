@@ -11,6 +11,8 @@
 
 #### 返回值
 	{
+	    "createTime": 20180710152547,
+	    "updateTime": 20180710152547,
 	    "id": 2,
 	    "title": "商品标题",
 	    "sellPoint": "商品卖点",
@@ -20,6 +22,5 @@
 	    "image": "商品图片",
 	    "itemCatId": 3,
 	    "status": 1,
-	    "createTime": 20180710152547,
-	    "updateTime": 20180710152547
+	    "itemDesc": "商品描述"
 	}
