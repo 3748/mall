@@ -46,6 +46,12 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
+	<!--解决406问题-->
+	<servlet-mapping>
+		<servlet-name>mall-sso</servlet-name>
+		<url-pattern>/sso/*</url-pattern>
+	</servlet-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

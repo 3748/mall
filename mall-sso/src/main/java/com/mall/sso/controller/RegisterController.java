@@ -1,5 +1,7 @@
 package com.mall.sso.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ import com.mall.sso.service.RegisterService;
 @RequestMapping({"register"})
 @Controller
 public class RegisterController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterController.class);
 
     @Autowired
     private RegisterService registerService;
@@ -50,7 +54,7 @@ public class RegisterController {
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("账号信息校验失败,原因:{}"+e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
