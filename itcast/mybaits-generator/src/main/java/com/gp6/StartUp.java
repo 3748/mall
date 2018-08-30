@@ -15,35 +15,24 @@ import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
 /**
- * @创建时间:2018-06-28
- * 
- * @author:gp6
- * 
- * @描述:启动类
+ * 启动类
+ *
+ * @author gp6
+ * @date 2018/8/30
  */
 public class StartUp {
-	public static void main(String[] args) throws URISyntaxException {
-		try {
-			List<String> warnings = new ArrayList<String>();
-			boolean overwrite = true;
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-			InputStream is = classloader.getResourceAsStream("generatorConfig.xml");
-			//InputStream is = classloader.getResourceAsStream("mybatorConfig.xml");
-			ConfigurationParser cp = new ConfigurationParser(warnings);
-			Configuration config = cp.parseConfiguration(is);
-			DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-			MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-			myBatisGenerator.generate(null);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (InvalidConfigurationException e) {
-			e.printStackTrace();
-		} catch (XMLParserException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void main(String[] args) {
+        try {
+            List<String> warnings = new ArrayList<>();
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream is = classloader.getResourceAsStream("generatorConfig.xml");
+            ConfigurationParser cp = new ConfigurationParser(warnings);
+            Configuration config = cp.parseConfiguration(is);
+            DefaultShellCallback callback = new DefaultShellCallback(true);
+            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+            myBatisGenerator.generate(null);
+        } catch (SQLException | IOException | InterruptedException | InvalidConfigurationException | XMLParserException e) {
+            e.printStackTrace();
+        }
+    }
 }
