@@ -20,9 +20,16 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- 密码加密工具 -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
+        </dependency>
+
+        <!-- 表单校验工具 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
 
         <!-- 单元测试 -->
