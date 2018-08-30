@@ -4,14 +4,14 @@ import javax.persistence.Table;
 
 /**
  * 商品规格参数
- * 
+ *
  * @author gp6
  * @date 2018-07-09
  */
 @Table(name = "m_item_param")
 public class ItemParam extends Base {
     /**
-     * 
+     *
      */
     private Long id;
 
@@ -26,16 +26,14 @@ public class ItemParam extends Base {
     private String paramData;
 
     /**
-     * 
-     * @return id 
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id 
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
@@ -43,6 +41,7 @@ public class ItemParam extends Base {
 
     /**
      * 商品ID
+     *
      * @return item_id 商品ID
      */
     public Long getItemId() {
@@ -51,6 +50,7 @@ public class ItemParam extends Base {
 
     /**
      * 商品ID
+     *
      * @param itemId 商品ID
      */
     public void setItemId(Long itemId) {
@@ -59,6 +59,7 @@ public class ItemParam extends Base {
 
     /**
      * 参数数据，格式为json格式
+     *
      * @return param_data 参数数据，格式为json格式
      */
     public String getParamData() {
@@ -67,6 +68,7 @@ public class ItemParam extends Base {
 
     /**
      * 参数数据，格式为json格式
+     *
      * @param paramData 参数数据，格式为json格式
      */
     public void setParamData(String paramData) {

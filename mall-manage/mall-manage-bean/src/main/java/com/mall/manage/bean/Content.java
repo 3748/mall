@@ -4,14 +4,14 @@ import javax.persistence.Table;
 
 /**
  * 首页内容
- * 
+ *
  * @author gp6
  * @date 2018-08-21
  */
 @Table(name = "m_content")
-public class Content extends Base{
+public class Content extends Base {
     /**
-     * 
+     *
      */
     private Long id;
 
@@ -56,16 +56,14 @@ public class Content extends Base{
     private String content;
 
     /**
-     * 
-     * @return id 
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id 
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
@@ -73,6 +71,7 @@ public class Content extends Base{
 
     /**
      * 内容类目ID
+     *
      * @return content_cat_id 内容类目ID
      */
     public Long getContentCatId() {
@@ -81,6 +80,7 @@ public class Content extends Base{
 
     /**
      * 内容类目ID
+     *
      * @param contentCatId 内容类目ID
      */
     public void setContentCatId(Long contentCatId) {
@@ -89,6 +89,7 @@ public class Content extends Base{
 
     /**
      * 内容标题
+     *
      * @return title 内容标题
      */
     public String getTitle() {
@@ -97,6 +98,7 @@ public class Content extends Base{
 
     /**
      * 内容标题
+     *
      * @param title 内容标题
      */
     public void setTitle(String title) {
@@ -105,6 +107,7 @@ public class Content extends Base{
 
     /**
      * 子标题
+     *
      * @return sub_title 子标题
      */
     public String getSubTitle() {
@@ -113,6 +116,7 @@ public class Content extends Base{
 
     /**
      * 子标题
+     *
      * @param subTitle 子标题
      */
     public void setSubTitle(String subTitle) {
@@ -121,6 +125,7 @@ public class Content extends Base{
 
     /**
      * 标题描述
+     *
      * @return title_desc 标题描述
      */
     public String getTitleDesc() {
@@ -129,6 +134,7 @@ public class Content extends Base{
 
     /**
      * 标题描述
+     *
      * @param titleDesc 标题描述
      */
     public void setTitleDesc(String titleDesc) {
@@ -137,6 +143,7 @@ public class Content extends Base{
 
     /**
      * 链接
+     *
      * @return url 链接
      */
     public String getUrl() {
@@ -145,6 +152,7 @@ public class Content extends Base{
 
     /**
      * 链接
+     *
      * @param url 链接
      */
     public void setUrl(String url) {
@@ -153,6 +161,7 @@ public class Content extends Base{
 
     /**
      * 图片绝对路径
+     *
      * @return pic 图片绝对路径
      */
     public String getPic() {
@@ -161,6 +170,7 @@ public class Content extends Base{
 
     /**
      * 图片绝对路径
+     *
      * @param pic 图片绝对路径
      */
     public void setPic(String pic) {
@@ -169,6 +179,7 @@ public class Content extends Base{
 
     /**
      * 图片2
+     *
      * @return pic2 图片2
      */
     public String getPic2() {
@@ -177,6 +188,7 @@ public class Content extends Base{
 
     /**
      * 图片2
+     *
      * @param pic2 图片2
      */
     public void setPic2(String pic2) {
@@ -185,6 +197,7 @@ public class Content extends Base{
 
     /**
      * 内容
+     *
      * @return content 内容
      */
     public String getContent() {
@@ -193,6 +206,7 @@ public class Content extends Base{
 
     /**
      * 内容
+     *
      * @param content 内容
      */
     public void setContent(String content) {

@@ -7,16 +7,13 @@ package com.mall.common.constant;
  * @author gp6
  * @date 2018-07-07
  */
-public interface Constants {
+public class Constants {
 
-	/*
-	 * 商品状态
-	 */
-	//正常
+    /**
+     * 商品状态----1:正常,2:下架,3:删除
+     */
 	public static final int ITEM_STATUS_NORMAL = 1;
-	//下架
 	public static final int ITEM_STATUS_STOP = 2;
-	//删除
 	public static final int ITEM_STATUS_DELETE = 3;
 	
 	/**
