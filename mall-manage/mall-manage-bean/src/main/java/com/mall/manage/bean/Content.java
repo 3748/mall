@@ -1,5 +1,7 @@
 package com.mall.manage.bean;
 
+import com.mall.common.bean.Base;
+
 import javax.persistence.Table;
 
 /**

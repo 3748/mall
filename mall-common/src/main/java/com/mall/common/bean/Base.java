@@ -1,4 +1,4 @@
-package com.mall.manage.bean;
+package com.mall.common.bean;
 
 /**
  * 基础实体类
