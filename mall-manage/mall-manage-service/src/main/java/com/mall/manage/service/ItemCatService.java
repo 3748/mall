@@ -6,23 +6,24 @@ import com.mall.manage.bean.ItemCat;
 import com.mall.manage.vo.ItemCatVo;
 
 /**
- * @describe 商品类目
+ * 商品类目
+ *
  * @author gp6
  * @date 2018-07-07
  */
 public interface ItemCatService {
-	/**
-	 * 根据父id获取所有的子商品类目
-	 * 
-	 * @param parentId
-	 * @return
-	 */
-	public List<ItemCat> getListByParentId(int parentId);
+    /**
+     * 根据父id获取所有的子商品类目
+     *
+     * @param parentId
+     * @return
+     */
+    List<ItemCat> getListByParentId(int parentId);
 
-	/**
-	 * 查询全部商品类目，并且生成树状结构
-	 * 
-	 * @return
-	 */
-	public ItemCatVo queryAllToTree();
+    /**
+     * 查询全部商品类目，并且生成树状结构
+     *
+     * @return
+     */
+    ItemCatVo queryAllToTree();
 }

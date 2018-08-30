@@ -5,8 +5,7 @@ import com.mall.manage.bean.Content;
 
 /**
  * @author gp6
- *
- * @data 2018年8月20日
+ * @date 2018/8/30
  */
 public interface ContentMapper extends Mapper<Content> {
 }

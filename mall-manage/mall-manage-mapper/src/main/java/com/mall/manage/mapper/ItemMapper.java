@@ -6,14 +6,14 @@ import com.mall.manage.vo.ItemVo;
 
 /**
  * @author gp6
- *
- * @data 2018年8月20日
+ * @date 2018/8/30
  */
 public interface ItemMapper extends Mapper<Item> {
-	/**
-	 * 根据Id获取商品信息
-	 * 
-	 * @return
-	 */
-	public ItemVo getItemInfoById(Long id);
+    /**
+     * 根据Id获取商品信息
+     *
+     * @param id
+     * @return
+     */
+    ItemVo getItemInfoById(Long id);
 }

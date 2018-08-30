@@ -8,12 +8,13 @@ import com.mall.manage.bean.Content;
  * @date 2018-07-07
  */
 public interface ContentService {
-	/**
-	 * 根据内容类目ID获取所有内容
-	 * @param contentCatId
-	 * @param pageNum
-	 * @param pageSize
-	 * @return
-	 */
-	public PageInfo<Content> queryListByCatId(Long contentCatId, Integer pageNum,Integer pageSize);
+    /**
+     * 根据内容类目ID获取所有内容
+     *
+     * @param contentCatId
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageInfo<Content> queryListByCatId(Long contentCatId, Integer pageNum, Integer pageSize);
 }

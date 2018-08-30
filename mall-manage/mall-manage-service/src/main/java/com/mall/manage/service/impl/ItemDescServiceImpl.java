@@ -7,14 +7,18 @@ import com.mall.manage.bean.ItemDesc;
 import com.mall.manage.mapper.ItemDescMapper;
 import com.mall.manage.service.ItemDescService;
 
-
+/**
+ * @author gp6
+ * @date 2018/8/30
+ */
 @Service
 public class ItemDescServiceImpl implements ItemDescService {
-	
-	@Autowired
-	private ItemDescMapper itemDescMapper;
-	
-	public Integer saveItemDesc(ItemDesc itemDesc){
-		return itemDescMapper.insert(itemDesc);
-	}
+
+    @Autowired
+    private ItemDescMapper itemDescMapper;
+
+    @Override
+    public int saveItemDesc(ItemDesc itemDesc) {
+        return itemDescMapper.insert(itemDesc);
+    }
 }

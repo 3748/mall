@@ -7,30 +7,30 @@ package com.mall.manage.bean;
  * @date 2018-08-22
  */
 public class Base {
-    /**
-     * 创建时间
-     */
-    private Long createTime;
+	/**
+	 * 创建时间
+	 */
+	private Long createTime;
 
-    /**
-     * 更新时间
-     */
-    private Long updateTime;
+	/**
+	 * 更新时间
+	 */
+	private Long updateTime;
 
-    public Long getCreateTime() {
-        return createTime;
-    }
+	public Long getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}
 
-    public Long getUpdateTime() {
-        return updateTime;
-    }
+	public Long getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setUpdateTime(Long updateTime) {
+		this.updateTime = updateTime;
+	}
 
 }

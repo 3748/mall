@@ -12,29 +12,29 @@ import com.mall.manage.service.ItemParamService;
 
 /**
  * 商品规格参数
- * 
+ *
  * @author gp6
  * @date 2018-07-07
  */
 @Service
 public class ItemParamServiceImpl implements ItemParamService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ItemParamServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemParamServiceImpl.class);
 
-	@Autowired
-	private ItemParamMapper itemParamMapper;
+    @Autowired
+    private ItemParamMapper itemParamMapper;
 
-	@Override
-	public int saveItemParam(ItemParam itemParam) {
-		int count = 0;
+    @Override
+    public int saveItemParam(ItemParam itemParam) {
+        int count = 0;
 
-		try {
-			itemParam.setCreateTime(DateTimeUtil.getCurrentTime());
-			itemParam.setUpdateTime(itemParam.getCreateTime());
-			count = itemParamMapper.insert(itemParam);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
-		return count;
-	}
+        try {
+            itemParam.setCreateTime(DateTimeUtil.getCurrentTime());
+            itemParam.setUpdateTime(itemParam.getCreateTime());
+            count = itemParamMapper.insert(itemParam);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return count;
+    }
 }

@@ -16,54 +16,53 @@ import com.mall.manage.service.ItemService;
 
 /**
  * 商品管理
- * 
+ *
  * @author gp6
  * @date 2018-07-09
  */
 @Controller
-@RequestMapping({ "item" })
+@RequestMapping({"item"})
 public class ItemController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
 
-	@Autowired
-	private ItemService itemService;
+    @Autowired
+    private ItemService itemService;
 
-	/**
-	 * @describe 新增商品
-	 * 
-	 * @param itemModel
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> saveItem(@RequestBody ItemModel itemModel) {
+    /**
+     * @param itemModel
+     * @return
+     * @describe 新增商品
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> saveItem(@RequestBody ItemModel itemModel) {
 
-		try {
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("新增商品， item = {}", itemModel);
-			}
+        try {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("新增商品， item = {}", itemModel);
+            }
 
-			// 模拟400情况
-			if (StringUtils.isEmpty(itemModel.getTitle())) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-			}
+            // 模拟400情况
+            if (StringUtils.isEmpty(itemModel.getTitle())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
 
-			Boolean bool = itemService.saveItem(itemModel);
-			if (!bool.booleanValue()) {
-				if (LOGGER.isInfoEnabled()) {
-					LOGGER.info("新增商品失败， itemVo = {}", itemModel);
-				}
+            Boolean bool = itemService.saveItem(itemModel);
+            if (!bool.booleanValue()) {
+                if (LOGGER.isInfoEnabled()) {
+                    LOGGER.info("新增商品失败， itemVo = {}", itemModel);
+                }
 
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-			}
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
 
-			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("新增商品成功， itemVo = {}", itemModel);
-			}
-			return ResponseEntity.status(HttpStatus.CREATED).build();
-		} catch (Exception e) {
-			LOGGER.error("新增商品出错! itemVo = " + itemModel, e);
-		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	}
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("新增商品成功， itemVo = {}", itemModel);
+            }
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (Exception e) {
+            LOGGER.error("新增商品出错! itemVo = " + itemModel, e);
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
 }

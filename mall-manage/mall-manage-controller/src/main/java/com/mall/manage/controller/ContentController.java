@@ -16,31 +16,30 @@ import com.mall.manage.service.ContentService;
 
 /**
  * 首页内容(首页上所有商品,广告等都可看做首页内容)
- * 
- * @author gp6
  *
+ * @author gp6
  * @data 2018年8月20日
  */
 @Controller
-@RequestMapping({ "content" })
+@RequestMapping({"content"})
 public class ContentController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ContentController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ContentController.class);
 
-	@Autowired
-	private ContentService contentService;
+    @Autowired
+    private ContentService contentService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<PageInfo<Content>> queryListByCatId(@RequestParam("contentCatId") Long contentCatId,
-			@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-			@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-		try {
-			PageInfo<Content> pageInfo = contentService.queryListByCatId(contentCatId, pageNum, pageSize);
-			return ResponseEntity.ok(pageInfo);
-		} catch (Exception e) {
-			e.printStackTrace();
-			LOGGER.error(e.getMessage());
-		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<PageInfo<Content>> queryListByCatId(@RequestParam("contentCatId") Long contentCatId,
+                                                              @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        try {
+            PageInfo<Content> pageInfo = contentService.queryListByCatId(contentCatId, pageNum, pageSize);
+            return ResponseEntity.ok(pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
 }

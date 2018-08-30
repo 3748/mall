@@ -4,11 +4,9 @@ import com.github.abel533.mapper.Mapper;
 import com.mall.manage.bean.ItemDesc;
 
 /**
- * 商品描述
- * 
  * @author gp6
- * @date 2018-07-09
+ * @date 2018/8/30
  */
-public interface ItemDescMapper extends Mapper<ItemDesc>{
+public interface ItemDescMapper extends Mapper<ItemDesc> {
 
 }

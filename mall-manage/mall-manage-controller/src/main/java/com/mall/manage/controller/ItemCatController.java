@@ -17,37 +17,38 @@ import com.mall.manage.service.ItemCatService;
 
 /**
  * 商品类目
+ *
  * @author gp6
  * @date 2018-07-07
  */
 @Controller
 @RequestMapping(value = "item/cat")
 public class ItemCatController {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ItemCatController.class);
 
-	@Autowired
-	private ItemCatService itemCatService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemCatController.class);
 
-	/**
-	 * 根据父id获取所有的子商品类目
-	 * 
-	 * @param parentId
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<ItemCat>> getListByParentId(
-			@RequestParam(value = "id", defaultValue = "0") int parentId) {
-		try {
-			List<ItemCat> list = itemCatService.getListByParentId(parentId);
-			if (null == list || list.isEmpty()) {
-				// 资源不存在
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-			}
-			return ResponseEntity.status(HttpStatus.OK).body(list);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-	}
+    @Autowired
+    private ItemCatService itemCatService;
+
+    /**
+     * 根据父id获取所有的子商品类目
+     *
+     * @param parentId
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<ItemCat>> getListByParentId(
+            @RequestParam(value = "id", defaultValue = "0") int parentId) {
+        try {
+            List<ItemCat> list = itemCatService.getListByParentId(parentId);
+            if (null == list || list.isEmpty()) {
+                // 资源不存在
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(list);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
 }

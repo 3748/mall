@@ -14,5 +14,5 @@ public interface ItemDescService {
 	 * @param itemDesc
 	 * @return
 	 */
-	public Integer saveItemDesc(ItemDesc itemDesc);
+	int saveItemDesc(ItemDesc itemDesc);
 }
