@@ -33,8 +33,8 @@ public class ContentCatController {
     /**
      * 根据父节点id查询分类列表
      *
-     * @param parentId
-     * @return
+     * @param parentId 商品类目父id
+     * @return ResponseEntity<List < ContentCat>>
      */
 
     @RequestMapping(method = RequestMethod.GET)

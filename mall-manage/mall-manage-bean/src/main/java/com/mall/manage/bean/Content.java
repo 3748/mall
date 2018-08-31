@@ -65,7 +65,7 @@ public class Content extends Base {
 	}
 
 	/**
-	 * @param id
+	 * @param id id
 	 */
 	public void setId(Long id) {
 		this.id = id;

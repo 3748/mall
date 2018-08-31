@@ -18,7 +18,7 @@ import com.mall.manage.service.ContentService;
  * 首页内容(首页上所有商品,广告等都可看做首页内容)
  *
  * @author gp6
- * @data 2018年8月20日
+ * @date 2018年8月20日
  */
 @Controller
 @RequestMapping({"content"})
@@ -29,6 +29,12 @@ public class ContentController {
     @Autowired
     private ContentService contentService;
 
+    /**
+     * @param contentCatId 首页内容类目id
+     * @param pageNum      页码
+     * @param pageSize     每页显示条数
+     * @return ResponseEntity<PageInfo   <   Content>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<PageInfo<Content>> queryListByCatId(@RequestParam("contentCatId") Long contentCatId,
                                                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,

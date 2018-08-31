@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class Item extends Base {
     /**
      * 商品id，同时也是商品编号
-     *
-     * @GeneratedValue 返回自增主键
+     * <p>
+     * 返回自增主键 @GeneratedValue
      */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

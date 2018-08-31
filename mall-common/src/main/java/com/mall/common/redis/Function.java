@@ -6,5 +6,10 @@ package com.mall.common.redis;
  */
 public interface Function<T, E> {
 
+    /**
+     * RedisUtil中使用
+     * @param e
+     * @return T
+     */
     T callback(E e);
 }

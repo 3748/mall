@@ -12,8 +12,8 @@ public interface ContentCatService {
     /**
      * 根据父节点id查询分类列表
      *
-     * @param parentId
-     * @return
+     * @param parentId 商品类目父id
+     * @return List<ContentCat>
      */
     List<ContentCat> queryListByParentId(Long parentId);
 }
