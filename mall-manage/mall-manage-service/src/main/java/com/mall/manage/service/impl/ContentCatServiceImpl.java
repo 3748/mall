@@ -11,18 +11,17 @@ import com.mall.manage.service.ContentCatService;
 
 /**
  * @author gp6
- *
- * @data 2018年8月20日
+ * @date 2018年8月20日
  */
 @Service
 public class ContentCatServiceImpl implements ContentCatService {
-	@Autowired
-	private ContentCatMapper contentCatMapper;
+    @Autowired
+    private ContentCatMapper contentCatMapper;
 
-	@Override
-	public List<ContentCat> queryListByParentId(Long parentId) {
-		ContentCat contentCat = new ContentCat();
-		contentCat.setParentId(parentId);
-		return contentCatMapper.select(contentCat);
-	}
+    @Override
+    public List<ContentCat> queryListByParentId(Long parentId) {
+        ContentCat contentCat = new ContentCat();
+        contentCat.setParentId(parentId);
+        return contentCatMapper.select(contentCat);
+    }
 }

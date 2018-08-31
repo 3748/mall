@@ -1,5 +1,7 @@
 package com.mall.manage.model;
 
+import com.mall.common.bean.Base;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ import java.util.Map;
  * @author gp6
  * @date 2018-07-09
  */
-public class ItemModel {
+public class ItemModel extends Base {
 
     /**
      * 商品标题
@@ -44,22 +46,12 @@ public class ItemModel {
     /**
      * 所属类目，叶子类目
      */
-    private Integer cid;
+    private Integer itemCatId;
 
     /**
      * 商品描述
      */
     private String itemDesc;
-
-    /**
-     * 创建时间
-     */
-    private Long createTime;
-
-    /**
-     * 更新时间
-     */
-    private Long updateTime;
 
     /**
      * 商品规格参数
@@ -114,12 +106,12 @@ public class ItemModel {
         this.image = image;
     }
 
-    public Integer getCid() {
-        return cid;
+    public Integer getItemCatId() {
+        return itemCatId;
     }
 
-    public void setCid(Integer cid) {
-        this.cid = cid;
+    public void setItemCatId(Integer itemCatId) {
+        this.itemCatId = itemCatId;
     }
 
     public String getItemDesc() {
@@ -128,22 +120,6 @@ public class ItemModel {
 
     public void setItemDesc(String itemDesc) {
         this.itemDesc = itemDesc;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
     }
 
     public List<Map<String, Object>> getItemParams() {

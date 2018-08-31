@@ -13,24 +13,22 @@ import com.mall.manage.service.ContentService;
 
 /**
  * @author gp6
- *
- * @data 2018年8月21日
+ * @date 2018年8月21日
  */
 @Service
 public class ContentServiceImpl implements ContentService {
 
-	@Autowired
-	private ContentMapper contentMapper;
+    @Autowired
+    private ContentMapper contentMapper;
 
-	@Override
-	public PageInfo<Content> queryListByCatId(Long contentCatId, Integer pageNum, Integer pageSize) {
-		PageHelper.startPage(pageNum.intValue(), pageSize.intValue());
+    @Override
+    public PageInfo<Content> queryListByCatId(Long contentCatId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
 
-		Content content = new Content();
-		content.setContentCatId(contentCatId);
-		List<Content> contents = contentMapper.select(content);
+        Content content = new Content();
+        content.setContentCatId(contentCatId);
+        List<Content> contents = contentMapper.select(content);
 
-		PageInfo<Content> pageInfo = new PageInfo<Content>(contents);
-		return pageInfo;
-	}
+        return new PageInfo<>(contents);
+    }
 }

@@ -56,7 +56,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Boolean saveItem(ItemModel itemModel) {
-        boolean flag = false;
+        boolean flag = true;
         itemModel.setCreateTime(DateTimeUtil.getCurrentTime());
         itemModel.setUpdateTime(itemModel.getCreateTime());
 
@@ -79,7 +79,7 @@ public class ItemServiceImpl implements ItemService {
         int countItemParam = itemParamService.saveItemParam(itemParam);
 
         if (1 != countItem || 1 != countItemDesc || 1 != countItemParam) {
-            flag = true;
+            flag = false;
         }
         return flag;
     }

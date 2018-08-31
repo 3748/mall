@@ -30,9 +30,8 @@ public class ItemController {
     private ItemService itemService;
 
     /**
-     * @param itemModel
-     * @return
-     * @describe 新增商品
+     * @param itemModel 前台传入商品参数
+     * @return ResponseEntity
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> saveItem(@RequestBody ItemModel itemModel) {
@@ -48,7 +47,7 @@ public class ItemController {
             }
 
             Boolean bool = itemService.saveItem(itemModel);
-            if (!bool.booleanValue()) {
+            if (!bool) {
                 if (LOGGER.isInfoEnabled()) {
                     LOGGER.info("新增商品失败， itemVo = {}", itemModel);
                 }
