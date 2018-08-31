@@ -2,8 +2,8 @@ package com.mall.manage.service;
 
 import java.util.List;
 
-import com.mall.manage.bean.ItemCat;
-import com.mall.manage.vo.ItemCatVo;
+import com.mall.common.bean.ItemCat;
+import com.mall.common.vo.ItemCatVo;
 
 /**
  * 商品类目
@@ -15,15 +15,15 @@ public interface ItemCatService {
     /**
      * 根据父id获取所有的子商品类目
      *
-     * @param parentId
-     * @return
+     * @param parentId 商品类目父id
+     * @return List<ItemCat>
      */
-    List<ItemCat> getListByParentId(int parentId);
+    List<ItemCat> getListByParentId(long parentId);
 
     /**
      * 查询全部商品类目，并且生成树状结构
      *
-     * @return
+     * @return ItemCatVo
      */
     ItemCatVo queryAllToTree();
 }

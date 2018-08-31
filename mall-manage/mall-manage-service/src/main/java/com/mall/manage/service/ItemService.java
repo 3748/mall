@@ -1,7 +1,7 @@
 package com.mall.manage.service;
 
-import com.mall.manage.model.ItemModel;
-import com.mall.manage.vo.ItemVo;
+import com.mall.common.model.ItemModel;
+import com.mall.common.vo.ItemVo;
 
 /**
  * 商品管理

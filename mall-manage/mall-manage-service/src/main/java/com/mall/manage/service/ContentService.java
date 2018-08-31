@@ -1,7 +1,7 @@
 package com.mall.manage.service;
 
 import com.github.pagehelper.PageInfo;
-import com.mall.manage.bean.Content;
+import com.mall.common.bean.Content;
 
 /**
  * @author gp6

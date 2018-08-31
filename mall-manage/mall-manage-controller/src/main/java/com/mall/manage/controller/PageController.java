@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("page")
 public class PageController {
-    @RequestMapping(value = "{pageName}", method = RequestMethod.GET)
+    @RequestMapping(value = "{pageName}",method = RequestMethod.GET)
     public String toPage(@PathVariable("pageName") String pageName) {
         return pageName;
     }

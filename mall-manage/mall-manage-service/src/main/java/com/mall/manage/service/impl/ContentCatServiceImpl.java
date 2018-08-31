@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mall.manage.bean.ContentCat;
+import com.mall.common.bean.ContentCat;
 import com.mall.manage.mapper.ContentCatMapper;
 import com.mall.manage.service.ContentCatService;
 

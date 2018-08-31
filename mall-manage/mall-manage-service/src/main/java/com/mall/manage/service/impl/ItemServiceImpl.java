@@ -12,15 +12,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.constant.Constants;
 import com.mall.common.utils.DateTimeUtil;
 import com.mall.common.utils.RedisUtil;
-import com.mall.manage.bean.Item;
-import com.mall.manage.bean.ItemDesc;
-import com.mall.manage.bean.ItemParam;
+import com.mall.common.bean.Item;
+import com.mall.common.bean.ItemDesc;
+import com.mall.common.bean.ItemParam;
 import com.mall.manage.mapper.ItemMapper;
-import com.mall.manage.model.ItemModel;
+import com.mall.common.model.ItemModel;
 import com.mall.manage.service.ItemDescService;
 import com.mall.manage.service.ItemParamService;
 import com.mall.manage.service.ItemService;
-import com.mall.manage.vo.ItemVo;
+import com.mall.common.vo.ItemVo;
 
 /**
  * 商品规格参数

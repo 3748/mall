@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mall.manage.bean.Content;
+import com.mall.common.bean.Content;
 import com.mall.manage.mapper.ContentMapper;
 import com.mall.manage.service.ContentService;
 

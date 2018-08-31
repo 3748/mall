@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageInfo;
-import com.mall.manage.bean.Content;
+import com.mall.common.bean.Content;
 import com.mall.manage.service.ContentService;
 
 /**
@@ -33,7 +33,7 @@ public class ContentController {
      * @param contentCatId 首页内容类目id
      * @param pageNum      页码
      * @param pageSize     每页显示条数
-     * @return ResponseEntity<PageInfo   <   Content>>
+     * @return ResponseEntity<PageInfo       <       Content>>
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<PageInfo<Content>> queryListByCatId(@RequestParam("contentCatId") Long contentCatId,

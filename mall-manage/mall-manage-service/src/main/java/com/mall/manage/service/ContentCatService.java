@@ -2,7 +2,7 @@ package com.mall.manage.service;
 
 import java.util.List;
 
-import com.mall.manage.bean.ContentCat;
+import com.mall.common.bean.ContentCat;
 
 /**
  * @author gp6

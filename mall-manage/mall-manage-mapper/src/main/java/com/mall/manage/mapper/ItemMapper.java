@@ -1,8 +1,8 @@
 package com.mall.manage.mapper;
 
 import com.github.abel533.mapper.Mapper;
-import com.mall.manage.bean.Item;
-import com.mall.manage.vo.ItemVo;
+import com.mall.common.bean.Item;
+import com.mall.common.vo.ItemVo;
 
 /**
  * @author gp6

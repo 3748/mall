@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mall.manage.bean.ItemCat;
+import com.mall.common.bean.ItemCat;
 import com.mall.manage.service.ItemCatService;
 
 /**
@@ -33,12 +33,12 @@ public class ItemCatController {
     /**
      * 根据父id获取所有的子商品类目
      *
-     * @param parentId
-     * @return
+     * @param parentId 商品类目父id
+     * @return ResponseEntity<List < ItemCat>>
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ItemCat>> getListByParentId(
-            @RequestParam(value = "id", defaultValue = "0") int parentId) {
+            @RequestParam(value = "id", defaultValue = "0") long parentId) {
         try {
             List<ItemCat> list = itemCatService.getListByParentId(parentId);
             if (null == list || list.isEmpty()) {

@@ -1,7 +1,7 @@
 package com.mall.manage.mapper;
 
 import com.github.abel533.mapper.Mapper;
-import com.mall.manage.bean.Content;
+import com.mall.common.bean.Content;
 
 /**
  * @author gp6

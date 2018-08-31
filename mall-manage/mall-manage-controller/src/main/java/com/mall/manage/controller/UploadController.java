@@ -1,13 +1,9 @@
 package com.mall.manage.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mall.common.constant.Constants;
+import com.mall.manage.service.PropertiesService;
+import com.mall.common.vo.UploadImgVo;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -22,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mall.common.constant.Constants;
-import com.mall.manage.service.PropertieService;
-import com.mall.manage.vo.UploadImgVo;
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * 图片上传
@@ -39,7 +37,7 @@ public class UploadController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UploadController.class);
 
     @Autowired
-    private PropertieService propertieService;
+    private PropertiesService propertieService;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 

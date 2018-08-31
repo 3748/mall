@@ -1,6 +1,6 @@
 package com.mall.manage.service;
 
-import com.mall.manage.bean.ItemDesc;
+import com.mall.common.bean.ItemDesc;
 
 /**
  * @author gp6

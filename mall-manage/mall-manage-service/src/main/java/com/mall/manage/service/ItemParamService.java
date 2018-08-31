@@ -1,6 +1,6 @@
 package com.mall.manage.service;
 
-import com.mall.manage.bean.ItemParam;
+import com.mall.common.bean.ItemParam;
 
 /**
  * 商品规格参数

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mall.common.utils.DateTimeUtil;
-import com.mall.manage.bean.ItemParam;
+import com.mall.common.bean.ItemParam;
 import com.mall.manage.mapper.ItemParamMapper;
 import com.mall.manage.service.ItemParamService;
 
