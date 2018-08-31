@@ -20,11 +20,6 @@
 			<artifactId>mall-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>com.mall.manage</groupId>
-			<artifactId>mall-manage-bean</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 
 		<!-- 单元测试 -->
 		<dependency>
