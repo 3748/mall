@@ -1,48 +1,44 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
-	
-	<!-- 定义集群连接池:
-			ShardedJedisPoolDemo.java
-				// 定义集群连接池
-	        	ShardedJedisPool shardedJedisPool = new ShardedJedisPool(poolConfig, shards);
-	        	
-	        	// 构建连接池配置信息
-		        JedisPoolConfig poolConfig = new JedisPoolConfig();
-		        // 设置最大连接数
-		        poolConfig.setMaxTotal(50);
-		        
-		        // 定义集群信息,由于只有一台机器,所以只定义一台
-		        List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
-		        shards.add(new JedisShardInfo("127.0.0.1", 6379));
-	 -->
-	<bean class="redis.clients.jedis.ShardedJedisPool">
-		<!-- 第一个构造参数 poolConfig-->	
-		<constructor-arg index="0">
-			<bean class="redis.clients.jedis.JedisPoolConfig">
-				<property name="maxTotal" value="${redis.maxTotal}"></property>
-			</bean>
-		</constructor-arg>
-		
-		<!-- 第二个构造参数  shards-->
-		<constructor-arg index="1">
-			<list>
-				<bean class="redis.clients.jedis.JedisShardInfo">
-					<constructor-arg index="0" value="${redis.node1.host}" />
-					<constructor-arg index="1" value="${redis.node1.port}"/>
-				</bean>
-				
-				<!-- 如果有其他节点 -->
-				<!-- <bean class="redis.clients.jedis.JedisShardInfo.JedisShardInfo">
-					<constructor-arg index="0" value="${redis.node2.host}" />
-					<constructor-arg index="1" value="${redis.node2.port}"/>
-				</bean> -->
-			</list>
-		</constructor-arg>
-	</bean>
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!-- 定义集群连接池:
+            ShardedJedisPoolDemo.java
+                // 定义集群连接池
+                ShardedJedisPool shardedJedisPool = new ShardedJedisPool(poolConfig, shards);
+
+                // 构建连接池配置信息
+                JedisPoolConfig poolConfig = new JedisPoolConfig();
+                // 设置最大连接数
+                poolConfig.setMaxTotal(50);
+
+                // 定义集群信息,由于只有一台机器,所以只定义一台
+                List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
+                shards.add(new JedisShardInfo("127.0.0.1", 6379));
+     -->
+    <bean class="redis.clients.jedis.ShardedJedisPool">
+        <!-- 第一个构造参数 poolConfig-->
+        <constructor-arg index="0">
+            <bean class="redis.clients.jedis.JedisPoolConfig">
+                <property name="maxTotal" value="${redis.maxTotal}"></property>
+            </bean>
+        </constructor-arg>
+
+        <!-- 第二个构造参数  shards-->
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.node1.host}"/>
+                    <constructor-arg index="1" value="${redis.node1.port}"/>
+                </bean>
+
+                <!-- 如果有其他节点 -->
+                <!-- <bean class="redis.clients.jedis.JedisShardInfo.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.node2.host}" />
+                    <constructor-arg index="1" value="${redis.node2.port}"/>
+                </bean> -->
+            </list>
+        </constructor-arg>
+    </bean>
 </beans>

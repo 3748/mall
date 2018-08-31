@@ -1,87 +1,82 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<!-- 使用spring自带的占位符替换功能 -->
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<!-- 允许JVM参数覆盖 -->
-		<!-- java -Djdbc.url=123 -jar xxx.jar -->
-		<property name="systemPropertiesModeName"
-			value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-		<!-- 忽略没有找到的资源文件 -->
-		<property name="ignoreResourceNotFound" value="true" />
-		<!-- 配置资源文件 -->
-		<property name="locations">
-			<list>
-				<!-- spring容器是父容器,Service属于父容器 SpringMVC容器是子容器,Controller属于子容器 子容器可以读取父容器的资源(bean),Service可以注入Controller 
-					父容器不能读取子容器的资源 @value注解 是在所有bean创建成功之后才执行，且只能在当前容器的查找数据 env.properties(该配置文件属于spring容器)属于父容器 
-					Controller(子容器)中 @Value("${IMAGE_BASE_URL}") private String IMAGE_BASE_URL; 
-					@Value只会在子容器中查找数据,所以不能找到 此时用Service当做中介,Service属于父容器,可以读取到配置文件中的值, 然后将Service注入到Controller中,即可完成上传路径配置文件的读取 -->
-				<value>classpath:properties/env.properties</value>
-				<value>classpath:properties/redis.properties</value>
-				<value>classpath:properties/jdbc.properties</value>
-			</list>
-		</property>
-	</bean>
+    <!-- 使用spring自带的占位符替换功能 -->
+    <bean
+            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 允许JVM参数覆盖 -->
+        <property name="systemPropertiesModeName"
+                  value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <!-- 忽略没有找到的资源文件 -->
+        <property name="ignoreResourceNotFound" value="true"/>
+        <!-- 配置资源文件 -->
+        <property name="locations">
+            <list>
+                <!-- spring容器是父容器,Service属于父容器 SpringMVC容器是子容器,Controller属于子容器 子容器可以读取父容器的资源(bean),Service可以注入Controller
+                    父容器不能读取子容器的资源 @value注解 是在所有bean创建成功之后才执行，且只能在当前容器的查找数据 env.properties(该配置文件属于spring容器)属于父容器
+                    Controller(子容器)中 @Value("${IMAGE_BASE_URL}") private String IMAGE_BASE_URL;
+                    @Value只会在子容器中查找数据,所以不能找到 此时用Service当做中介,Service属于父容器,可以读取到配置文件中的值, 然后将Service注入到Controller中,即可完成上传路径配置文件的读取 -->
+                <value>classpath:properties/env.properties</value>
+                <value>classpath:properties/redis.properties</value>
+                <value>classpath:properties/jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
 
-	<!-- 扫描包 -->
-	<context:component-scan base-package="com.mall" />
+    <!-- 扫描包 -->
+    <context:component-scan base-package="com.mall"/>
 
-	<bean id="dataSource"
-		class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
-		destroy-method="close">
-		<!-- 数据库驱动 -->
-		<property name="driverClassName"
-			value="${jdbc.driverClassName}" />
-		<!-- 相应驱动的jdbcUrl -->
-		<property name="url" value="${jdbc.url}" />
-		<!-- 数据库的用户名 -->
-		<property name="username" value="${jdbc.username}" />
-		<!-- 数据库的密码 -->
-		<property name="password" value="${jdbc.password}" />
-		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<!-- 属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 监控统计用的filter:stat 日志用的filter:log4j 
-			防御sql注入的filter:wall -->
-		<property name="filters" value="stat" />
-		<!-- 最大连接池数量 -->
-		<property name="maxActive" value="20" />
-		<!-- 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时 -->
-		<property name="initialSize" value="1" />
-		<!-- 获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。 -->
-		<property name="maxWait" value="60000" />
-		<!-- 最小连接池数量 -->
-		<property name="minIdle" value="1" />
-		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-		<property name="minEvictableIdleTimeMillis" value="300000" />
-		<!-- 验证连接有效与否的SQL，不同的数据配置不同 -->
-		<property name="validationQuery" value="SELECT 'x'" />
-		<!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
-		<property name="testWhileIdle" value="true" />
-		<!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。 -->
-		<property name="testOnBorrow" value="false" />
-		<!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
-		<property name="testOnReturn" value="false" />
-		<!-- 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。 -->
-		<property name="poolPreparedStatements" value="false" />
-		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
-		<property name="maxPoolPreparedStatementPerConnectionSize"
-			value="20" />
-		<!-- 超过时间限制是否回收 -->
-		<property name="removeAbandoned" value="true" />
-		<!-- 超时时间；单位为秒。180秒=3分钟 -->
-		<property name="removeAbandonedTimeout" value="180" />
-		<!-- 关闭abanded连接时输出错误日志 -->
-		<property name="logAbandoned" value="true" />
-		<!-- 解决Emoji表情 -->
-		<property name="connectionInitSqls" value="set names utf8mb4" />
-	</bean>
+    <bean id="dataSource"
+          class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <!-- 数据库驱动 -->
+        <property name="driverClassName"
+                  value="${jdbc.driverClassName}"/>
+        <!-- 相应驱动的jdbcUrl -->
+        <property name="url" value="${jdbc.url}"/>
+        <!-- 数据库的用户名 -->
+        <property name="username" value="${jdbc.username}"/>
+        <!-- 数据库的密码 -->
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 监控统计用的filter:stat 日志用的filter:log4j
+            防御sql注入的filter:wall -->
+        <property name="filters" value="stat"/>
+        <!-- 最大连接池数量 -->
+        <property name="maxActive" value="20"/>
+        <!-- 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时 -->
+        <property name="initialSize" value="1"/>
+        <!-- 获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。 -->
+        <property name="maxWait" value="60000"/>
+        <!-- 最小连接池数量 -->
+        <property name="minIdle" value="1"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <!-- 验证连接有效与否的SQL，不同的数据配置不同 -->
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
+        <property name="testWhileIdle" value="true"/>
+        <!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。 -->
+        <property name="testOnBorrow" value="false"/>
+        <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name="testOnReturn" value="false"/>
+        <!-- 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。 -->
+        <property name="poolPreparedStatements" value="false"/>
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="maxPoolPreparedStatementPerConnectionSize"
+                  value="20"/>
+        <!-- 超过时间限制是否回收 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- 超时时间；单位为秒。180秒=3分钟 -->
+        <property name="removeAbandonedTimeout" value="180"/>
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true"/>
+        <!-- 解决Emoji表情 -->
+        <property name="connectionInitSqls" value="set names utf8mb4"/>
+    </bean>
 </beans>
