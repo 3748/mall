@@ -21,7 +21,7 @@
 		        List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
 		        shards.add(new JedisShardInfo("127.0.0.1", 6379));
 	 -->
-	<bean class="redis.clients.jedis.ShardedJedisPool">
+	<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
 		<!-- 第一个构造参数 poolConfig-->	
 		<constructor-arg index="0">
 			<bean class="redis.clients.jedis.JedisPoolConfig">
