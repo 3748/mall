@@ -17,7 +17,6 @@
 		<module>mall-manage-controller</module>
 		<module>mall-manage-service</module>
 		<module>mall-manage-mapper</module>
-		<module>mall-manage-bean</module>
 		<module>mall-manage-web</module>
 	</modules>
 

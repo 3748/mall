@@ -11,11 +11,6 @@
 
 	<!-- 添加依赖 -->
 	<dependencies>
-		<dependency>
-			<artifactId>mall-manage-bean</artifactId>
-			<groupId>com.mall.manage</groupId>
-			<version>${project.version}</version>
-		</dependency>
 
 		<!-- Mybatis -->
 		<dependency>

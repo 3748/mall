@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mall.manage.bean.ContentCat;
+import com.mall.common.bean.ContentCat;
 import com.mall.manage.service.ContentCatService;
 
 /**
@@ -34,7 +34,7 @@ public class ContentCatController {
      * 根据父节点id查询分类列表
      *
      * @param parentId 商品类目父id
-     * @return ResponseEntity<List < ContentCat>>
+     * @return ResponseEntity<List   <   ContentCat>>
      */
 
     @RequestMapping(method = RequestMethod.GET)
