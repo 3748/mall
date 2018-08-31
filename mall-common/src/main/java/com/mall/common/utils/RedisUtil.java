@@ -22,7 +22,7 @@ public class RedisUtil {
     @Autowired(required = false)
     private ShardedJedisPool shardedJedisPool;
 
-    public <T> T execute(Function<T, ShardedJedis> function) {
+    private <T> T execute(Function<T, ShardedJedis> function) {
         ShardedJedis shardedJedis = null;
         try {
             // 从连接池中获取到jedis分片对象
@@ -39,9 +39,9 @@ public class RedisUtil {
     /**
      * 执行set操作
      *
-     * @param key
-     * @param value
-     * @return
+     * @param key   Redis中的key
+     * @param value Redis中的key
+     * @return String
      */
     public String set(final String key, final String value) {
         return this.execute(new Function<String, ShardedJedis>() {
@@ -55,8 +55,8 @@ public class RedisUtil {
     /**
      * 执行get操作
      *
-     * @param key
-     * @return
+     * @param key Redis中的key
+     * @return String
      */
     public String get(final String key) {
         return this.execute(new Function<String, ShardedJedis>() {
@@ -70,8 +70,8 @@ public class RedisUtil {
     /**
      * 执行删除操作
      *
-     * @param key
-     * @return
+     * @param key Redis中的key
+     * @return String
      */
     public Long del(final String key) {
         return this.execute(new Function<Long, ShardedJedis>() {
@@ -85,9 +85,8 @@ public class RedisUtil {
     /**
      * 设置生存时间，单位为：秒
      *
-     * @param key
-     * @param seconds
-     * @return
+     * @param key Redis中的key
+     * @return String
      */
     public Long expire(final String key, final Integer seconds) {
         return this.execute(new Function<Long, ShardedJedis>() {
@@ -101,9 +100,10 @@ public class RedisUtil {
     /**
      * 执行set操作并且设置生存时间，单位为：秒
      *
-     * @param key
-     * @param value
-     * @return
+     * @param key     Redis中的key
+     * @param value   Redis中的key
+     * @param seconds 有效时间
+     * @return String
      */
     public String set(final String key, final String value, final Integer seconds) {
         return this.execute(new Function<String, ShardedJedis>() {
