@@ -31,7 +31,6 @@ public class User extends Base {
      * <p>
      * json序列化时,忽略此字段(@JsonIgnore) 如果加入该注解,@RequestBody User 也不会获取到该字段的值
      */
-    @JsonIgnore
     @Length(min = 6, max = 20, message = "密码的长度必须在6-20位之间!")
     private String password;
 
@@ -44,7 +43,7 @@ public class User extends Base {
     /**
      * 注册邮箱
      */
-    @Email(message = "邮箱格式不正确")
+    @Email(message = "邮箱格式不正确!")
     private String email;
 
 

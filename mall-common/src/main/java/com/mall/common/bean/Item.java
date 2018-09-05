@@ -202,7 +202,7 @@ public class Item extends Base {
     /**
      * 所属类目，叶子类目
      *
-     * @param item_cat_id 所属类目，叶子类目
+     * @param itemCatId 所属类目，叶子类目
      */
     public void setItemCatId(Integer itemCatId) {
         this.itemCatId = itemCatId;
