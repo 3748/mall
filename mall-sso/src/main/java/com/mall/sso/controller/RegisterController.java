@@ -1,16 +1,23 @@
 package com.mall.sso.controller;
 
+import com.mall.common.bean.User;
+import com.mall.sso.service.RegisterService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 
-import com.mall.sso.service.RegisterService;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 注册相关功能
@@ -30,7 +37,7 @@ public class RegisterController {
     /**
      * 跳转注册页面
      *
-     * @return
+     * @return String
      */
     @RequestMapping(method = RequestMethod.GET)
     public String register() {
@@ -42,20 +49,67 @@ public class RegisterController {
      *
      * @param param 1:用户名 2:手机号 3:邮箱地址
      * @param type  代表param类型
-     * @return
+     * @return ResponseEntity<Boolean>
      */
     @RequestMapping(value = {"{param}/{type}"}, method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkRegister(@PathVariable("param") String param,
+    public ResponseEntity<Boolean> registerCheck(@PathVariable("param") String param,
                                                  @PathVariable("type") Integer type) {
         try {
-            Integer count = registerService.checkRegister(param, type);
+            Integer count = registerService.registerCheck(param, type);
             if (0 == count) {
                 return ResponseEntity.ok(true);
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (Exception e) {
-            LOGGER.error("账号信息校验失败,原因:{}"+e.getMessage());
+            LOGGER.error("账号信息校验失败,原因:{}" + e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
+
+    /**
+     * 用户注册
+     *
+     * @param user          注册信息
+     * @param bindingResult @Valid校验的结果
+     * @return ResponseEntity<Map < String ,   Object>>
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> doRegister(@Valid @RequestBody User user, BindingResult bindingResult) {
+        Map<String, Object> result = new HashMap<>(16);
+
+        // bindingResult接收@Valid校验的结果
+        if (bindingResult.hasErrors()) {
+            List<String> errorMsgs = new ArrayList<>();
+
+            List<ObjectError> objectErrors = bindingResult.getAllErrors();
+            for (ObjectError objectError : objectErrors) {
+                // 获取User中定义的message的内容
+                String message = objectError.getDefaultMessage();
+                errorMsgs.add(message);
+            }
+
+            result.put("status", HttpStatus.BAD_REQUEST.value());
+            result.put("data", "参数有误! " + StringUtils.join(errorMsgs, '|'));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        }
+
+        try {
+            Boolean bool = registerService.doRegister(user);
+            if (bool) {
+                result.put("status", HttpStatus.CREATED.value());
+                return ResponseEntity.ok(result);
+            } else {
+                result.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+                result.put("data", " 笑Skr人,居然注册失败了!");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            result.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            result.put("data", "笑Skr人,居然注册失败了!");
+        }
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
     }
 }

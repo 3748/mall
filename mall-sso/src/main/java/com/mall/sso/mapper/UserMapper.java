@@ -1,6 +1,6 @@
 package com.mall.sso.mapper;
 
-import com.mall.sso.bean.User;
+import com.mall.common.bean.User;
 
 import com.github.abel533.mapper.Mapper;
 
