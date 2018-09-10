@@ -28,6 +28,9 @@ public class ItemService {
     @Value("${MANAGE_MALL_URL}")
     private String manageMallUrl;
 
+    @Value("${ITEM_DETAIL}")
+    private String itemDetail;
+
     @Autowired
     private HttpClientUtil httpClientUtil;
 
@@ -43,7 +46,7 @@ public class ItemService {
     public ItemVo getItemInfoById(Long id) {
 
         // 从缓存中命中
-        String key = StringEnum.WEB_ITEM_DETAIL.getValue() + id;
+        String key = StringEnum.MALL_WEB_ITEM_DETAIL.getValue() + id;
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
@@ -51,19 +54,18 @@ public class ItemService {
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
-            e.printStackTrace();
         }
 
         String jsonData;
         try {
-            String url = this.manageMallUrl + "/rest/api/item/2";
+            String url = manageMallUrl + itemDetail;
             jsonData = httpClientUtil.doGet(url);
             if (StringUtils.isEmpty(jsonData)) {
                 return null;
             }
 
             // 将数据写入到缓存中
-            redisUtil.set(key, jsonData, NumberEnum.ITEM_DETAIL_EXPIRE_TIME.ordinal());
+            redisUtil.set(key, jsonData, NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
             return OBJECTMAPPER.readValue(jsonData, ItemVo.class);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());

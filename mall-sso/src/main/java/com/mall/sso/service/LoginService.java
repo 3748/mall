@@ -42,7 +42,7 @@ public class LoginService {
         String token = DigestUtils.md5Hex(username + System.currentTimeMillis());
 
         //设置token和过期时间
-        redisUtil.set("TOKEN_" + token, MAPPER.writeValueAsString(user), NumberEnum.TOKEN_EXPIRE_TIME.ordinal());
+        redisUtil.set("TOKEN_" + token, MAPPER.writeValueAsString(user), NumberEnum.TOKEN_EXPIRE_TIME.getValue());
 
         return token;
     }

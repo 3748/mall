@@ -1,7 +1,6 @@
 package com.mall.sso.controller;
 
 import com.mall.common.bean.User;
-import com.mall.common.constant.Constants;
 import com.mall.common.enums.NumberEnum;
 import com.mall.common.utils.CookieUtils;
 import com.mall.sso.service.LoginService;
@@ -42,7 +41,7 @@ public class LoginController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<>(NumberEnum.MAP_INIT_SIZE.ordinal());
+        Map<String, Object> result = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
         try {
             String token = loginService.login(user.getUserName(), user.getPassword());
             if (StringUtils.isEmpty(token)) {
@@ -50,7 +49,7 @@ public class LoginController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
             }
 
-            CookieUtils.setCookie(request, response, "TT_TOKEN", token);
+            CookieUtils.setCookie(request, response, "MALL_TOKEN", token);
         } catch (Exception e) {
             result.put("status", 500);
         }

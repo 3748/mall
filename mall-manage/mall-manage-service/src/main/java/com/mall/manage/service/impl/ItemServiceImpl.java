@@ -6,6 +6,7 @@ import com.mall.common.bean.Item;
 import com.mall.common.bean.ItemDesc;
 import com.mall.common.bean.ItemParam;
 import com.mall.common.enums.NumberEnum;
+import com.mall.common.enums.StringEnum;
 import com.mall.common.model.ItemModel;
 import com.mall.common.utils.DateTimeUtil;
 import com.mall.common.utils.RedisUtil;
@@ -34,13 +35,6 @@ public class ItemServiceImpl implements ItemService {
 
     private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
 
-    /**
-     * 定义key的规则:项目名_模块名_业务名
-     */
-    private static final String REDIS_KEY = "MANAGE_MALL_ITEM_DETAIL";
-
-    private static final Integer REDIS_TIME = 60 * 60 * 24;
-
     @Autowired
     private RedisUtil redisUtil;
 
@@ -62,7 +56,7 @@ public class ItemServiceImpl implements ItemService {
         // 保存商品基本信息
         Item item = new Item();
         BeanUtils.copyProperties(itemModel, item);
-        item.setStatus(NumberEnum.ITEM_STATUS_NORMAL.ordinal());
+        item.setStatus(NumberEnum.ITEM_STATUS_NORMAL.getValue());
         int countItem = itemMapper.insert(item);
 
         // 保存商品描述
@@ -86,17 +80,15 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemVo getItemInfoById(Long id) {
 
-        String key = REDIS_KEY + id;
-
+        // 从缓存中命中
+        String key = StringEnum.MALL_MANAGE_ITEM_DETAIL.getValue()+ id;
         try {
-            // 从缓存中命中
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
                 return OBJECTMAPPER.readValue(cacheData, ItemVo.class);
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
-            e.printStackTrace();
         }
 
         ItemVo itemVo = itemMapper.getItemInfoById(id);
@@ -106,7 +98,7 @@ public class ItemServiceImpl implements ItemService {
             }
 
             // 将数据写入到缓存中
-            redisUtil.set(key, OBJECTMAPPER.writeValueAsString(itemVo), REDIS_TIME);
+            redisUtil.set(key, OBJECTMAPPER.writeValueAsString(itemVo), NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
             return itemVo;
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage());

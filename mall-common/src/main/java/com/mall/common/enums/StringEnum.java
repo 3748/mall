@@ -11,7 +11,9 @@ public enum StringEnum {
      * Redis定义key的规则:项目名_模块名_业务名
      */
     //Redis中前台商品详情Key
-    WEB_ITEM_DETAIL("WEB_ITEM_DETAIL");
+    MALL_WEB_ITEM_DETAIL("MALL_WEB_ITEM_DETAIL"),
+    //Redis中后台商品详情Key
+    MALL_MANAGE_ITEM_DETAIL("MALL_MANAGE_ITEM_DETAIL");
 
     private String value;
 
