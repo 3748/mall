@@ -1,26 +1,25 @@
 package com.mall.manage.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mall.common.bean.Item;
+import com.mall.common.bean.ItemDesc;
+import com.mall.common.bean.ItemParam;
+import com.mall.common.enums.NumberEnum;
+import com.mall.common.model.ItemModel;
+import com.mall.common.utils.DateTimeUtil;
+import com.mall.common.utils.RedisUtil;
+import com.mall.common.vo.ItemVo;
+import com.mall.manage.mapper.ItemMapper;
+import com.mall.manage.service.ItemDescService;
+import com.mall.manage.service.ItemParamService;
+import com.mall.manage.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mall.common.constant.Constants;
-import com.mall.common.utils.DateTimeUtil;
-import com.mall.common.utils.RedisUtil;
-import com.mall.common.bean.Item;
-import com.mall.common.bean.ItemDesc;
-import com.mall.common.bean.ItemParam;
-import com.mall.manage.mapper.ItemMapper;
-import com.mall.common.model.ItemModel;
-import com.mall.manage.service.ItemDescService;
-import com.mall.manage.service.ItemParamService;
-import com.mall.manage.service.ItemService;
-import com.mall.common.vo.ItemVo;
 
 /**
  * 商品规格参数
@@ -63,7 +62,7 @@ public class ItemServiceImpl implements ItemService {
         // 保存商品基本信息
         Item item = new Item();
         BeanUtils.copyProperties(itemModel, item);
-        item.setStatus(Constants.ITEM_STATUS_NORMAL);
+        item.setStatus(NumberEnum.ITEM_STATUS_NORMAL.ordinal());
         int countItem = itemMapper.insert(item);
 
         // 保存商品描述

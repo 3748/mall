@@ -1,7 +1,8 @@
 package com.mall.manage.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mall.common.constant.Constants;
+import com.mall.common.enums.ImageTypeEnum;
+import com.mall.common.utils.DateTimeUtil;
 import com.mall.manage.service.PropertiesService;
 import com.mall.common.vo.UploadImgVo;
 import org.apache.commons.lang3.RandomUtils;
@@ -37,7 +38,7 @@ public class UploadController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UploadController.class);
 
     @Autowired
-    private PropertiesService propertieService;
+    private PropertiesService propertiesService;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -47,8 +48,8 @@ public class UploadController {
             throws Exception {
         // 校验图片格式
         boolean isLegal = false;
-        for (String type : Constants.IMAGE_TYPE) {
-            if (StringUtils.endsWithIgnoreCase(imageFile.getOriginalFilename(), type)) {
+        for (ImageTypeEnum type : ImageTypeEnum.values()) {
+            if (StringUtils.endsWithIgnoreCase(imageFile.getOriginalFilename(), type.getValue())) {
                 isLegal = true;
                 break;
             }
@@ -68,9 +69,9 @@ public class UploadController {
         }
 
         // 生成图片的绝对引用地址
-        String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertieService.uploadDir), "\\",
+        String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertiesService.uploadDir), "\\",
                 "/");
-        uploadImgResult.setUrl(propertieService.imageBaseUrl + picUrl);
+        uploadImgResult.setUrl(propertiesService.imageBaseUrl + picUrl);
 
         File newFile = new File(filePath);
 
@@ -103,7 +104,7 @@ public class UploadController {
     }
 
     private String getFilePath(String sourceFileName) {
-        String baseFolder = propertieService.uploadDir + File.separator + "images";
+        String baseFolder = propertiesService.uploadDir + File.separator + "images";
         Date nowDate = new Date();
         // yyyy/MM/dd
         String fileFolder = baseFolder + File.separator + new DateTime(nowDate).toString("yyyy") + File.separator
@@ -113,9 +114,10 @@ public class UploadController {
             // 如果目录不存在，则创建目录
             file.mkdirs();
         }
-        // 生成新的文件名
-        String fileName = new DateTime(nowDate).toString("yyyyMMddhhmmssSSSS") + RandomUtils.nextInt(100, 9999) + "."
+        // 生成新的文件名,当前时间+随机数
+        String fileName = DateTimeUtil.CURRENTTIME.toString() + RandomUtils.nextInt(100, 9999) + "."
                 + StringUtils.substringAfterLast(sourceFileName, ".");
+
         return fileFolder + File.separator + fileName;
     }
 }
