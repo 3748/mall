@@ -18,6 +18,7 @@ import com.mall.manage.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemMapper itemMapper;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public Boolean saveItem(ItemModel itemModel) {
@@ -105,5 +109,35 @@ public class ItemServiceImpl implements ItemService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Boolean updateItem(ItemModel itemModel) {
+        boolean flag = true;
+        itemModel.setUpdateTime(DateTimeUtil.CURRENTTIME);
+
+        // 更新商品基本信息
+        Item item = new Item();
+        BeanUtils.copyProperties(itemModel, item);
+        //updateByPrimaryKeySelective(只更新model中不为空的字段)   updateByPrimaryKey(将为空的字段在数据库中置为NULL)
+        int countItem = itemMapper.updateByPrimaryKeySelective(item);
+
+        // 更新商品描述
+        ItemDesc itemDesc = new ItemDesc();
+        itemDesc.setItemId(itemModel.getId());
+        BeanUtils.copyProperties(itemModel, itemDesc);
+        int countItemDesc = itemDescService.updateItemDesc(itemDesc);
+
+        // 更新商品规格参数
+        ItemParam itemParam = new ItemParam();
+        itemParam.setItemId(itemModel.getId());
+        itemParam.setParamData(itemModel.getItemParams().toString());
+        itemParam.setUpdateTime(itemModel.getUpdateTime());
+        int countItemParam = itemParamService.updateItemParam(itemParam);
+
+        if (1 != countItem || 1 != countItemDesc || 1 != countItemParam) {
+            flag = false;
+        }
+        return flag;
     }
 }

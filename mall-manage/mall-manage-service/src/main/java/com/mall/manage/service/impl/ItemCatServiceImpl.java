@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mall.common.enums.NumberEnum;
+import com.mall.common.enums.StringEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +32,6 @@ public class ItemCatServiceImpl implements ItemCatService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemCatServiceImpl.class);
 
-    /**
-     * 定义key的规则:项目名_模块名_业务名
-     */
-    private static final String REDIS_KEY = "MANAGE_MALL_ITEM_CAT_ALL";
-
     private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
 
     @Autowired
@@ -54,7 +51,7 @@ public class ItemCatServiceImpl implements ItemCatService {
     public ItemCatVo queryAllToTree() {
         // 先从缓存中查询,命中即返回
         try {
-            String cacheData = redisUtil.get(REDIS_KEY);
+            String cacheData = redisUtil.get(StringEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue());
 
             // 查询到结果
             if (StringUtils.isNotEmpty(cacheData)) {
@@ -115,7 +112,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 
         // 将查询结果集写入缓存,此处将result进行序列化
         try {
-            redisUtil.set(REDIS_KEY, OBJECTMAPPER.writeValueAsString(result), 60 * 60 * 24 * 30 * 3);
+            redisUtil.set(StringEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue(), OBJECTMAPPER.writeValueAsString(result), NumberEnum.ITEM_CAT_EXPIRE_TIME.getValue());
         } catch (Exception e) {
             e.printStackTrace();
         }

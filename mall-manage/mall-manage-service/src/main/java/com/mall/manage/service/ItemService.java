@@ -1,5 +1,6 @@
 package com.mall.manage.service;
 
+import com.mall.common.bean.Item;
 import com.mall.common.model.ItemModel;
 import com.mall.common.vo.ItemVo;
 
@@ -25,4 +26,12 @@ public interface ItemService {
      * @return ItemVo
      */
     ItemVo getItemInfoById(Long id);
+
+    /**
+     * 更新商品
+     *
+     * @param itemModel 前台传入商品参数
+     * @return Boolean
+     */
+    Boolean updateItem(ItemModel itemModel);
 }

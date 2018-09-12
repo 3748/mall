@@ -8,11 +8,19 @@ import com.mall.common.bean.ItemDesc;
  */
 public interface ItemDescService {
 
-	/**
-	 * 保存商品描述
-	 * 
-	 * @param itemDesc
-	 * @return
-	 */
-	int saveItemDesc(ItemDesc itemDesc);
+    /**
+     * 保存商品描述
+     *
+     * @param itemDesc 商品描述
+     * @return int
+     */
+    int saveItemDesc(ItemDesc itemDesc);
+
+    /**
+     * 修改商品描述
+     *
+     * @param itemDesc 商品描述
+     * @return int
+     */
+    int updateItemDesc(ItemDesc itemDesc);
 }
