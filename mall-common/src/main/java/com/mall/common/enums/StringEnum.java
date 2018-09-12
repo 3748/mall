@@ -13,7 +13,9 @@ public enum StringEnum {
     //Redis中前台商品详情Key
     MALL_WEB_ITEM_DETAIL("MALL_WEB_ITEM_DETAIL"),
     //Redis中后台商品详情Key
-    MALL_MANAGE_ITEM_DETAIL("MALL_MANAGE_ITEM_DETAIL");
+    MALL_MANAGE_ITEM_DETAIL("MALL_MANAGE_ITEM_DETAIL"),
+    //Redis中后台商品类目Key
+    MALL_MANAGE_ITEM_CAT_ALL("MALL_MANAGE_ITEM_CAT_ALL");
 
     private String value;
 

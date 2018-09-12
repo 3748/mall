@@ -16,6 +16,9 @@ public enum NumberEnum {
     //Redis中商品信息有效时间,24小时
     ITEM_DETAIL_EXPIRE_TIME(60 * 60 * 24),
 
+    //Redis中商品类目信息有效时间,一个月
+    ITEM_CAT_EXPIRE_TIME(60 * 60 * 24 * 30 * 3),
+
     //商品状态  1:正常  2:下架  3:删除
     ITEM_STATUS_NORMAL(1), ITEM_STATUS_STOP(2), ITEM_STATUS_DELETE(3);;
 
