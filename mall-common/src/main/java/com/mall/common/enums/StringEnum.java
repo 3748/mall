@@ -10,12 +10,24 @@ public enum StringEnum {
     /**
      * Redis定义key的规则:项目名_模块名_业务名
      */
-    //Redis中前台商品详情Key
+    // Redis中前台----商品详情Key
     MALL_WEB_ITEM_DETAIL("MALL_WEB_ITEM_DETAIL"),
-    //Redis中后台商品详情Key
+
+    // Redis中后台----商品详情Key
     MALL_MANAGE_ITEM_DETAIL("MALL_MANAGE_ITEM_DETAIL"),
-    //Redis中后台商品类目Key
-    MALL_MANAGE_ITEM_CAT_ALL("MALL_MANAGE_ITEM_CAT_ALL");
+
+    // Redis中后台----商品类目Key
+    MALL_MANAGE_ITEM_CAT_ALL("MALL_MANAGE_ITEM_CAT_ALL"),
+
+
+    /**
+     * MQ操作类型
+     */
+    // MQ----修改
+    MQ_TYPE_UPDATE("update"),
+
+    // MQ----插入
+    MQ_TYPE_INSERT("insert");
 
     private String value;
 

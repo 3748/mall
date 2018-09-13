@@ -23,6 +23,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 商品规格参数
  *
@@ -78,6 +81,9 @@ public class ItemServiceImpl implements ItemService {
         if (1 != countItem || 1 != countItemDesc || 1 != countItemParam) {
             flag = false;
         }
+
+        // 向MQ发送消息
+        sendMsg(itemModel.getId(), StringEnum.MQ_TYPE_INSERT.getValue());
         return flag;
     }
 
@@ -85,7 +91,7 @@ public class ItemServiceImpl implements ItemService {
     public ItemVo getItemInfoById(Long id) {
 
         // 从缓存中命中
-        String key = StringEnum.MALL_MANAGE_ITEM_DETAIL.getValue()+ id;
+        String key = StringEnum.MALL_MANAGE_ITEM_DETAIL.getValue() + id;
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
@@ -138,6 +144,30 @@ public class ItemServiceImpl implements ItemService {
         if (1 != countItem || 1 != countItemDesc || 1 != countItemParam) {
             flag = false;
         }
+
+        // 向MQ发送消息
+        sendMsg(itemModel.getId(), StringEnum.MQ_TYPE_UPDATE.getValue());
         return flag;
+    }
+
+    /**
+     * MQ发送消息到交换机
+     *
+     * @param itemId 商品ID
+     * @param type   类型
+     */
+    private void sendMsg(Long itemId, String type) {
+        try {
+            // 封装MQ传递的参数
+            Map<String, Object> data = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
+            data.put("itemId", itemId);
+            data.put("type", type);
+            data.put("date", System.currentTimeMillis());
+
+            // 发送MQ,通知其他系统更新缓存中的商品信息(尽量少的传递信息)
+            rabbitTemplate.convertAndSend("item." + type, OBJECTMAPPER.writeValueAsString(data));
+        } catch (Exception e) {
+            LOGGER.error("MQ消息发送失败", e.getMessage());
+        }
     }
 }

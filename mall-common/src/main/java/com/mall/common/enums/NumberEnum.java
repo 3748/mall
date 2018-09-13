@@ -10,13 +10,13 @@ public enum NumberEnum {
     //Map初始化默认大小
     MAP_INIT_SIZE(16),
 
-    //Redis中token有效时间,30分钟
+    //Redis中登录系统----token有效时间,30分钟
     TOKEN_EXPIRE_TIME(60 * 30),
 
-    //Redis中商品信息有效时间,24小时
+    //Redis中----商品信息有效时间,24小时
     ITEM_DETAIL_EXPIRE_TIME(60 * 60 * 24),
 
-    //Redis中商品类目信息有效时间,一个月
+    //Redis中后台----商品类目信息有效时间,一个月
     ITEM_CAT_EXPIRE_TIME(60 * 60 * 24 * 30 * 3),
 
     //商品状态  1:正常  2:下架  3:删除
