@@ -30,6 +30,7 @@
         <javax.version>1.0</javax.version>
         <commons-codec.version>1.9</commons-codec.version>
         <hibernate.version>5.1.3.Final</hibernate.version>
+        <rabbit.version>1.4.0.RELEASE</rabbit.version>
 
         <!-- plugin的属性定义 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -221,6 +222,13 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
+            </dependency>
+
+            <!-- RabbitMQ -->
+            <dependency>
+                <groupId>org.springframework.amqp</groupId>
+                <artifactId>spring-rabbit</artifactId>
+                <version>${rabbit.version}</version>
             </dependency>
 
         </dependencies>

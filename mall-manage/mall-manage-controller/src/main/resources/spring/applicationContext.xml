@@ -17,6 +17,7 @@
                 <value>classpath:properties/jdbc.properties</value>
                 <value>classpath:properties/env.properties</value>
                 <value>classpath:properties/redis.properties</value>
+                <value>classpath:properties/rabbit.properties</value>
             </list>
         </property>
     </bean>
