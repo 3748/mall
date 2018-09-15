@@ -25,7 +25,7 @@ public class ItemController {
     private ItemService itemService;
 
     /**
-     * 调用mall.com/item/2.html, 会出现406错误,由于浏览器把数据当成html解析导致
+     * 调用mall.com/item/test/2.html, 会出现406错误,由于浏览器把数据当成html解析导致
      *
      * @param id 商品id
      * @return ResponseEntity<ItemVo>

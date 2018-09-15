@@ -13,12 +13,16 @@
     <!-- 2: 定义MQ的管理，包括队列、交换器等,用来完成队列/交换机的自动声明-->
     <rabbit:admin connection-factory="connectionFactory"/>
 
-    <!-- 3: 定义交换机(自动声明,默认持久化),自动声明不是在启动时声明,而是在使用时声明-->
-    <rabbit:topic-exchange name="mall-manage-item-exchange" auto-declare="true"/>
+    <!-- 3: 定义队列，自动声明(默认持久化,durable="false"改为非持久化)  -->
+    <rabbit:queue name="mall-web-item-queue" auto-declare="true"/>
 
-    <!-- 4: 定义Rabbit模板，指定连接工厂以及定义交换机(exchange) -->
-    <rabbit:template id="template" connection-factory="connectionFactory" exchange="mall-manage-item-exchange"/>
+    <!-- 4: 定义消费者-->
+    <bean id="itemQueueListener" class="com.mall.web.mq.listener.ItemQueueListener"/>
 
-    <!-- 后台系统无需声明队列,只需将消息发送到交换机集皆可 -->
+    <!-- 5: 定义消费者队列监听 -->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="itemQueueListener" method="execute" queue-names="mall-web-item-queue"/>
+    </rabbit:listener-container>
 
+    <!-- 6: 此时队列和交换机还未完成绑定,  绑定关系不建议在代码中完成,  在管理界面中完成-->
 </beans>

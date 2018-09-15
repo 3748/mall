@@ -190,8 +190,6 @@
                 <version>${jsp-api.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- <dependency> <groupId>javax</groupId> <artifactId>servlet-api</artifactId>
-                <version>${servlet-api.version}</version> <scope>provided</scope> </dependency> -->
 
             <!-- 时间操作组件 -->
             <dependency>
