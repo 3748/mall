@@ -3,11 +3,10 @@ package com.mall.manage.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.enums.ImageTypeEnum;
 import com.mall.common.utils.DateTimeUtil;
-import com.mall.manage.service.PropertiesService;
 import com.mall.common.vo.UploadImgVo;
+import com.mall.manage.service.PropertiesService;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * 图片上传
@@ -105,10 +103,8 @@ public class UploadController {
 
     private String getFilePath(String sourceFileName) {
         String baseFolder = propertiesService.uploadDir + File.separator + "images";
-        Date nowDate = new Date();
-        // yyyy/MM/dd
-        String fileFolder = baseFolder + File.separator + new DateTime(nowDate).toString("yyyy") + File.separator
-                + new DateTime(nowDate).toString("MM") + File.separator + new DateTime(nowDate).toString("dd");
+        // 目录格式 yyyy/MM/dd
+        String fileFolder = baseFolder + File.separator + DateTimeUtil.CURRENTYEAR + File.separator + DateTimeUtil.CURRENTMOUTH + File.separator + DateTimeUtil.CURRENTDATE;
         File file = new File(fileFolder);
         if (!file.isDirectory()) {
             // 如果目录不存在，则创建目录

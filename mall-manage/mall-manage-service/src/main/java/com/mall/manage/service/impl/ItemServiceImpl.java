@@ -57,7 +57,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Boolean saveItem(ItemModel itemModel) {
         boolean flag = true;
-        itemModel.setCreateTime(DateTimeUtil.getCurrentTime());
+        itemModel.setCreateTime(DateTimeUtil.CURRENTTIME);
         itemModel.setUpdateTime(itemModel.getCreateTime());
 
         // 保存商品基本信息

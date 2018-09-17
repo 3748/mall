@@ -33,7 +33,7 @@ public class ItemParamServiceImpl implements ItemParamService {
         int count = 0;
 
         try {
-            itemParam.setCreateTime(DateTimeUtil.getCurrentTime());
+            itemParam.setCreateTime(DateTimeUtil.CURRENTTIME);
             itemParam.setUpdateTime(itemParam.getCreateTime());
             count = itemParamMapper.insert(itemParam);
         } catch (Exception e) {
