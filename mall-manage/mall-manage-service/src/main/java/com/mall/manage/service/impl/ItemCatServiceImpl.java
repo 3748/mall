@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.abel533.mapper.Mapper;
 import com.mall.common.enums.NumberEnum;
 import com.mall.common.enums.StringEnum;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +40,13 @@ public class ItemCatServiceImpl implements ItemCatService {
 
     @Autowired
     private ItemCatMapper itemCatMapper;
+
+    /**
+     * Spring4增加了对泛型注入的支持，可以直接在Service中写
+     *
+     * @Autowired
+     * private Mapper<T> mapper;
+     */
 
     @Override
     public List<ItemCat> getListByParentId(long parentId) {

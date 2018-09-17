@@ -13,7 +13,7 @@
         <property name="typeAliasesPackage" value="com.mall.common.bean"/>
     </bean>
 
-    <!-- mapper接口的扫描器 -->
+    <!--mapper接口的扫描器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.mall.manage.mapper"/>
     </bean>

@@ -34,7 +34,7 @@ public class ItemCatController {
      * 根据父id获取所有的子商品类目
      *
      * @param parentId 商品类目父id
-     * @return ResponseEntity<List < ItemCat>>
+     * @return ResponseEntity<List<ItemCat>>
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ItemCat>> getListByParentId(

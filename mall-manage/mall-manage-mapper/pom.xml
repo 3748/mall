@@ -23,7 +23,14 @@
 			<groupId>com.github.abel533</groupId>
 			<artifactId>mapper</artifactId>
 
-			<!-- 传入通用mapper依赖,但排除jpa依赖 -->
+			<!--
+                要排除通用Mapper中的jpa依赖
+
+                理由:
+                    1: 通用Mapper中的jpa依赖不会被使用
+                    2: common中引入了jpa依赖
+                    3: mapper依赖common
+            -->
 			<exclusions>
 				<exclusion>
 					<artifactId>persistence-api</artifactId>
