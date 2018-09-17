@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.mall.parent</groupId>
         <artifactId>mall-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -46,6 +46,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!--时间操作组件 -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
         </dependency>
 
         <dependency>
