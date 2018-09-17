@@ -15,8 +15,8 @@
     -->
     <bean id="httpClientConnectionManager"
           class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager">
-        <property name="maxTotal" value="${http.maxTotal}"></property>
-        <property name="defaultMaxPerRoute" value="${http.maxPerRoute}"></property>
+        <property name="maxTotal" value="${http.maxTotal}"/>
+        <property name="defaultMaxPerRoute" value="${http.maxPerRoute}"/>
     </bean>
 
     <!--
@@ -28,7 +28,7 @@
         下面配置文件和上面代码实现功能一致(不包含后面的build)
     -->
     <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder">
-        <property name="connectionManager" ref="httpClientConnectionManager"></property>
+        <property name="connectionManager" ref="httpClientConnectionManager"/>
     </bean>
 
     <!--
@@ -58,10 +58,10 @@
             下面配置文件相当于 new Builder(),加上设置,不包含build();
      -->
     <bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig.Builder">
-        <property name="connectTimeout" value="${http.connectTimeout}"></property>
-        <property name="connectionRequestTimeout" value="${http.connectionRequestTimeout}"></property>
-        <property name="socketTimeout" value="${http.socketTimeout}"></property>
-        <property name="staleConnectionCheckEnabled" value="${http.staleConnectionCheckEnabled}"></property>
+        <property name="connectTimeout" value="${http.connectTimeout}"/>
+        <property name="connectionRequestTimeout" value="${http.connectionRequestTimeout}"/>
+        <property name="socketTimeout" value="${http.socketTimeout}"/>
+        <property name="staleConnectionCheckEnabled" value="${http.staleConnectionCheckEnabled}"/>
     </bean>
 
     <!--

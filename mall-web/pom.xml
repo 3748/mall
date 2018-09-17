@@ -11,14 +11,14 @@
 	<parent>
 		<groupId>com.mall.parent</groupId>
 		<artifactId>mall-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.mall.common</groupId>
 			<artifactId>mall-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
 		<!-- 单元测试 -->
@@ -46,19 +46,9 @@
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
-		<!-- JSP相关 -->
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
@@ -66,10 +56,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-io</artifactId>
 		</dependency>
 
 		<!-- RabbitMQ -->
