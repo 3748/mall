@@ -80,7 +80,7 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
-        <!-- Jackson Json处理工具包 -->
+        <!--Jackson Json处理工具包-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -112,20 +112,16 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
-        <!-- jedis -->
+        <!--jedis -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
 
-        <!-- 分页助手 -->
+        <!--分页助手 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
         </dependency>
     </dependencies>
 </project>
