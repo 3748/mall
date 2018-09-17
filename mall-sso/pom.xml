@@ -10,14 +10,14 @@
     <parent>
         <groupId>com.mall.parent</groupId>
         <artifactId>mall-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.mall.common</groupId>
             <artifactId>mall-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- 密码加密工具 -->
