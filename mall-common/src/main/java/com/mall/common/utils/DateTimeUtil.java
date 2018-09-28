@@ -35,7 +35,6 @@ public class DateTimeUtil {
      */
     public static final String CURRENTDATE = getCurrentDate();
 
-
     private static Long getCurrentTime() {
         SimpleDateFormat formatter = new SimpleDateFormat(YYYYMMDDHHMMSS);
         return Long.valueOf(formatter.format(new Date()));
