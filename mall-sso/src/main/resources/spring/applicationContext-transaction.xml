@@ -5,18 +5,18 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <!-- 定义事务管理器 -->
+    <!--定义事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!-- 定义事务策略 -->
+    <!--定义事务策略-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <!--所有以query开头的方法都是只读的 -->
+            <!--所有以query开头的方法都是只读的-->
             <tx:method name="query*" read-only="true"/>
 
-            <!--其他方法使用默认事务策略 -->
+            <!--其他方法使用默认事务策略-->
             <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
