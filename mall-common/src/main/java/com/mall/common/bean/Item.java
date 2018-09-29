@@ -1,7 +1,5 @@
 package com.mall.common.bean;
 
-import com.mall.common.bean.Base;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

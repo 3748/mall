@@ -19,6 +19,8 @@ public enum StringEnum {
     // Redis中后台----商品类目Key
     MALL_MANAGE_ITEM_CAT_ALL("MALL_MANAGE_ITEM_CAT_ALL"),
 
+    // Redis中单点登录系统----token Key
+    MALL_SSO_LOGIN_TOKEN("TOKEN"),
 
     /**
      * MQ操作类型

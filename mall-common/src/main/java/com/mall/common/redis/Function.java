@@ -8,7 +8,7 @@ public interface Function<T, E> {
 
     /**
      * RedisUtil中使用
-     * @param e
+     * @param e 参数
      * @return T
      */
     T callback(E e);

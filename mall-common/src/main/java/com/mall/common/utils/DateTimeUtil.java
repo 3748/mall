@@ -1,9 +1,9 @@
 package com.mall.common.utils;
 
+import org.joda.time.DateTime;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.joda.time.DateTime;
 
 /**
  * 日期时间工具类
