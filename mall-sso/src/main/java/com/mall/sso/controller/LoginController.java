@@ -37,7 +37,7 @@ public class LoginController {
      * @param user     登录时提供的用户信息
      * @param request  HttpServletRequest
      * @param response HttpServletResponse
-     * @return ResponseEntity<Map<String,Object>>
+     * @return         ResponseEntity<Map<String,Object>>
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {

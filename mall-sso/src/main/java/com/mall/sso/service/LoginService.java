@@ -3,6 +3,7 @@ package com.mall.sso.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.bean.User;
 import com.mall.common.enums.NumberEnum;
+import com.mall.common.enums.StringEnum;
 import com.mall.common.utils.RedisUtil;
 import com.mall.sso.mapper.UserMapper;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -42,7 +43,7 @@ public class LoginService {
         String token = DigestUtils.md5Hex(username + System.currentTimeMillis());
 
         //设置token和过期时间
-        redisUtil.set("TOKEN_" + token, MAPPER.writeValueAsString(user), NumberEnum.TOKEN_EXPIRE_TIME.getValue());
+        redisUtil.set(StringEnum.MALL_SSO_LOGIN_TOKEN + token, MAPPER.writeValueAsString(user), NumberEnum.TOKEN_EXPIRE_TIME.getValue());
 
         return token;
     }
