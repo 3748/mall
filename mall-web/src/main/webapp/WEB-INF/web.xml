@@ -15,7 +15,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- 编码过滤器，以UTF8编码 -->
+	<!--编码过滤器，以UTF8编码-->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -29,7 +29,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- 配置SpringMVC框架入口 -->
+	<!--配置SpringMVC框架入口-->
 	<servlet>
 		<servlet-name>mall-web</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -42,12 +42,19 @@
 
 	<servlet-mapping>
 		<servlet-name>mall-web</servlet-name>
-		<!-- 伪静态 ,好处:有利于SEO(搜索引擎优化)-->
+		<!--
+			伪静态,好处:有利于SEO(搜索引擎优化)
+
+			搜索引擎根据得分将搜索结果排名
+
+			搜索引擎规则:
+				静态页面的得分高于动态页面
+		-->
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>test-json.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

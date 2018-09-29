@@ -21,7 +21,7 @@
         <!-- 第一个构造参数 poolConfig-->
         <constructor-arg index="0">
             <bean class="redis.clients.jedis.JedisPoolConfig">
-                <property name="maxTotal" value="${redis.maxTotal}"></property>
+                <property name="maxTotal" value="${redis.maxTotal}" />
             </bean>
         </constructor-arg>
 

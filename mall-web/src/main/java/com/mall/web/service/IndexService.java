@@ -48,7 +48,7 @@ public class IndexService {
 
             ArrayNode rows = (ArrayNode) jsonNode.get("list");
 
-            List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+            List<Map<String, Object>> result = new ArrayList<>();
             for (JsonNode row : rows) {
                 // 这样获取的值,是有顺序的
                 Map<String, Object> map = new LinkedHashMap<>();

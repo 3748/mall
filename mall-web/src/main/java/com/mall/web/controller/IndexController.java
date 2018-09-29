@@ -32,6 +32,7 @@ public class IndexController {
         String indexAD1 = indexService.queryIndexAD1();
         modelAndView.addObject("indexAD1", indexAD1);
 
+        // 小广告位数据
         String indexAD2 = indexService.queryIndexAD2();
         modelAndView.addObject("indexAD2", indexAD2);
         return modelAndView;
