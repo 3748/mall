@@ -32,7 +32,7 @@ public class ItemController {
      */
     @RequestMapping(value = "test/{id}", method = RequestMethod.GET)
     public ResponseEntity<ItemVo> getItemInfoById406(@PathVariable("id") Long id) {
-        ItemVo itemVo = itemService.getItemInfoById(id);
+        ItemVo itemVo = itemService.selectItemById(id);
 
         BeanUtil<ItemVo> beanUtil = new BeanUtil<>();
         return beanUtil.isNull(itemVo);
@@ -45,8 +45,8 @@ public class ItemController {
      * @return ResponseEntity<ItemVo>
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ModelAndView getItemInfoById(@PathVariable("id") Long id) {
-        ItemVo itemVo = itemService.getItemInfoById(id);
+    public ModelAndView selectItemById(@PathVariable("id") Long id) {
+        ItemVo itemVo = itemService.selectItemById(id);
 
         ModelAndView modelAndView = new ModelAndView("item");
         modelAndView.addObject("itemVo", itemVo);

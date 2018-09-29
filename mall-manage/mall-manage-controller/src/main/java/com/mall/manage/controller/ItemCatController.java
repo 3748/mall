@@ -36,9 +36,9 @@ public class ItemCatController {
      * @return ResponseEntity<List<ItemCat>>
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<ItemCat>> getListByParentId(@RequestParam(value = "id", defaultValue = "0") long parentId) {
+    public ResponseEntity<List<ItemCat>> selectItemCatListByParentId(@RequestParam(value = "id", defaultValue = "0") long parentId) {
         try {
-            List<ItemCat> list = itemCatService.getListByParentId(parentId);
+            List<ItemCat> list = itemCatService.selectItemCatListByParentId(parentId);
             if (null == list || list.isEmpty()) {
                 // 资源不存在
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

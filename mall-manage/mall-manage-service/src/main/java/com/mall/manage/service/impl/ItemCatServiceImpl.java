@@ -49,14 +49,14 @@ public class ItemCatServiceImpl implements ItemCatService {
      */
 
     @Override
-    public List<ItemCat> getListByParentId(long parentId) {
+    public List<ItemCat> selectItemCatListByParentId(long parentId) {
         ItemCat itemCat = new ItemCat();
         itemCat.setParentId(parentId);
         return itemCatMapper.select(itemCat);
     }
 
     @Override
-    public ItemCatVo queryAllToTree() {
+    public ItemCatVo selectAllItemCatListToTree() {
         // 先从缓存中查询,命中即返回
         try {
             String cacheData = redisUtil.get(StringEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue());

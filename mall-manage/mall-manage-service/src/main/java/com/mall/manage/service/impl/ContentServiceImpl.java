@@ -22,7 +22,7 @@ public class ContentServiceImpl implements ContentService {
     private ContentMapper contentMapper;
 
     @Override
-    public PageInfo<Content> queryListByCatId(Long contentCatId, Integer pageNum, Integer pageSize) {
+    public PageInfo<Content> selectContentListByCatId(Long contentCatId, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
 
         Content content = new Content();

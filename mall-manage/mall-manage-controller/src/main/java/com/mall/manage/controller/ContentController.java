@@ -36,11 +36,11 @@ public class ContentController {
      * @return ResponseEntity<PageInfo<Content>>
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<PageInfo<Content>> queryListByCatId(@RequestParam("contentCatId") Long contentCatId,
+    public ResponseEntity<PageInfo<Content>> selectContentListByCatId(@RequestParam("contentCatId") Long contentCatId,
                                                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         try {
-            PageInfo<Content> pageInfo = contentService.queryListByCatId(contentCatId, pageNum, pageSize);
+            PageInfo<Content> pageInfo = contentService.selectContentListByCatId(contentCatId, pageNum, pageSize);
             return ResponseEntity.ok(pageInfo);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());

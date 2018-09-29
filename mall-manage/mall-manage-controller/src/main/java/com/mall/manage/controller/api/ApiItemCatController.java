@@ -69,8 +69,8 @@ public class ApiItemCatController {
      * @return ResponseEntity<ItemCatVo>
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<ItemCatVo> queryAllToTree() {
-        ItemCatVo itemCatVo = itemCatService.queryAllToTree();
+    public ResponseEntity<ItemCatVo> selectAllItemCatListToTree() {
+        ItemCatVo itemCatVo = itemCatService.selectAllItemCatListToTree();
         BeanUtil<ItemCatVo> beanUtil = new BeanUtil<>();
         return beanUtil.isNull(itemCatVo);
     }

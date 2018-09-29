@@ -26,7 +26,7 @@ public interface ItemService {
      * @param id 商品id
      * @return ItemVo
      */
-    ItemVo getItemInfoById(Long id);
+    ItemVo selectItemById(Long id);
 
     /**
      * 更新商品

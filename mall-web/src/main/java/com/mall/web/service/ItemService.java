@@ -43,7 +43,7 @@ public class ItemService {
      * @param id 商品id
      * @return ItemVo
      */
-    public ItemVo getItemInfoById(Long id) {
+    public ItemVo selectItemById(Long id) {
 
         // 从缓存中命中
         String key = StringEnum.MALL_WEB_ITEM_DETAIL.getValue() + id;

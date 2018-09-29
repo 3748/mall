@@ -18,12 +18,12 @@ public interface ItemCatService {
      * @param parentId 商品类目父id
      * @return List<ItemCat>
      */
-    List<ItemCat> getListByParentId(long parentId);
+    List<ItemCat> selectItemCatListByParentId(long parentId);
 
     /**
      * 查询全部商品类目，并且生成树状结构
      *
      * @return ItemCatVo
      */
-    ItemCatVo queryAllToTree();
+    ItemCatVo selectAllItemCatListToTree();
 }

@@ -35,8 +35,8 @@ public class ApiItemController {
      * @return ResponseEntity<Item>
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResponseEntity<ItemVo> getItemInfoById(@PathVariable("id") Long id) {
-        ItemVo itemVo = itemService.getItemInfoById(id);
+    public ResponseEntity<ItemVo> selectItemById(@PathVariable("id") Long id) {
+        ItemVo itemVo = itemService.selectItemById(id);
 
         BeanUtil<ItemVo> beanUtil = new BeanUtil<>();
         return beanUtil.isNull(itemVo);

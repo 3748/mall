@@ -92,7 +92,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemVo getItemInfoById(Long id) {
+    public ItemVo selectItemById(Long id) {
 
         // 从缓存中命中
         String key = StringEnum.MALL_MANAGE_ITEM_DETAIL.getValue() + id;

@@ -16,5 +16,5 @@ public interface ContentService {
      * @param pageSize     每页显示条数
      * @return PageInfo<Content>
      */
-    PageInfo<Content> queryListByCatId(Long contentCatId, Integer pageNum, Integer pageSize);
+    PageInfo<Content> selectContentListByCatId(Long contentCatId, Integer pageNum, Integer pageSize);
 }
