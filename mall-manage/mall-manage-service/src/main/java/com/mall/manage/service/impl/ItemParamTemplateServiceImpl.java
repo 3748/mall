@@ -33,7 +33,7 @@ public class ItemParamTemplateServiceImpl implements ItemParamTemplateService {
     public void insertItemParamTemplate(ItemParamTemplate itemParamTemplate) {
         try {
             itemParamTemplate.setCreateTime(DateTimeUtil.CURRENTTIME);
-            itemParamTemplate.setUpdatedTime(itemParamTemplate.getCreateTime());
+            itemParamTemplate.setUpdateTime(itemParamTemplate.getCreateTime());
             itemParamTemplateMapper.insert(itemParamTemplate);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());

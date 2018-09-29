@@ -2,6 +2,8 @@ package com.mall.manage.controller;
 
 import com.mall.common.bean.ItemParamTemplate;
 import com.mall.manage.service.ItemParamTemplateService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping({"item/param/template"})
 public class ItemParamTemplateController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemParamTemplateController.class);
+
     @Autowired
     private ItemParamTemplateService itemParamTemplateService;
 
@@ -39,7 +43,7 @@ public class ItemParamTemplateController {
             }
             return ResponseEntity.ok(itemParam);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("根据商品类目ID={}查询商品规格参数模板失败", catId, e);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
@@ -67,7 +71,7 @@ public class ItemParamTemplateController {
             itemParamTemplateService.insertItemParamTemplate(itemParamTemplate);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("新增商品规格参数模板失败,catId={},paramData={}", catId, paramData);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }

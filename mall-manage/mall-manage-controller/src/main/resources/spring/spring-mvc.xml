@@ -7,36 +7,60 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <!-- 注解驱动  -->
+    <!--
+        注解驱动:
+            1: 它声明了@RequestMapping、@RequestBody、@ResponseBody等
+            2: 该配置默认加载很多的参数绑定方法，比如json转换解析器等
+
+        注解驱动在sprin-webmvc中
+        注解驱动属于配置文件 org.springframework.web.servlet.config
+    -->
     <mvc:annotation-driven>
+        <!--
+            在SpringMVC中返回的类型有两种:
+                1: ModelAndView
+                2: 数据的响应
+                    2.1 使用@ResponseBody注解返回(会使用MappingJackson2HttpMessageConverter消息转换器,返回json数据)
+                    2.2 使用消息转换器返回 eg:ResponseEntity<T>
+
+                    默认的消息转化器：
+                        org.springframework.web.servlet.config.AnnotationDrivenBeanDefinitionParser.getMessageConverters
+
+                        会根据不同的返回值类型,找到对应的消息转换器
+        -->
         <mvc:message-converters register-defaults="true">
-            <!-- 将消息转换器的默认字符设为UTF-8,解决返回字符串乱码问题 -->
+            <!--将字符串消息转换器的默认字符设为UTF-8,解决返回字符串乱码问题 -->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg index="0" value="UTF-8"/>
             </bean>
 
-            <!-- 项目支持jsonp -->
-            <bean class="com.mall.common.springframework.http.converter.json.CallbackMappingJackson2HttpMessageConverter">
-                <property name="callbackName" value="callback"></property>
+            <!--项目支持jsonp-->
+            <bean class="com.mall.common.springframework.http.converter.json.MappingJackson2HttpMessageConverterJsonp">
+                <property name="callbackName" value="callback"/>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-
-    <!-- 扫描Controller -->
+    <!--扫描Controller-->
     <context:component-scan base-package="com.mall.manage.controller"/>
 
-    <!-- 视图解析器 -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 文件上传解析器 -->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 限制文件最大为5MB 5*1024*1024 -->
+    <!--
+        文件上传解析器, 在spring-web中
+
+        spring-web与spring-webmvc的区别
+            1: webmvc主要是对mvc的支持(Controller层注解)，包括restful协议
+            2: web则对远程调用和远程服务(web)的支持
+
+        id只能为multipartResolver
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--限制文件最大为5MB 5*1024*1024-->
         <property name="maxUploadSize" value="5242880"/>
     </bean>
 

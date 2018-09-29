@@ -14,7 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("page")
 public class PageController {
-    @RequestMapping(value = "{pageName}",method = RequestMethod.GET)
+
+    /**
+     * 页面跳转
+     *
+     * @param pageName 要跳转的页面名称
+     * @return String
+     */
+    @RequestMapping(value = "{pageName}", method = RequestMethod.GET)
     public String toPage(@PathVariable("pageName") String pageName) {
         return pageName;
     }

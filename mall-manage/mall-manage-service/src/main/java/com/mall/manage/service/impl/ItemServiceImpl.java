@@ -2,6 +2,9 @@ package com.mall.manage.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.abel533.entity.Example;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mall.common.bean.Item;
 import com.mall.common.bean.ItemDesc;
 import com.mall.common.bean.ItemParam;
@@ -24,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,7 +59,7 @@ public class ItemServiceImpl implements ItemService {
     private RabbitTemplate rabbitTemplate;
 
     @Override
-    public Boolean saveItem(ItemModel itemModel) {
+    public Boolean insertItem(ItemModel itemModel) {
         boolean flag = true;
         itemModel.setCreateTime(DateTimeUtil.CURRENTTIME);
         itemModel.setUpdateTime(itemModel.getCreateTime());
@@ -125,13 +129,19 @@ public class ItemServiceImpl implements ItemService {
         // 更新商品基本信息
         Item item = new Item();
         BeanUtils.copyProperties(itemModel, item);
-        //updateByPrimaryKeySelective(只更新model中不为空的字段)   updateByPrimaryKey(将为空的字段在数据库中置为NULL)
+
+        // 将不能被修改的字段设置为null,防止前台传入参数,值被修改
+        item.setCreateTime(null);
+        item.setStatus(null);
+
+        // updateByPrimaryKeySelective(只更新model中不为空的字段)   updateByPrimaryKey(将为空的字段在数据库中置为NULL)
         int countItem = itemMapper.updateByPrimaryKeySelective(item);
 
         // 更新商品描述
         ItemDesc itemDesc = new ItemDesc();
         itemDesc.setItemId(itemModel.getId());
         BeanUtils.copyProperties(itemModel, itemDesc);
+        itemDesc.setCreateTime(null);
         int countItemDesc = itemDescService.updateItemDesc(itemDesc);
 
         // 更新商品规格参数
@@ -139,6 +149,7 @@ public class ItemServiceImpl implements ItemService {
         itemParam.setItemId(itemModel.getId());
         itemParam.setParamData(itemModel.getItemParams().toString());
         itemParam.setUpdateTime(itemModel.getUpdateTime());
+        itemDesc.setCreateTime(null);
         int countItemParam = itemParamService.updateItemParam(itemParam);
 
         if (1 != countItem || 1 != countItemDesc || 1 != countItemParam) {
@@ -148,6 +159,16 @@ public class ItemServiceImpl implements ItemService {
         // 向MQ发送消息
         sendMsg(itemModel.getId(), StringEnum.MQ_TYPE_UPDATE.getValue());
         return flag;
+    }
+
+    @Override
+    public PageInfo<Item> selectItemList(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+
+        Example example = new Example(Item.class);
+        example.setOrderByClause("ID DESC");
+        List<Item> items = itemMapper.selectByExample(example);
+        return new PageInfo<>(items);
     }
 
     /**

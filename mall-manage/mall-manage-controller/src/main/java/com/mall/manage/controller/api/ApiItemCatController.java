@@ -35,9 +35,10 @@ public class ApiItemCatController {
      * 接口单独支持jsonp
      * 首页左侧商品类目
      *
-     * @return
+     * 返回值在浏览器中显示乱码
      */
-	/*@RequestMapping(method = RequestMethod.GET)
+	/*
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<String> queryAllToTree(@RequestParam(value = "callback", required = false) String callback) {
 		try {
 			ItemCatResult itemCatResult = itemCatService.queryAllToTree();

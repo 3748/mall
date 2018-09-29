@@ -15,6 +15,26 @@
         <!-- 配置资源文件 -->
         <property name="locations">
             <list>
+                <!--
+                    Spring容器与SpringMVC容器
+                        1: spring容器是父容器,Service属于父容器
+                        2: SpringMVC容器是子容器,Controller属于子容器
+                        3: 子容器可以读取父容器的资源(bean)
+                            eg:Service可以注入Controller
+                        4: 父容器不能读取子容器的资源
+
+                    @Value
+                        在Spring容器初始化（所有的bean）之后，在当前的所在容器中获取值，然后注入。
+                        当@Value写在Controller中时,只会在SpringMVC容器中查找配置数据
+
+                        env.properties(该配置文件属于spring容器)属于父容器
+
+                    解决方法
+                        1: 用Service当做中介,Service属于父容器,可以读取到配置文件中的值, 然后将Service注入到Controller中,即可完成上传路径配置文件的读取
+                        2: 将配置文件注入SpringMVC容器中
+
+                        建议使用第一种
+                -->
                 <value>classpath:properties/jdbc.properties</value>
                 <value>classpath:properties/env.properties</value>
                 <value>classpath:properties/redis.properties</value>
@@ -23,8 +43,19 @@
         </property>
     </bean>
 
-    <!-- 扫描包 -->
+    <!--
+        扫描包:
+            1: 扫描配置的base-package包下的所有使用了@Component注解的类，并且将它们自动注册到容器中
+            2: 同时也扫描@Controller，@Service，@Repository这三个注解，因为他们是继承自@Component。
+    -->
     <context:component-scan base-package="com.mall"/>
+
+    <!--
+        1: 有了context:component-scan配置，context:annotation-config是可以省略掉的
+        2: context:component-scan配置会默认打开context:annotation-config配置。
+        3: 以下配置会默认声明了@Required、@Autowired、 @PostConstruct、@PersistenceContext、@Resource、@PreDestroy等注解。
+    -->
+    <!--<context:annotation-config/>-->
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>

@@ -10,10 +10,24 @@ import com.mall.common.bean.ContentCat;
  */
 public interface ContentCatService {
     /**
-     * 根据父节点id查询分类列表
+     * 根据父内容类目id查询内容分类列表
      *
-     * @param parentId 商品类目父id
+     * @param parentId 父内容类目id
      * @return List<ContentCat>
      */
-    List<ContentCat> queryListByParentId(Long parentId);
+    List<ContentCat> selectContentCatByParentId(Long parentId);
+
+    /**
+     * 新增内容类目
+     *
+     * @param contentCat 内容类目信息
+     */
+    void insertContentCat(ContentCat contentCat);
+
+    /**
+     * 删除内容类目
+     *
+     * @param id 类目id
+     */
+    void deleteContentCat(Long id);
 }

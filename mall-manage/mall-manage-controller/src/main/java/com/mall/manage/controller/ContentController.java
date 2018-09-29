@@ -33,7 +33,7 @@ public class ContentController {
      * @param contentCatId 首页内容类目id
      * @param pageNum      页码
      * @param pageSize     每页显示条数
-     * @return ResponseEntity<PageInfo       <       Content>>
+     * @return ResponseEntity<PageInfo<Content>>
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<PageInfo<Content>> queryListByCatId(@RequestParam("contentCatId") Long contentCatId,
@@ -43,7 +43,6 @@ public class ContentController {
             PageInfo<Content> pageInfo = contentService.queryListByCatId(contentCatId, pageNum, pageSize);
             return ResponseEntity.ok(pageInfo);
         } catch (Exception e) {
-            e.printStackTrace();
             LOGGER.error(e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

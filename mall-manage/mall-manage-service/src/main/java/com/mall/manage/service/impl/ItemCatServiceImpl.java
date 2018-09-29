@@ -113,9 +113,6 @@ public class ItemCatServiceImpl implements ItemCatService {
                     }
                 }
             }
-            if (result.getItemCats().size() >= 14) {
-                break;
-            }
         }
 
         // 将查询结果集写入缓存,此处将result进行序列化

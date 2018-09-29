@@ -1,18 +1,14 @@
 package com.mall.manage.service.impl;
 
 import com.github.abel533.entity.Example;
-import com.mall.common.bean.ItemDesc;
+import com.mall.common.bean.ItemParam;
+import com.mall.common.utils.DateTimeUtil;
+import com.mall.manage.mapper.ItemParamMapper;
+import com.mall.manage.service.ItemParamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.mall.common.utils.DateTimeUtil;
-import com.mall.common.bean.ItemParam;
-import com.mall.manage.mapper.ItemParamMapper;
-import com.mall.manage.service.ItemParamService;
-
-import javax.xml.crypto.Data;
 
 /**
  * 商品规格参数

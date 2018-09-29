@@ -40,10 +40,17 @@ public class UploadController {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    @RequestMapping(value = "/img", method = RequestMethod.POST)
+    /**
+     * produces: 指定相应类型
+     *
+     * @param imageFile 图片文件
+     * @return 文本类型的json数据
+     * @throws Exception 异常
+     */
+    @RequestMapping(value = "/img", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
-    public String uploadImg(@RequestParam("imageFile") MultipartFile imageFile, HttpServletResponse response)
-            throws Exception {
+    public String uploadImg(@RequestParam("imageFile") MultipartFile imageFile) throws Exception {
+
         // 校验图片格式
         boolean isLegal = false;
         for (ImageTypeEnum type : ImageTypeEnum.values()) {
@@ -67,8 +74,7 @@ public class UploadController {
         }
 
         // 生成图片的绝对引用地址
-        String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertiesService.uploadDir), "\\",
-                "/");
+        String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertiesService.uploadDir), "\\", "/");
         uploadImgResult.setUrl(propertiesService.imageBaseUrl + picUrl);
 
         File newFile = new File(filePath);
@@ -76,7 +82,7 @@ public class UploadController {
         // 写文件到磁盘
         imageFile.transferTo(newFile);
 
-        // 校验图片是否合法
+        // 校验图片是否合法,图片是否有宽和高
         isLegal = false;
         try {
             BufferedImage image = ImageIO.read(newFile);
@@ -97,10 +103,16 @@ public class UploadController {
             newFile.delete();
         }
 
-        response.setContentType(MediaType.TEXT_HTML_VALUE);
+        // 将一个java对象序列化成json字符串
         return MAPPER.writeValueAsString(uploadImgResult);
     }
 
+    /**
+     * 生成文件路径
+     *
+     * @param sourceFileName 上传的文件名称
+     * @return 文件路径
+     */
     private String getFilePath(String sourceFileName) {
         String baseFolder = propertiesService.uploadDir + File.separator + "images";
         // 目录格式 yyyy/MM/dd

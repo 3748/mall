@@ -19,6 +19,6 @@
     <!-- 4: 定义Rabbit模板，指定连接工厂以及定义交换机(exchange) -->
     <rabbit:template id="template" connection-factory="connectionFactory" exchange="mall-manage-item-exchange"/>
 
-    <!-- 后台系统无需声明队列,只需将消息发送到交换机集皆可 -->
+    <!-- 后台系统无需声明队列,只需将消息发送到交换机即可 -->
 
 </beans>
