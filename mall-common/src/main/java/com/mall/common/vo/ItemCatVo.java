@@ -16,7 +16,7 @@ public class ItemCatVo {
      * 指定序列化json后的名称
      */
     @JsonProperty("data")
-    private List<ItemCatData> itemCats = new ArrayList<ItemCatData>();
+    private List<ItemCatData> itemCats = new ArrayList<>();
 
     public List<ItemCatData> getItemCats() {
         return itemCats;

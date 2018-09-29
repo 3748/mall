@@ -21,7 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
  * @author gp6
  * @date 2018-08-20
  */
-public class CallbackMappingJackson2HttpMessageConverter extends MappingJackson2HttpMessageConverter {
+public class MappingJackson2HttpMessageConverterJsonp extends MappingJackson2HttpMessageConverter {
 	/**
 	 * 做jsonp的支持的标识，在请求参数中加该参数
 	 */
@@ -30,8 +30,8 @@ public class CallbackMappingJackson2HttpMessageConverter extends MappingJackson2
 	@Override
 	protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
 		// 从threadLocal中获取当前的Request对象
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-				.getRequest();
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+
 		String callbackParam = request.getParameter(callbackName);
 		if (StringUtils.isEmpty(callbackParam)) {
 			// 没有找到callback参数，直接返回json数据
@@ -41,8 +41,8 @@ public class CallbackMappingJackson2HttpMessageConverter extends MappingJackson2
 			try {
 				String result = callbackParam + "(" + super.getObjectMapper().writeValueAsString(object) + ");";
 				IOUtils.write(result, outputMessage.getBody(), encoding.getJavaName());
-			} catch (JsonProcessingException ex) {
-				throw new HttpMessageNotWritableException("Could not write JSON: " + ex.getMessage(), ex);
+			} catch (JsonProcessingException e) {
+				throw new HttpMessageNotWritableException("Could not write JSON: " + e.getMessage(), e);
 			}
 		}
 	}

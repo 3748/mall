@@ -22,7 +22,6 @@ public class BeanUtil<T> {
             }
             return ResponseEntity.ok(t);
         } catch (Exception e) {
-            e.printStackTrace();
             LOGGER.error(e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

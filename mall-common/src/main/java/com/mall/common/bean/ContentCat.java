@@ -1,7 +1,8 @@
 package com.mall.common.bean;
 
-import com.mall.common.bean.Base;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -15,6 +16,8 @@ public class ContentCat extends Base {
     /**
      * 类目ID
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -40,7 +43,7 @@ public class ContentCat extends Base {
     /**
      * 该类目是否为父类目，1为true，0为false
      */
-    private Byte isParent;
+    private Integer isParent;
 
     /**
      * 类目ID
@@ -137,7 +140,7 @@ public class ContentCat extends Base {
      *
      * @return is_parent 该类目是否为父类目，1为true，0为false
      */
-    public Byte getIsParent() {
+    public Integer getIsParent() {
         return isParent;
     }
 
@@ -146,7 +149,7 @@ public class ContentCat extends Base {
      *
      * @param isParent 该类目是否为父类目，1为true，0为false
      */
-    public void setIsParent(Byte isParent) {
+    public void setIsParent(Integer isParent) {
         this.isParent = isParent;
     }
 }
