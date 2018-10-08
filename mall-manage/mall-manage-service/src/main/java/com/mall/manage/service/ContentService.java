@@ -17,4 +17,11 @@ public interface ContentService {
      * @return PageInfo<Content>
      */
     PageInfo<Content> selectContentListByCatId(Long contentCatId, Integer pageNum, Integer pageSize);
+
+    /**
+     * 新增内容
+     *
+     * @param content 内容信息
+     */
+    void insertContent(Content content);
 }

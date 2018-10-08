@@ -15,6 +15,12 @@ public class BeanUtil<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BeanUtil.class);
 
+    /**
+     * 判断实体类是否为空
+     *
+     * @param t 实体类
+     * @return ResponseEntity
+     */
     public ResponseEntity<T> isNull(T t) {
         try {
             if (null == t) {

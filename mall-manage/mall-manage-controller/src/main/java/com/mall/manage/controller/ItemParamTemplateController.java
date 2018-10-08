@@ -1,6 +1,7 @@
 package com.mall.manage.controller;
 
 import com.mall.common.bean.ItemParamTemplate;
+import com.mall.common.utils.BeanUtil;
 import com.mall.manage.service.ItemParamTemplateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,16 +37,9 @@ public class ItemParamTemplateController {
      */
     @RequestMapping(value = {"{catId}"}, method = RequestMethod.GET)
     public ResponseEntity<ItemParamTemplate> selectItemParamTemplateByItemId(@PathVariable("catId") Long catId) {
-        try {
-            ItemParamTemplate itemParam = itemParamTemplateService.selectItemParamTemplateByItemId(catId);
-            if (null == itemParam) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-            }
-            return ResponseEntity.ok(itemParam);
-        } catch (Exception e) {
-            LOGGER.error("根据商品类目ID={}查询商品规格参数模板失败", catId, e);
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        ItemParamTemplate itemParamTemplate = itemParamTemplateService.selectItemParamTemplateByItemId(catId);
+        BeanUtil<ItemParamTemplate> beanUtil = new BeanUtil<>();
+        return beanUtil.isNull(itemParamTemplate);
     }
 
     /**

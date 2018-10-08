@@ -2,6 +2,7 @@ package com.mall.manage.service.impl;
 
 import java.util.List;
 
+import com.mall.common.utils.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,13 @@ public class ContentServiceImpl implements ContentService {
         List<Content> contents = contentMapper.select(content);
 
         return new PageInfo<>(contents);
+    }
+
+    @Override
+    public void insertContent(Content content){
+        content.setId(null);
+        content.setCreateTime(DateTimeUtil.CURRENTTIME);
+        content.setUpdateTime(content.getCreateTime());
+        contentMapper.insert(content);
     }
 }

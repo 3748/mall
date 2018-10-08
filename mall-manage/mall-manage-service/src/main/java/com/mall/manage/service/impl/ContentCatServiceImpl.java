@@ -56,6 +56,7 @@ public class ContentCatServiceImpl implements ContentCatService {
     public void deleteContentCat(Long id) {
         List<Object> idsList = new ArrayList<>();
         ContentCat contentCat = contentCatMapper.selectByPrimaryKey(id);
+
         findAllSubContentCat(idsList, id);
 
         // 删除类目以及其子类目

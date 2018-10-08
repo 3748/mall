@@ -1,18 +1,15 @@
 package com.mall.manage.controller.api;
 
-import com.mall.common.bean.ItemCat;
 import com.mall.common.utils.BeanUtil;
+import com.mall.common.vo.ItemCatVo;
+import com.mall.manage.service.ItemCatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.mall.manage.service.ItemCatService;
-import com.mall.common.vo.ItemCatVo;
 
 /**
  * 商品类目接口(供商城前台调用)
@@ -69,7 +66,7 @@ public class ApiItemCatController {
      * @return ResponseEntity<ItemCatVo>
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<ItemCatVo> selectAllItemCatListToTree() {
+    public ResponseEntity<ItemCatVo> selectItemCatListToTree() {
         ItemCatVo itemCatVo = itemCatService.selectAllItemCatListToTree();
         BeanUtil<ItemCatVo> beanUtil = new BeanUtil<>();
         return beanUtil.isNull(itemCatVo);
