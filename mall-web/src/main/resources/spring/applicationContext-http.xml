@@ -42,7 +42,7 @@
 
         指定CloseableHttpClient的初始化是通过httpClientBuilder的build方法初始化得到
     -->
-    <bean id="httpClient" class="org.apache.http.impl.client.CloseableHttpClient" factory-bean="httpClientBuilder" factory-method="build" scope="prototype"/>
+    <bean id="closeableHttpClient" class="org.apache.http.impl.client.CloseableHttpClient" factory-bean="httpClientBuilder" factory-method="build" scope="prototype"/>
 
     <!--
         请求参数构造器

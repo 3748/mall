@@ -15,7 +15,8 @@
 			结论：script标签的src可以跨域请求资源，但是ajax请求不可以跨域请求。
 			疑问：能否借助script标签的src进行加载数据？ -- 可以的。
 	-->
-	<%--<script type="text/javascript">
+	<%--
+	<script type="text/javascript">
 		alert($);
 		$(function() {
 			$.ajax({
@@ -27,7 +28,8 @@
 				}
 			})
 		})
-	</script>--%>
+	</script>
+	--%>
 
 	<!--
 		2:
@@ -36,17 +38,20 @@
 			解决：只需要返回js脚本即可。
 			
 	-->
-	<%--<script type="text/javascript">
+	<%--
+	<script type="text/javascript">
 		alert($);
 	</script> 
-	<script type="text/javascript" src="http://manage.mall.com/json.jsp"></script>--%>
+	<script type="text/javascript" src="http://manage.mall.com/json.jsp"></script>
+	--%>
 
 	<!--
 		3:
 			发现: 返回的js脚本成功解析，但是，fun没有定义。
 			解决：定义个一个fun方法即可。
 	-->
-	<%--<script type="text/javascript">
+	<%--
+	<script type="text/javascript">
 		alert($);
 
         /*
@@ -62,21 +67,24 @@
 			alert(data.abc)
 		}
 	</script>
-	<script type="text/javascript" src="http://manage.mall.com/json.jsp"></script>--%>
+	<script type="text/javascript" src="http://manage.mall.com/json.jsp"></script>
+	--%>
 	
 	
 	<!--
 		4: jsonp优化
 	-->
-	<%--<script type="text/javascript">
+	<%--
+	<script type="text/javascript">
 		alert($);
 
 		function fun(data){
 			alert(data.abc)
 		}
 	</script>
-	<!--4.1将客户端方法名传递至服务端-->
-	<script type="text/javascript" src="http://manage.mall.com/json.jsp?callback=fun"></script>--%>
+	<!--4.1: 将客户端方法名传递至服务端-->
+	<script type="text/javascript" src="http://manage.mall.com/json.jsp?callback=fun"></script>
+	--%>
 	
 	 <!--
 		5: 通过jQuery使用jsonp请求
@@ -94,8 +102,9 @@
 		})
 	</script>
 	
-	<!-- 测试跨域请求数据 -->
-	<%--<script type="text/javascript">
+	<!--测试跨域请求数据-->
+	<%--
+	<script type="text/javascript">
 	 	$(function() {
 			$.ajax({
 				url : "http://manage.mall.com/rest/api/item/cat",
@@ -106,7 +115,7 @@
 				}
 			})
 		})
-	</script> --%>
-	
+	</script>
+	--%>
 </body>
 </html>

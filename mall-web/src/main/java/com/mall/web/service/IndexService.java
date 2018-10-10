@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.mall.common.utils.HttpClientUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ import java.util.Map;
  */
 @Service
 public class IndexService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndexService.class);
+
     @Autowired
     private HttpClientUtil httpClientUtil;
 
@@ -32,7 +37,7 @@ public class IndexService {
     @Value("${INDEX_AD2_URL}")
     private String indexAd2Url;
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
 
     public String queryIndexAD1() {
         try {
@@ -43,8 +48,8 @@ public class IndexService {
                 return null;
             }
 
-            // 解析json,生成前端需要的json数据
-            JsonNode jsonNode = MAPPER.readTree(jsonData);
+            // 解析json,生成前端需要的json数据,把json字符串转为一个java对象
+            JsonNode jsonNode = OBJECTMAPPER.readTree(jsonData);
 
             ArrayNode rows = (ArrayNode) jsonNode.get("list");
 
@@ -64,9 +69,9 @@ public class IndexService {
             }
 
             // 转为json字符串
-            return MAPPER.writeValueAsString(result);
+            return OBJECTMAPPER.writeValueAsString(result);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("获取大广告位失败" + e.getMessage());
         }
         return null;
     }
@@ -79,9 +84,9 @@ public class IndexService {
                 return null;
             }
 
-            JsonNode jsonNode = MAPPER.readTree(jsonData);
+            JsonNode jsonNode = OBJECTMAPPER.readTree(jsonData);
             ArrayNode rows = (ArrayNode) jsonNode.get("list");
-            List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+            List<Map<String, Object>> result = new ArrayList<>();
             for (JsonNode row : rows) {
                 Map<String, Object> map = new LinkedHashMap<>();
                 map.put("width", 310);
@@ -95,9 +100,9 @@ public class IndexService {
                 result.add(map);
             }
 
-            return MAPPER.writeValueAsString(result);
+            return OBJECTMAPPER.writeValueAsString(result);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("获取小广告位失败" + e.getMessage());
         }
         return null;
     }

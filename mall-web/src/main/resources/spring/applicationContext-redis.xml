@@ -1,9 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-    <!-- 定义集群连接池:
+    <!--
+        定义集群连接池:
             ShardedJedisPoolDemo.java
                 // 定义集群连接池
                 ShardedJedisPool shardedJedisPool = new ShardedJedisPool(poolConfig, shards);

@@ -2,27 +2,26 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-	http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
-	http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
-
-    <!-- 1: 定义RabbitMQ的连接工厂 -->
+    <!--1: 定义RabbitMQ的连接工厂-->
     <rabbit:connection-factory id="connectionFactory" host="${rabbit.host}" port="${rabbit.port}" username="${rabbit.username}" password="${rabbit.password}" virtual-host="${rabbit.vhosts}"/>
 
-    <!-- 2: 定义MQ的管理，包括队列、交换器等,用来完成队列/交换机的自动声明-->
+    <!--2: 定义MQ的管理，包括队列、交换器等,用来完成队列/交换机的自动声明-->
     <rabbit:admin connection-factory="connectionFactory"/>
 
-    <!-- 3: 定义队列，自动声明(默认持久化,durable="false"改为非持久化)  -->
+    <!--3: 定义队列，自动声明(默认持久化,durable="false"改为非持久化)  -->
     <rabbit:queue name="mall-web-item-queue" auto-declare="true"/>
 
-    <!-- 4: 定义消费者-->
+    <!--4: 定义消费者-->
     <bean id="itemQueueListener" class="com.mall.web.mq.listener.ItemQueueListener"/>
 
-    <!-- 5: 定义消费者队列监听 -->
+    <!--5: 定义消费者队列监听-->
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="itemQueueListener" method="execute" queue-names="mall-web-item-queue"/>
     </rabbit:listener-container>
 
-    <!-- 6: 此时队列和交换机还未完成绑定,  绑定关系不建议在代码中完成,  在管理界面中完成-->
+    <!--6: 此时队列和交换机还未完成绑定,绑定关系不建议在代码中完成,在管理界面中完成-->
 </beans>

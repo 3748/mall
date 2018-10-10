@@ -1,8 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!-- 使用spring自带的占位符替换功能 -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -37,7 +39,7 @@
                         建议使用第一种
                 -->
                 <value>classpath:properties/env.properties</value>
-                <value>classpath:properties/httpclient.properties</value>
+                <value>classpath:properties/http.properties</value>
                 <value>classpath:properties/redis.properties</value>
                 <value>classpath:properties/rabbit.properties</value>
             </list>
