@@ -1,43 +1,20 @@
-/*
- * ====================================================================
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- * ====================================================================
- *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the Apache Software Foundation.  For more
- * information on the Apache Software Foundation, please see
- * <http://www.apache.org/>.
- *
- */
 package cn.itcast.httpclient;
 
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 定时关闭无效连接
- * 
+ *
  * @author gp6
  * @date 2018-08-20
  */
 public class ClientEvictExpiredConnections {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientEvictExpiredConnections.class);
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
         // 设置最大连接数
         cm.setMaxTotal(200);
@@ -54,14 +31,14 @@ public class ClientEvictExpiredConnections {
 
         private volatile boolean shutdown;
 
-        public IdleConnectionEvictor(HttpClientConnectionManager connMgr) {
+        private IdleConnectionEvictor(HttpClientConnectionManager connMgr) {
             this.connMgr = connMgr;
         }
 
         @Override
         public void run() {
             try {
-            	//此处为死循环,5秒钟关闭一次
+                //此处为死循环,5秒钟关闭一次
                 while (!shutdown) {
                     synchronized (this) {
                         wait(5000);
@@ -69,11 +46,15 @@ public class ClientEvictExpiredConnections {
                         connMgr.closeExpiredConnections();
                     }
                 }
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException e) {
                 // 结束
+                LOGGER.error("定时关闭无效连接失败" + e.getMessage());
             }
         }
 
+        /**
+         * 将线程停止
+         */
         public void shutdown() {
             shutdown = true;
             synchronized (this) {
