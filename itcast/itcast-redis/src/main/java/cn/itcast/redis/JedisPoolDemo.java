@@ -25,7 +25,7 @@ public class JedisPoolDemo {
 		Jedis jedis = jedisPool.getResource();
 
 		// 读取数据
-		System.out.println(jedis.get("mytest"));
+		System.out.println(jedis.get("test"));
 
 		// 将连接还回到连接池中,该操作一般放到finally中,防止前面出现异常
 		jedisPool.returnResource(jedis);

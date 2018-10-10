@@ -24,12 +24,13 @@ public class ShardedJedisPoolDemo {
 		poolConfig.setMaxTotal(50);
 
 		// 定义集群信息,由于只有一台机器,所以只定义一台
-		List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
+		List<JedisShardInfo> shards = new ArrayList<>();
 		shards.add(new JedisShardInfo("127.0.0.1", 6379));
 
 		// 定义集群连接池
 		ShardedJedisPool shardedJedisPool = new ShardedJedisPool(poolConfig, shards);
 		ShardedJedis shardedJedis = null;
+
 		try {
 			// 从连接池中获取到jedis分片对象
 			shardedJedis = shardedJedisPool.getResource();
