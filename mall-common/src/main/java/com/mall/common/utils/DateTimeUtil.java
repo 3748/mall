@@ -54,6 +54,4 @@ public class DateTimeUtil {
         Date nowDate = new Date();
         return new DateTime(nowDate).toString("dd");
     }
-
-
 }

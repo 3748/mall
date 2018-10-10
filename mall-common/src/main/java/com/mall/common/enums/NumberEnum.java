@@ -7,6 +7,9 @@ package com.mall.common.enums;
  * @date 2018/9/5
  */
 public enum NumberEnum {
+    // 项目中用到的数字
+    ZERO(0), ONE(1),
+
     // Map初始化默认大小
     MAP_INIT_SIZE(16),
 
@@ -26,7 +29,7 @@ public enum NumberEnum {
     CONCAT_CAT_STATUS_NORMAL(1), CONCAT_CAT_STATUS_DELETE(2),
 
     // 内容类目是否为父类目 1:是 0:否
-    CONCAT_CAT_IS_PARENT(1), CONCAT_CAT_IS_NOT_PARENT(0),;
+    CONCAT_CAT_IS_NOT_PARENT(0), CONCAT_CAT_IS_PARENT(1);
 
     private int value;
 
@@ -41,6 +44,4 @@ public enum NumberEnum {
     public void setValue(int value) {
         this.value = value;
     }
-
-
 }

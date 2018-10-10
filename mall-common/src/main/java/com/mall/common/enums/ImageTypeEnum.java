@@ -8,7 +8,7 @@ package com.mall.common.enums;
  */
 public enum ImageTypeEnum {
 
-    //对应文件后缀
+    // 对应文件后缀
     BMP(".bmp"), JPG(".jpg"), JPEG(".jpeg"), GIF(".gif"), PNG(".png");
 
     private String value;

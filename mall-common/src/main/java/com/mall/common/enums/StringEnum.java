@@ -20,7 +20,7 @@ public enum StringEnum {
     MALL_MANAGE_ITEM_CAT_ALL("MALL_MANAGE_ITEM_CAT_ALL"),
 
     // Redis中单点登录系统----token Key
-    MALL_SSO_LOGIN_TOKEN("TOKEN"),
+    MALL_SSO_LOGIN_TOKEN("MALL_SSO_LOGIN_TOKEN"),
 
     /**
      * MQ操作类型
@@ -29,7 +29,10 @@ public enum StringEnum {
     MQ_TYPE_UPDATE("update"),
 
     // MQ----插入
-    MQ_TYPE_INSERT("insert");
+    MQ_TYPE_INSERT("insert"),
+
+    // 登录系统Token
+    MALL_SSO_TOKEN("MALL_SSO_TOKEN");
 
     private String value;
 

@@ -7,7 +7,8 @@ package com.mall.common.redis;
 public interface Function<T, E> {
 
     /**
-     * RedisUtil中使用
+     * 参数类型和返回类型不确定,由泛型代替
+     *
      * @param e 参数
      * @return T
      */
