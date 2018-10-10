@@ -1,7 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <!-- 定义连接管理器
         HttpConnectManager.java
@@ -13,13 +13,14 @@
 
         下面配置文件和上面代码实现功能一致
     -->
-    <bean id="httpClientConnectionManager"
-          class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager">
+    <bean id="httpClientConnectionManager" class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager">
         <property name="maxTotal" value="${http.maxTotal}"/>
         <property name="defaultMaxPerRoute" value="${http.maxPerRoute}"/>
     </bean>
 
     <!--
+        在配置文件中配置的bean就相当于new出一个对象
+
         HttpClient构建器 :
             CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(cm).build();
             相当于
@@ -36,10 +37,12 @@
         此处实现build功能
 
         此时新建的httpClient为单例,此处不能使用单例,上面两个可以使单例,加入scope="prototype"变成多例
+
+        httpClient对象是通过build创建的,不是通过new创建的,所以要指定factory-bean和factory-method
+
+        指定CloseableHttpClient的初始化是通过httpClientBuilder的build方法初始化得到
     -->
-    <bean id="closeableHttpClient" class="org.apache.http.impl.client.CloseableHttpClient"
-          factory-bean="httpClientBuilder" factory-method="build" scope="prototype">
-    </bean>
+    <bean id="httpClient" class="org.apache.http.impl.client.CloseableHttpClient" factory-bean="httpClientBuilder" factory-method="build" scope="prototype"/>
 
     <!--
         请求参数构造器
@@ -70,12 +73,10 @@
 
         此时新建的config为单例,此处能使用单例
     -->
-    <bean id="requestConfig" class="org.apache.http.client.config.RequestConfig"
-          factory-bean="requestConfigBuilder" factory-method="build">
-    </bean>
+    <bean id="requestConfig" class="org.apache.http.client.config.RequestConfig" factory-bean="requestConfigBuilder" factory-method="build"/>
 
     <!--
-        定期关闭无效连接
+        定期关闭连接管理器中的无效连接
             IdleConnectionEvictor.java
 
                 public IdleConnectionEvictor(HttpClientConnectionManager connMgr) {
