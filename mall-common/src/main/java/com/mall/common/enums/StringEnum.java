@@ -10,33 +10,29 @@ public enum StringEnum {
     /**
      * Redis定义key的规则:项目名_模块名_业务名
      */
-    // Redis中前台----商品详情Key
-    MALL_WEB_ITEM_DETAIL("MALL_WEB_ITEM_DETAIL"),
+    MALL_WEB_ITEM_DETAIL("Web-商品详情Key", "MALL_WEB_ITEM_DETAIL"),
 
-    // Redis中后台----商品详情Key
-    MALL_MANAGE_ITEM_DETAIL("MALL_MANAGE_ITEM_DETAIL"),
+    MALL_MANAGE_ITEM_DETAIL("Manage-商品详情Key", "MALL_MANAGE_ITEM_DETAIL"),
 
-    // Redis中后台----商品类目Key
-    MALL_MANAGE_ITEM_CAT_ALL("MALL_MANAGE_ITEM_CAT_ALL"),
+    MALL_MANAGE_ITEM_CAT_ALL("商品类目Key", "MALL_MANAGE_ITEM_CAT_ALL"),
 
-    // Redis中单点登录系统----token Key
-    MALL_SSO_LOGIN_TOKEN("MALL_SSO_LOGIN_TOKEN"),
+    MALL_SSO_LOGIN_TOKEN("Redis中Token Key", "MALL_SSO_LOGIN_TOKEN"),
 
-    /**
-     * MQ操作类型
-     */
-    // MQ----修改
-    MQ_TYPE_UPDATE("update"),
+    MQ_TYPE_UPDATE("MQ操作类型--update", "update"),
 
-    // MQ----插入
-    MQ_TYPE_INSERT("insert"),
+    MQ_TYPE_INSERT("MQ操作类型--insert", "insert"),
 
-    // 登录系统Token
-    MALL_SSO_TOKEN("MALL_SSO_TOKEN");
+    MALL_SSO_TOKEN(" 登录系统Token", "MALL_SSO_TOKEN");
 
+    private String name;
     private String value;
 
     StringEnum(String value) {
+        this.value = value;
+    }
+
+    StringEnum(String name, String value) {
+        this.name = name;
         this.value = value;
     }
 

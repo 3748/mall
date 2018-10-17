@@ -1,5 +1,6 @@
 package com.mall.common.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -29,6 +30,7 @@ public class User extends Base {
      * <p>
      * json序列化时,忽略此字段(@JsonIgnore) 如果加入该注解,@RequestBody User 也不会获取到该字段的值
      */
+    @JsonIgnore
     @Length(min = 6, max = 20, message = "密码的长度必须在6-20位之间!")
     private String password;
 

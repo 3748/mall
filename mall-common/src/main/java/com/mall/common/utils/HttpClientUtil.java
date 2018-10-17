@@ -10,6 +10,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -54,8 +56,9 @@ public class HttpClientUtil implements BeanFactoryAware {
 
     /**
      * Spring在初始化时,会调用该方法
-     *
+     * <p>
      * 讲述了如何在单例对象中使用多例对象
+     *
      * @param beanFactory Bean工厂
      * @throws BeansException 异常
      */
@@ -107,15 +110,14 @@ public class HttpClientUtil implements BeanFactoryAware {
     }
 
     /**
-     * 带有参数的POST请求
+     * 参数为表单的POST请求
      *
      * @param url    请求地址
      * @param params 参数
      * @return String
-     * @throws ParseException 异常信息
-     * @throws IOException    异常信息
+     * @throws Exception 异常信息
      */
-    private HttpResult doPost(String url, Map<String, String> params) throws ParseException, IOException {
+    private HttpResult doPost(String url, Map<String, String> params) throws Exception {
         // 创建http POST请求
         HttpPost httpPost = new HttpPost(url);
         httpPost.setConfig(requestConfig);
@@ -146,11 +148,38 @@ public class HttpClientUtil implements BeanFactoryAware {
      *
      * @param url 请求地址
      * @return HttpResult
-     * @throws ParseException 异常信息
-     * @throws IOException    异常信息
+     * @throws Exception 异常信息
      */
-    public HttpResult doPost(String url) throws ParseException, IOException {
+    public HttpResult doPost(String url) throws Exception {
         return this.doPost(url, null);
+    }
+
+    /**
+     * 参数为json的表单请求
+     *
+     * @param url  请求地址
+     * @param json 参数
+     * @return String
+     * @throws Exception 异常信息
+     */
+    private HttpResult doPostJson(String url, String json) throws Exception {
+        // 创建http POST请求
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setConfig(requestConfig);
+
+        if (null != json) {
+
+            // 构造一个form表单式的实体
+            StringEntity stringEntity = new StringEntity(json, ContentType.APPLICATION_JSON);
+
+            // 将请求实体设置到httpPost对象中
+            httpPost.setEntity(stringEntity);
+        }
+
+        // 执行请求
+        CloseableHttpResponse response = getHttpClient().execute(httpPost);
+
+        return new HttpResult(response.getStatusLine().getStatusCode(), EntityUtils.toString(response.getEntity(), "UTF-8"));
     }
 
 }
