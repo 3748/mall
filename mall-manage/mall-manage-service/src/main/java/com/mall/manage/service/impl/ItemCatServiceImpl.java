@@ -33,7 +33,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemCatServiceImpl.class);
 
-    private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Autowired
     private RedisUtil redisUtil;
@@ -64,10 +64,10 @@ public class ItemCatServiceImpl implements ItemCatService {
             // 查询到结果
             if (StringUtils.isNotEmpty(cacheData)) {
                 // 此处将cacheData进行反序列化,因为存入的时候序列化存入
-                return OBJECTMAPPER.readValue(cacheData, ItemCatVo.class);
+                return OBJECT_MAPPER.readValue(cacheData, ItemCatVo.class);
             }
         } catch (Exception e) {
-            LOGGER.error("获取缓存失败,原因:{}" + e.getMessage());
+            LOGGER.error("商品类目获取缓存失败,原因:" + e.getMessage());
         }
 
         // 缓存未能命中
@@ -117,9 +117,9 @@ public class ItemCatServiceImpl implements ItemCatService {
 
         // 将查询结果集写入缓存,此处将result进行序列化
         try {
-            redisUtil.set(StringEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue(), OBJECTMAPPER.writeValueAsString(result), NumberEnum.ITEM_CAT_EXPIRE_TIME.getValue());
+            redisUtil.set(StringEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue(), OBJECT_MAPPER.writeValueAsString(result), NumberEnum.ITEM_CAT_EXPIRE_TIME.getValue());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("商品类目写入缓存失败,原因:" + e.getMessage());
         }
 
         return result;

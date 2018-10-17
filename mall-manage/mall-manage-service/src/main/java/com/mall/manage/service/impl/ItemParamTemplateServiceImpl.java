@@ -36,7 +36,7 @@ public class ItemParamTemplateServiceImpl implements ItemParamTemplateService {
             itemParamTemplate.setUpdateTime(itemParamTemplate.getCreateTime());
             itemParamTemplateMapper.insert(itemParamTemplate);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("商品参数模板插入失败" + e.getMessage());
         }
     }
 }

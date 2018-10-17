@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class UploadController {
     @Autowired
     private PropertiesService propertiesService;
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     /**
      * produces: 指定相应类型
@@ -70,7 +69,7 @@ public class UploadController {
         String filePath = getFilePath(imageFile.getOriginalFilename());
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Pic file upload .[{}] to [{}] .", imageFile.getOriginalFilename(), filePath);
+            LOGGER.debug("图片[{}] 上传至 [{}] 失败", imageFile.getOriginalFilename(), filePath);
         }
 
         // 生成图片的绝对引用地址
@@ -104,7 +103,7 @@ public class UploadController {
         }
 
         // 将一个java对象序列化成json字符串
-        return MAPPER.writeValueAsString(uploadImgResult);
+        return OBJECT_MAPPER.writeValueAsString(uploadImgResult);
     }
 
     /**

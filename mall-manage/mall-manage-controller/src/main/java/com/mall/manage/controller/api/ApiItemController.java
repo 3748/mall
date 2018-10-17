@@ -24,7 +24,6 @@ import com.mall.common.vo.ItemVo;
 @RequestMapping({"api/item"})
 public class ApiItemController {
 
-
     @Autowired
     private ItemService itemService;
 
@@ -40,6 +39,5 @@ public class ApiItemController {
 
         BeanUtil<ItemVo> beanUtil = new BeanUtil<>();
         return beanUtil.isNull(itemVo);
-
     }
 }

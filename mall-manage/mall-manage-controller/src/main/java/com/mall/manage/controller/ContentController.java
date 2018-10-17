@@ -46,7 +46,7 @@ public class ContentController {
             PageInfo<Content> pageInfo = contentService.selectContentListByCatId(contentCatId, pageNum, pageSize);
             return ResponseEntity.ok(pageInfo);
         } catch (Exception e) {
-            LOGGER.error("根据内容类目id获取首页内容失败,contentCatId={}",contentCatId,e.getMessage());
+            LOGGER.error("根据内容类目id获取首页内容失败,contentCatId={}", contentCatId, e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
@@ -58,12 +58,12 @@ public class ContentController {
      * @return ResponseEntity
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insertContent(@RequestBody  Content content) {
+    public ResponseEntity<Void> insertContent(@RequestBody Content content) {
         try {
             contentService.insertContent(content);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
-            LOGGER.error("新增内容失败,content={}",content,e.getMessage());
+            LOGGER.error("新增内容失败,content={}", content, e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }

@@ -33,7 +33,7 @@ public class ItemParamServiceImpl implements ItemParamService {
             itemParam.setUpdateTime(itemParam.getCreateTime());
             count = itemParamMapper.insert(itemParam);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("新增商品规格参数失败,原因:" + e.getMessage());
         }
         return count;
     }
@@ -43,16 +43,16 @@ public class ItemParamServiceImpl implements ItemParamService {
         int count = 0;
 
         try {
-            //指定Where条件
+            // 指定Where条件
             Example example = new Example(ItemParam.class);
             Example.Criteria criteria = example.createCriteria();
-            criteria.andEqualTo("itemId",itemParam.getItemId());
+            criteria.andEqualTo("itemId", itemParam.getItemId());
             itemParam.setUpdateTime(DateTimeUtil.CURRENTTIME);
 
-            //updateByExampleSelective(修改实体类中不为null的字段)
-            count = itemParamMapper.updateByExampleSelective(itemParam,example);
+            // updateByExampleSelective(修改实体类中不为null的字段)
+            count = itemParamMapper.updateByExampleSelective(itemParam, example);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("修改商品规格参数失败,原因:" + e.getMessage());
         }
         return count;
     }

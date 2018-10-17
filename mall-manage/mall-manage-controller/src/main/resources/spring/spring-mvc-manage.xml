@@ -12,7 +12,7 @@
             1: 它声明了@RequestMapping、@RequestBody、@ResponseBody等
             2: 该配置默认加载很多的参数绑定方法，比如json转换解析器等
 
-        注解驱动在sprin-webmvc中
+        注解驱动在spring-webmvc中
         注解驱动属于配置文件 org.springframework.web.servlet.config
     -->
     <mvc:annotation-driven>

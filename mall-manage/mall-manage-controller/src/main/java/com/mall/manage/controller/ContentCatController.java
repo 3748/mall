@@ -42,7 +42,7 @@ public class ContentCatController {
             }
             return ResponseEntity.ok(list);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("根据父内容类目id查询内容分类列表" + e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }

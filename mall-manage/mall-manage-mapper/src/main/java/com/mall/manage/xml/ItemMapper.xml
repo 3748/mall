@@ -25,12 +25,9 @@
 		select
 			id, title, sell_point sellPoint, price, num, barcode, image, item_cat_id itemCatId, status,
 			mi.create_time createTime, mi.update_time updateTime,mid.item_desc itemDesc
-		from 
+		from
 			m_item mi
-		left join
-			m_item_desc mid
-		on 
-			mi.id = mid.item_id
+		left join m_item_desc mid on mi.id = mid.item_id
 		where mi.id = #{id,jdbcType=BIGINT}
 	</select>
 </mapper>

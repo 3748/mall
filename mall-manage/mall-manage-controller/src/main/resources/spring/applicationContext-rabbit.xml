@@ -2,23 +2,21 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xsi:schemaLocation="http://www.springframework.org/schema/rabbit
-
 	http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-    <!-- 1: 定义RabbitMQ的连接工厂 -->
+    <!--1: 定义RabbitMQ的连接工厂-->
     <rabbit:connection-factory id="connectionFactory" host="${rabbit.host}" port="${rabbit.port}" username="${rabbit.username}" password="${rabbit.password}" virtual-host="${rabbit.vhosts}"/>
 
-    <!-- 2: 定义MQ的管理，包括队列、交换器等,用来完成队列/交换机的自动声明-->
+    <!--2: 定义MQ的管理，包括队列、交换器等,用来完成队列/交换机的自动声明-->
     <rabbit:admin connection-factory="connectionFactory"/>
 
-    <!-- 3: 定义交换机(自动声明,默认持久化),自动声明不是在启动时声明,而是在使用时声明-->
+    <!--3: 定义交换机(自动声明,默认持久化),自动声明不是在启动时声明,而是在使用时声明-->
     <rabbit:topic-exchange name="mall-manage-item-exchange" auto-declare="true"/>
 
-    <!-- 4: 定义Rabbit模板，指定连接工厂以及定义交换机(exchange) -->
+    <!--4: 定义Rabbit模板，指定连接工厂以及定义交换机(exchange)-->
     <rabbit:template id="template" connection-factory="connectionFactory" exchange="mall-manage-item-exchange"/>
 
-    <!-- 后台系统无需声明队列,只需将消息发送到交换机即可 -->
-
+    <!--后台系统无需声明队列,只需将消息发送到交换机即可-->
 </beans>

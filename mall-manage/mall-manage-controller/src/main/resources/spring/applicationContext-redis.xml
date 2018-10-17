@@ -2,7 +2,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-    <!-- 定义集群连接池:
+    <!--
+        定义分片式集群连接池:
             ShardedJedisPoolDemo.java
                 // 定义集群连接池
                 ShardedJedisPool shardedJedisPool = new ShardedJedisPool(poolConfig, shards);
@@ -17,14 +18,14 @@
                 shards.add(new JedisShardInfo("127.0.0.1", 6379));
      -->
     <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
-        <!-- 第一个构造参数 poolConfig-->
+        <!--第一个构造参数 poolConfig-->
         <constructor-arg index="0">
             <bean class="redis.clients.jedis.JedisPoolConfig">
                 <property name="maxTotal" value="${redis.maxTotal}"/>
             </bean>
         </constructor-arg>
 
-        <!-- 第二个构造参数  shards-->
+        <!--第二个构造参数  shards-->
         <constructor-arg index="1">
             <list>
                 <bean class="redis.clients.jedis.JedisShardInfo">

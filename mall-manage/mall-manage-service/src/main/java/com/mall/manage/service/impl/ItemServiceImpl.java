@@ -41,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemServiceImpl.class);
 
-    private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Autowired
     private RedisUtil redisUtil;
@@ -99,10 +99,10 @@ public class ItemServiceImpl implements ItemService {
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
-                return OBJECTMAPPER.readValue(cacheData, ItemVo.class);
+                return OBJECT_MAPPER.readValue(cacheData, ItemVo.class);
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("从缓存中获取商品详情失败" + e.getMessage());
         }
 
         ItemVo itemVo = itemMapper.getItemInfoById(id);
@@ -112,7 +112,7 @@ public class ItemServiceImpl implements ItemService {
             }
 
             // 将数据写入到缓存中
-            redisUtil.set(key, OBJECTMAPPER.writeValueAsString(itemVo), NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
+            redisUtil.set(key, OBJECT_MAPPER.writeValueAsString(itemVo), NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
             return itemVo;
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage());
@@ -152,7 +152,7 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setCreateTime(null);
         int countItemParam = itemParamService.updateItemParam(itemParam);
 
-        if (1 != countItem || 1 != countItemDesc || 1 != countItemParam) {
+        if (NumberEnum.ONE.getValue() != countItem || NumberEnum.ONE.getValue() != countItemDesc || NumberEnum.ONE.getValue() != countItemParam) {
             flag = false;
         }
 
@@ -186,7 +186,7 @@ public class ItemServiceImpl implements ItemService {
             data.put("date", System.currentTimeMillis());
 
             // 发送MQ,通知其他系统更新缓存中的商品信息(尽量少的传递信息)
-            rabbitTemplate.convertAndSend("item." + type, OBJECTMAPPER.writeValueAsString(data));
+            rabbitTemplate.convertAndSend("item." + type, OBJECT_MAPPER.writeValueAsString(data));
         } catch (Exception e) {
             LOGGER.error("MQ消息发送失败", e.getMessage());
         }

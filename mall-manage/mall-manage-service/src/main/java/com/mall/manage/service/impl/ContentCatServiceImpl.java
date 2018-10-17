@@ -45,7 +45,7 @@ public class ContentCatServiceImpl implements ContentCatService {
             使用selectByPrimaryKey,在id字段上要加上@Id注解,否则可能会出现类型转换异常
          */
         ContentCat parentContentCat = contentCatMapper.selectByPrimaryKey(contentCat.getParentId());
-        if (1 != parentContentCat.getIsParent()) {
+        if (NumberEnum.CONCAT_CAT_IS_PARENT.getValue() != parentContentCat.getIsParent()) {
             parentContentCat.setUpdateTime(contentCat.getCreateTime());
             parentContentCat.setIsParent(NumberEnum.CONCAT_CAT_IS_PARENT.getValue());
             contentCatMapper.updateByPrimaryKeySelective(parentContentCat);
@@ -61,14 +61,14 @@ public class ContentCatServiceImpl implements ContentCatService {
 
         // 删除类目以及其子类目
         Example example = new Example(ContentCat.class);
-        example.createCriteria().andIn("id",idsList);
+        example.createCriteria().andIn("id", idsList);
         contentCatMapper.deleteByExample(example);
 
         // 判断当前类目的父类目是否有其他子类目
         List<ContentCat> list = selectContentCatByParentId(contentCat.getParentId());
 
         // 没有其他子类目,将父类目的isParent改为0
-        if(null == list || list.size() ==0 ){
+        if (null == list || list.size() == NumberEnum.ZERO.getValue()) {
             ContentCat parentContentCat = new ContentCat();
             parentContentCat.setId(contentCat.getParentId());
             parentContentCat.setIsParent(NumberEnum.CONCAT_CAT_IS_NOT_PARENT.getValue());

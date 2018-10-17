@@ -45,7 +45,7 @@ public class ItemCatController {
             }
             return ResponseEntity.status(HttpStatus.OK).body(list);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("根据父id获取所有的子商品类目:" + e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }

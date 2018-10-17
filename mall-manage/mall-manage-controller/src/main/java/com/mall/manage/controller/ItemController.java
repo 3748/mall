@@ -118,7 +118,7 @@ public class ItemController {
             PageInfo<Item> pageInfo = itemService.selectItemList(pageNum, pageSize);
             return ResponseEntity.ok(pageInfo);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("查询商品列表页" + e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
