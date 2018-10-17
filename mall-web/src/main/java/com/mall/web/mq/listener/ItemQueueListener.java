@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ItemQueueListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemQueueListener.class);
 
-    private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Autowired
     private RedisUtil redisUtil;
@@ -27,7 +27,7 @@ public class ItemQueueListener {
      */
     public void execute(String msg) {
         try {
-            JsonNode jsonNode = OBJECTMAPPER.readTree(msg);
+            JsonNode jsonNode = OBJECT_MAPPER.readTree(msg);
             Long itemId = jsonNode.get("itemId").asLong();
 
             redisUtil.del(StringEnum.MALL_WEB_ITEM_DETAIL.getValue() + itemId);

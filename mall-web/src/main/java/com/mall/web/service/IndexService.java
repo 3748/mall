@@ -37,7 +37,7 @@ public class IndexService {
     @Value("${INDEX_AD2_URL}")
     private String indexAd2Url;
 
-    private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public String queryIndexAD1() {
         try {
@@ -49,13 +49,13 @@ public class IndexService {
             }
 
             // 解析json,生成前端需要的json数据,把json字符串转为一个java对象
-            JsonNode jsonNode = OBJECTMAPPER.readTree(jsonData);
+            JsonNode jsonNode = OBJECT_MAPPER.readTree(jsonData);
 
             ArrayNode rows = (ArrayNode) jsonNode.get("list");
 
             List<Map<String, Object>> result = new ArrayList<>();
             for (JsonNode row : rows) {
-                // 这样获取的值,是有顺序的
+                // 使用LinkedHashMap,这样获取的值,是有顺序的
                 Map<String, Object> map = new LinkedHashMap<>();
                 map.put("srcB", row.get("pic").asText());
                 map.put("height", 240);
@@ -69,7 +69,7 @@ public class IndexService {
             }
 
             // 转为json字符串
-            return OBJECTMAPPER.writeValueAsString(result);
+            return OBJECT_MAPPER.writeValueAsString(result);
         } catch (Exception e) {
             LOGGER.error("获取大广告位失败" + e.getMessage());
         }
@@ -84,7 +84,7 @@ public class IndexService {
                 return null;
             }
 
-            JsonNode jsonNode = OBJECTMAPPER.readTree(jsonData);
+            JsonNode jsonNode = OBJECT_MAPPER.readTree(jsonData);
             ArrayNode rows = (ArrayNode) jsonNode.get("list");
             List<Map<String, Object>> result = new ArrayList<>();
             for (JsonNode row : rows) {
@@ -100,7 +100,7 @@ public class IndexService {
                 result.add(map);
             }
 
-            return OBJECTMAPPER.writeValueAsString(result);
+            return OBJECT_MAPPER.writeValueAsString(result);
         } catch (Exception e) {
             LOGGER.error("获取小广告位失败" + e.getMessage());
         }

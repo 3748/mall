@@ -23,7 +23,7 @@ public class ItemService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemService.class);
 
-    private static final ObjectMapper OBJECTMAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Value("${MANAGE_MALL_URL}")
     private String manageMallUrl;
@@ -50,10 +50,10 @@ public class ItemService {
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
-                return OBJECTMAPPER.readValue(cacheData, ItemVo.class);
+                return OBJECT_MAPPER.readValue(cacheData, ItemVo.class);
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("获取商品详情失败,原因:" + e.getMessage());
         }
 
         String jsonData;
@@ -66,7 +66,7 @@ public class ItemService {
 
             // 将数据写入到缓存中
             redisUtil.set(key, jsonData, NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
-            return OBJECTMAPPER.readValue(jsonData, ItemVo.class);
+            return OBJECT_MAPPER.readValue(jsonData, ItemVo.class);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
