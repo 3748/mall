@@ -1,12 +1,9 @@
-package cn.itcast.httpclient.get;
+package com.test.httpclient.get;
 
-import cn.itcast.httpclient.CommonUtil;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import com.test.httpclient.CommonUtil;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.springframework.http.HttpStatus;
 
 /**
  * GET请求

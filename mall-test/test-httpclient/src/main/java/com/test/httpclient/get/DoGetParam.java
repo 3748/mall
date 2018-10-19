@@ -1,6 +1,6 @@
-package cn.itcast.httpclient.get;
+package com.test.httpclient.get;
 
-import cn.itcast.httpclient.CommonUtil;
+import com.test.httpclient.CommonUtil;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;

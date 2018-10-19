@@ -1,4 +1,4 @@
-package cn.itcast.httpclient;
+package com.test.httpclient;
 
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;

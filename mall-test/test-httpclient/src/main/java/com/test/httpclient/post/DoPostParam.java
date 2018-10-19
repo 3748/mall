@@ -1,18 +1,15 @@
-package cn.itcast.httpclient.post;
+package com.test.httpclient.post;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.itcast.httpclient.CommonUtil;
+import com.test.httpclient.CommonUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-import org.springframework.http.HttpStatus;
 
 /**
  * 带有参数的POST请求
