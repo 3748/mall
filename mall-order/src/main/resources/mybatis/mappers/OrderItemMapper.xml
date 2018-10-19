@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.order.mapper.OrderItemMapper">
+    <resultMap id="BaseResultMap" type="com.mall.common.bean.OrderItem">
+        <result column="item_id" property="itemId" jdbcType="VARCHAR"/>
+        <result column="order_id" property="orderId" jdbcType="VARCHAR"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="BIGINT"/>
+        <result column="total_fee" property="totalFee" jdbcType="BIGINT"/>
+        <result column="pic_path" property="picPath" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertOrderItemList" parameterType="java.util.List">
+        insert into m_order_item(
+        item_id, order_id, num, title, price, total_fee, pic_path
+        )values
+        <foreach collection="orderItemList" item="orderItem" index="index" separator=",">
+            (
+            #{orderItem.itemId,jdbcType=VARCHAR},
+            #{orderId,jdbcType=VARCHAR},
+            #{orderItem.num,jdbcType=INTEGER},
+            #{orderItem.title,jdbcType=VARCHAR},
+            #{orderItem.price,jdbcType=BIGINT},
+            #{orderItem.totalFee,jdbcType=BIGINT},
+            #{orderItem.picPath,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+</mapper>
