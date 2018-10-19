@@ -1,7 +1,7 @@
 package com.mall.web.service;
 
 import com.mall.common.enums.NumberEnum;
-import com.mall.common.enums.StringEnum;
+import com.mall.common.enums.KeywordEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +46,7 @@ public class ItemService {
     public ItemVo selectItemById(Long id) {
 
         // 从缓存中命中
-        String key = StringEnum.MALL_WEB_ITEM_DETAIL.getValue() + id;
+        String key = KeywordEnum.MALL_WEB_ITEM_DETAIL.getValue() + id;
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {

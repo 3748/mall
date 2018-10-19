@@ -1,6 +1,7 @@
 package com.mall.sso.controller;
 
 import com.mall.common.bean.User;
+import com.mall.common.enums.NumberEnum;
 import com.mall.sso.service.RegisterService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class RegisterController {
      * @return String
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String register() {
+    public String toRegister() {
         return "register";
     }
 
@@ -52,11 +53,11 @@ public class RegisterController {
      * @return ResponseEntity<Boolean>
      */
     @RequestMapping(value = {"{param}/{type}"}, method = RequestMethod.GET)
-    public ResponseEntity<Boolean> registerCheck(@PathVariable("param") String param,
-                                                 @PathVariable("type") Integer type) {
+    public ResponseEntity<Boolean> selectCount(@PathVariable("param") String param,
+                                               @PathVariable("type") Integer type) {
         try {
-            Integer count = registerService.registerCheck(param, type);
-            if (0 == count) {
+            Integer count = registerService.selectCount(param, type);
+            if (NumberEnum.ZERO.getValue() == count) {
                 return ResponseEntity.ok(true);
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -71,12 +72,12 @@ public class RegisterController {
      *
      * @param user          注册信息
      * @param bindingResult @Valid校验的结果
-     * @return ResponseEntity<Map < String ,   Object>>
+     * @return ResponseEntity
      */
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> doRegister(@Valid @RequestBody User user, BindingResult bindingResult) {
-        Map<String, Object> result = new HashMap<>(16);
+    public ResponseEntity<Map<String, Object>> register(@Valid @RequestBody User user, BindingResult bindingResult) {
+        Map<String, Object> result = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
 
         // bindingResult接收@Valid校验的结果
         if (bindingResult.hasErrors()) {
@@ -90,12 +91,14 @@ public class RegisterController {
             }
 
             result.put("status", HttpStatus.BAD_REQUEST.value());
+
+            // StringUtils.join : 以指定字符将集合中的值进行连接
             result.put("data", "参数有误! " + StringUtils.join(errorMsgs, '|'));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
         }
 
         try {
-            Boolean bool = registerService.doRegister(user);
+            Boolean bool = registerService.register(user);
             if (bool) {
                 result.put("status", HttpStatus.CREATED.value());
                 return ResponseEntity.ok(result);

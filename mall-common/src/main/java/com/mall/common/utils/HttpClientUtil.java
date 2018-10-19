@@ -162,14 +162,13 @@ public class HttpClientUtil implements BeanFactoryAware {
      * @return String
      * @throws Exception 异常信息
      */
-    private HttpResult doPostJson(String url, String json) throws Exception {
+    public HttpResult doPostJson(String url, String json) throws Exception {
         // 创建http POST请求
         HttpPost httpPost = new HttpPost(url);
         httpPost.setConfig(requestConfig);
 
         if (null != json) {
-
-            // 构造一个form表单式的实体
+            // 构建一个字符串实体
             StringEntity stringEntity = new StringEntity(json, ContentType.APPLICATION_JSON);
 
             // 将请求实体设置到httpPost对象中

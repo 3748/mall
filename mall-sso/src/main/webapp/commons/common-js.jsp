@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${staticUrl}/js/jquery-easyui-1.4.1/themes/icon.css" />
 <link rel="stylesheet" type="text/css"
-	href="${staticUrl}/css/taotao.css" />
+	href="${staticUrl}/css/mall.css" />
 <script type="text/javascript"
 	src="${staticUrl}/js/jquery-easyui-1.4.1/jquery.min.js"></script>
 <script type="text/javascript"

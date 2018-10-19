@@ -42,7 +42,7 @@ public class ContentCatController {
             }
             return ResponseEntity.ok(list);
         } catch (Exception e) {
-            LOGGER.error("根据父内容类目id查询内容分类列表" + e.getMessage());
+            LOGGER.error("根据父内容类目id查询内容分类列表失败,原因:" + e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
@@ -59,7 +59,7 @@ public class ContentCatController {
             contentCatService.insertContentCat(contentCat);
             return ResponseEntity.status(HttpStatus.CREATED).body(contentCat);
         } catch (Exception e) {
-            LOGGER.error("新增内容类目失败,contentCat={}", contentCat, e);
+            LOGGER.error("新增内容类目失败,contentCat={},原因:", contentCat, e);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
@@ -76,7 +76,7 @@ public class ContentCatController {
             contentCatService.deleteContentCat(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (Exception e) {
-            LOGGER.error("删除内容类目失败,id={}", id, e);
+            LOGGER.error("删除内容类目失败,id={},原因:", id, e);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }

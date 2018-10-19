@@ -35,14 +35,13 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:spring/spring-mvc.xml</param-value>
+			<param-value>classpath:spring/spring-mvc-sso.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>mall-sso</servlet-name>
-		<!-- 伪静态 ,好处:有利于SEO(搜索引擎优化)-->
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 

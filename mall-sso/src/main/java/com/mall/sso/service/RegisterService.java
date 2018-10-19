@@ -19,7 +19,7 @@ public class RegisterService {
 	@Autowired
 	private UserMapper userMapper;
 
-	public Integer registerCheck(String param, Integer type) {
+	public Integer selectCount(String param, Integer type) {
 		User user = new User();
 
 		switch (type) {
@@ -38,9 +38,9 @@ public class RegisterService {
 		return userMapper.selectCount(user);
 	}
 
-	public Boolean doRegister(User user) {
+	public Boolean register(User user) {
 		user.setCreateTime(DateTimeUtil.CURRENTTIME);
-		user.setUpdateTime(DateTimeUtil.CURRENTTIME);
+		user.setUpdateTime(user.getCreateTime());
 		// 密码加密
 		user.setPassword(DigestUtils.md5Hex(user.getPassword()));
 		userMapper.insert(user);
