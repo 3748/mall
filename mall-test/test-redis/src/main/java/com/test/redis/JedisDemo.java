@@ -1,4 +1,4 @@
-package cn.itcast.redis;
+package com.test.redis;
 
 import redis.clients.jedis.Jedis;
 

@@ -1,4 +1,4 @@
-package cn.itcast.redis;
+package com.test.redis;
 
 import java.util.ArrayList;
 import java.util.List;
