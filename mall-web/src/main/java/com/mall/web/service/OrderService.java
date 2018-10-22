@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.bean.User;
 import com.mall.common.enums.KeywordEnum;
 import com.mall.common.http.client.HttpResult;
-import com.mall.common.model.OrderModel;
+import com.mall.common.request.OrderRequest;
 import com.mall.common.utils.HttpClientUtil;
 import com.mall.web.threadlocal.UserThreadLocal;
 import org.slf4j.Logger;
@@ -30,15 +30,15 @@ public class OrderService {
     @Autowired
     private HttpClientUtil httpClientUtil;
 
-    public String insertOrderModel(OrderModel orderModel) {
+    public String insertOrderRequest(OrderRequest orderRequest) {
         String url = propertiesService.mallOrderUrl + "/order/insert";
 
         // 从本地线程中获取user对象
         User user = UserThreadLocal.get();
-        orderModel.setUserId(user.getId());
-        orderModel.setBuyerNick(user.getUserName());
+        orderRequest.setUserId(user.getId());
+        orderRequest.setBuyerNick(user.getUserName());
         try {
-            String json = OBJECT_MAPPER.writeValueAsString(orderModel);
+            String json = OBJECT_MAPPER.writeValueAsString(orderRequest);
             HttpResult httpResult = httpClientUtil.doPostJson(url, json);
             if (httpResult.getCode() == HttpStatus.OK.value()) {
                 String data = httpResult.getData();

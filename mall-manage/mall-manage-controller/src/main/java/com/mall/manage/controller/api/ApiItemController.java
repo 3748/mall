@@ -1,8 +1,6 @@
 package com.mall.manage.controller.api;
 
 import com.mall.common.utils.BeanUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,9 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mall.common.bean.Item;
 import com.mall.manage.service.ItemService;
-import com.mall.common.vo.ItemVo;
+import com.mall.common.response.ItemResponse;
 
 /**
  * 商品接口(供商城前台调用)
@@ -34,10 +31,10 @@ public class ApiItemController {
      * @return ResponseEntity<Item>
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResponseEntity<ItemVo> selectItemById(@PathVariable("id") Long id) {
-        ItemVo itemVo = itemService.selectItemById(id);
+    public ResponseEntity<ItemResponse> selectItemById(@PathVariable("id") Long id) {
+        ItemResponse itemResponse = itemService.selectItemById(id);
 
-        BeanUtil<ItemVo> beanUtil = new BeanUtil<>();
-        return beanUtil.isNull(itemVo);
+        BeanUtil<ItemResponse> beanUtil = new BeanUtil<>();
+        return beanUtil.isNull(itemResponse);
     }
 }

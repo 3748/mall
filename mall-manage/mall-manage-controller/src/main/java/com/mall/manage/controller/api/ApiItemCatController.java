@@ -1,7 +1,7 @@
 package com.mall.manage.controller.api;
 
 import com.mall.common.utils.BeanUtil;
-import com.mall.common.vo.ItemCatVo;
+import com.mall.common.response.ItemCatResponse;
 import com.mall.manage.service.ItemCatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,12 +63,12 @@ public class ApiItemCatController {
      * 首页左侧商品类目
      * 项目统一支持jsonp后
      *
-     * @return ResponseEntity<ItemCatVo>
+     * @return ResponseEntity<ItemCatResponse>
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<ItemCatVo> selectItemCatListToTree() {
-        ItemCatVo itemCatVo = itemCatService.selectAllItemCatListToTree();
-        BeanUtil<ItemCatVo> beanUtil = new BeanUtil<>();
-        return beanUtil.isNull(itemCatVo);
+    public ResponseEntity<ItemCatResponse> selectItemCatListToTree() {
+        ItemCatResponse itemCatResponse = itemCatService.selectAllItemCatListToTree();
+        BeanUtil<ItemCatResponse> beanUtil = new BeanUtil<>();
+        return beanUtil.isNull(itemCatResponse);
     }
 }

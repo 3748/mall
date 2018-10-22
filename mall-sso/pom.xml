@@ -6,7 +6,7 @@
     <artifactId>mall-sso</artifactId>
     <packaging>war</packaging>
 
-    <!-- 加入父依赖 -->
+    <!--加入父依赖-->
     <parent>
         <groupId>com.mall.parent</groupId>
         <artifactId>mall-parent</artifactId>
@@ -20,26 +20,26 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!-- 密码加密工具 -->
+        <!--密码加密工具-->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
 
-        <!-- 单元测试 -->
+        <!--单元测试-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- 连接池 -->
+        <!--连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
 
-        <!-- Spring -->
+        <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -53,7 +53,7 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
 
-        <!-- Mybatis -->
+        <!--Mybatis-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -63,13 +63,13 @@
             <artifactId>mybatis-spring</artifactId>
         </dependency>
 
-        <!-- 通用Mapper -->
+        <!--通用Mapper-->
         <dependency>
             <groupId>com.github.abel533</groupId>
             <artifactId>mapper</artifactId>
         </dependency>
 
-        <!-- MySql -->
+        <!--MySql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -92,26 +92,16 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Apache工具组件 -->
+        <!--Apache工具组件-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
 
-        <!--jedis -->
+        <!--jedis-->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-        </dependency>
-
-        <!--分页助手 -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
         </dependency>
     </dependencies>
 </project>

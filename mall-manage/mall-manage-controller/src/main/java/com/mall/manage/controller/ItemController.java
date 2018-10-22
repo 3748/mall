@@ -1,9 +1,8 @@
 package com.mall.manage.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.mall.common.bean.Content;
 import com.mall.common.bean.Item;
-import com.mall.common.model.ItemModel;
+import com.mall.common.request.ItemRequest;
 import com.mall.manage.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -35,37 +34,37 @@ public class ItemController {
     /**
      * 新增商品
      *
-     * @param itemModel 前台传入商品参数
+     * @param itemRequest 前台传入商品参数
      * @return ResponseEntity
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insertItem(@RequestBody ItemModel itemModel) {
+    public ResponseEntity<Void> insertItem(@RequestBody ItemRequest itemRequest) {
 
         try {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("新增商品， itemModel = {}", itemModel);
+                LOGGER.debug("新增商品， ItemRequest = {}", itemRequest);
             }
 
             // 模拟400情况
-            if (StringUtils.isEmpty(itemModel.getTitle())) {
+            if (StringUtils.isEmpty(itemRequest.getTitle())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
 
-            Boolean bool = itemService.insertItem(itemModel);
+            Boolean bool = itemService.insertItem(itemRequest);
             if (!bool) {
                 if (LOGGER.isInfoEnabled()) {
-                    LOGGER.info("新增商品失败， itemModel = {}", itemModel);
+                    LOGGER.info("新增商品失败， ItemRequest = {}", itemRequest);
                 }
 
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
 
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("新增商品成功， itemModel = {}", itemModel);
+                LOGGER.debug("新增商品成功， ItemRequest = {}", itemRequest);
             }
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
-            LOGGER.error("新增商品出错! itemModel = " + itemModel, e);
+            LOGGER.error("新增商品出错! ItemRequest = " + itemRequest, e);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
@@ -73,34 +72,34 @@ public class ItemController {
     /**
      * 更新商品
      *
-     * @param itemModel 前台传入商品参数
+     * @param itemRequest 前台传入商品参数
      * @return ResponseEntity
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateItem(@RequestBody ItemModel itemModel) {
+    public ResponseEntity<Void> updateItem(@RequestBody ItemRequest itemRequest) {
         try {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("编辑商品， itemModel = {}", itemModel);
+                LOGGER.debug("编辑商品， ItemRequest = {}", itemRequest);
             }
-            if (StringUtils.isEmpty(itemModel.getTitle())) {
+            if (StringUtils.isEmpty(itemRequest.getTitle())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
 
-            Boolean bool = itemService.updateItem(itemModel);
+            Boolean bool = itemService.updateItem(itemRequest);
             if (!bool) {
                 if (LOGGER.isInfoEnabled()) {
-                    LOGGER.info("编辑商品失败， itemModel = {}", itemModel);
+                    LOGGER.info("编辑商品失败， ItemRequest = {}", itemRequest);
                 }
 
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
             if (LOGGER.isInfoEnabled()) {
-                LOGGER.info("编辑商品成功， itemId = {}", itemModel.getId());
+                LOGGER.info("编辑商品成功， itemId = {}", itemRequest.getId());
             }
 
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (Exception e) {
-            LOGGER.error("编辑商品出错! itemModel = " + itemModel, e);
+            LOGGER.error("编辑商品出错! ItemRequest = " + itemRequest, e);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }

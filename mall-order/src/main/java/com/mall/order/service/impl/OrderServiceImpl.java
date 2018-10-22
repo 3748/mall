@@ -3,13 +3,12 @@ package com.mall.order.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.bean.Order;
 import com.mall.common.enums.NumberEnum;
-import com.mall.common.enums.ResponseMsgEnum;
-import com.mall.common.model.OrderModel;
+import com.mall.common.request.OrderRequest;
 import com.mall.common.utils.DateTimeUtil;
 import com.mall.common.utils.ValidateUtil;
-import com.mall.common.vo.MallResult;
+import com.mall.common.response.MallResponse;
 import com.mall.order.mapper.OrderMapper;
-import com.mall.order.pojo.PageResult;
+import com.mall.order.pojo.PageResponse;
 import com.mall.order.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,33 +34,33 @@ public class OrderServiceImpl implements OrderService {
     // private RabbitTemplate rabbitTemplate;
 
     @Override
-    public MallResult insertOrderModel(String json) {
+    public MallResponse insertOrderRequest(String json) {
 
-        OrderModel orderModel;
+        OrderRequest orderRequest;
         try {
-            orderModel = OBJECT_MAPPER.readValue(json, OrderModel.class);
+            orderRequest = OBJECT_MAPPER.readValue(json, OrderRequest.class);
 
             // 校验Order对象
-            ValidateUtil.validate(orderModel);
+            ValidateUtil.validate(orderRequest);
         } catch (Exception e) {
-            return MallResult.build(HttpStatus.BAD_REQUEST.value(), ResponseMsgEnum.REQUEST_PARAMETER_ERROR.getValue());
+            return MallResponse.build(HttpStatus.BAD_REQUEST.value(), "请求参数错误!");
         }
 
         try {
             // 生成订单ID,规则为：userId+当前时间戳
-            String orderId = orderModel.getUserId() + "" + System.currentTimeMillis();
-            orderModel.setOrderId(orderId);
+            String orderId = orderRequest.getUserId() + "" + System.currentTimeMillis();
+            orderRequest.setOrderId(orderId);
 
             // 设置订单的初始状态为未付款
-            orderModel.setStatus(NumberEnum.ORDER_STATUS_UNPAID.getValue());
-            orderModel.setCreateTime(DateTimeUtil.CURRENTTIME);
-            orderModel.setUpdateTime(orderModel.getCreateTime());
+            orderRequest.setStatus(NumberEnum.ORDER_STATUS_UNPAID.getValue());
+            orderRequest.setCreateTime(DateTimeUtil.CURRENTTIME);
+            orderRequest.setUpdateTime(orderRequest.getCreateTime());
 
             // 设置买家评价状态，初始为未评价
-            orderModel.setBuyerAssess(NumberEnum.BUYER_UNASSESS.getValue());
+            orderRequest.setBuyerAssess(NumberEnum.BUYER_UNASSESS.getValue());
 
             // 一次将数据插入3张表
-            orderMapper.insertOrderInfo(orderModel);
+            orderMapper.insertOrderInfo(orderRequest);
 
             // 持久化order对象
             // orderDao.createOrder(order);
@@ -76,11 +75,11 @@ public class OrderServiceImpl implements OrderService {
             // msg.put("itemIds", itemIds);
             // this.rabbitTemplate.convertAndSend(objectMapper.writeValueAsString(msg));
 
-            return MallResult.ok(orderId);
+            return MallResponse.ok(orderId);
         } catch (Exception e) {
-            LOGGER.error(ResponseMsgEnum.ORDER_INSERT_FAIL.getValue(), e.getMessage());
+            LOGGER.error("订单新增失败,原因:", e.getMessage());
         }
-        return MallResult.build(HttpStatus.BAD_REQUEST.value(), ResponseMsgEnum.ORDER_INSERT_FAIL.getValue());
+        return MallResponse.build(HttpStatus.BAD_REQUEST.value(), "订单新增失败!");
     }
 
     @Override
@@ -89,19 +88,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public PageResult<Order> selectOrderByUserNameAndPage(String buyerNick, Integer page, Integer count) {
+    public PageResponse<Order> selectOrderByUserNameAndPage(String buyerNick, Integer page, Integer count) {
         return null;
         //orderDao.queryOrderByUserNameAndPage(buyerNick, page, count);
     }
 
     @Override
-    public MallResult updateOrderStatus(String json) {
+    public MallResponse updateOrderStatus(String json) {
         Order order;
         try {
             order = OBJECT_MAPPER.readValue(json, Order.class);
         } catch (Exception e) {
-            LOGGER.error(ResponseMsgEnum.ORDER_UPDATE_FAIL.getValue(), e.getMessage());
-            return MallResult.build(HttpStatus.BAD_REQUEST.value(), ResponseMsgEnum.REQUEST_PARAMETER_ERROR.getValue());
+            LOGGER.error("订单修改失败,原因:", e.getMessage());
+            return MallResponse.build(HttpStatus.BAD_REQUEST.value(), "订单修改失败!");
         }
         return null;
     }

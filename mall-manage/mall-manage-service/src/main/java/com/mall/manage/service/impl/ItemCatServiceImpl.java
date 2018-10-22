@@ -5,9 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.github.abel533.mapper.Mapper;
 import com.mall.common.enums.NumberEnum;
-import com.mall.common.enums.StringEnum;
+import com.mall.common.enums.KeywordEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,8 @@ import com.mall.common.utils.RedisUtil;
 import com.mall.common.bean.ItemCat;
 import com.mall.manage.mapper.ItemCatMapper;
 import com.mall.manage.service.ItemCatService;
-import com.mall.common.vo.ItemCatData;
-import com.mall.common.vo.ItemCatVo;
+import com.mall.common.response.ItemCatData;
+import com.mall.common.response.ItemCatResponse;
 
 /**
  * 商品类目
@@ -44,8 +43,7 @@ public class ItemCatServiceImpl implements ItemCatService {
     /**
      * Spring4增加了对泛型注入的支持，可以直接在Service中写
      *
-     * @Autowired
-     * private Mapper<T> mapper;
+     * @Autowired private Mapper<T> mapper;
      */
 
     @Override
@@ -56,15 +54,15 @@ public class ItemCatServiceImpl implements ItemCatService {
     }
 
     @Override
-    public ItemCatVo selectAllItemCatListToTree() {
+    public ItemCatResponse selectAllItemCatListToTree() {
         // 先从缓存中查询,命中即返回
         try {
-            String cacheData = redisUtil.get(StringEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue());
+            String cacheData = redisUtil.get(KeywordEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue());
 
             // 查询到结果
             if (StringUtils.isNotEmpty(cacheData)) {
                 // 此处将cacheData进行反序列化,因为存入的时候序列化存入
-                return OBJECT_MAPPER.readValue(cacheData, ItemCatVo.class);
+                return OBJECT_MAPPER.readValue(cacheData, ItemCatResponse.class);
             }
         } catch (Exception e) {
             LOGGER.error("商品类目获取缓存失败,原因:" + e.getMessage());
@@ -72,10 +70,10 @@ public class ItemCatServiceImpl implements ItemCatService {
 
         // 缓存未能命中
         List<ItemCat> cats = itemCatMapper.select(null);
-        ItemCatVo result = new ItemCatVo();
+        ItemCatResponse result = new ItemCatResponse();
 
         // 转为map存储，key为父节点ID，value为数据集合
-        Map<Long, List<ItemCat>> itemCatMap = new HashMap<>(16);
+        Map<Long, List<ItemCat>> itemCatMap = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
         for (ItemCat itemCat : cats) {
             if (!itemCatMap.containsKey(itemCat.getParentId())) {
                 itemCatMap.put(itemCat.getParentId(), new ArrayList<>());
@@ -84,32 +82,32 @@ public class ItemCatServiceImpl implements ItemCatService {
         }
 
         // 封装一级对象
-        List<ItemCat> itemCatList1 = itemCatMap.get(0L);
-        for (ItemCat itemCat : itemCatList1) {
-            ItemCatData itemCatData = new ItemCatData();
-            itemCatData.setUrl("/products/" + itemCat.getId() + ".html");
-            itemCatData.setName("<a href='" + itemCatData.getUrl() + "'>" + itemCat.getName() + "</a>");
-            result.getItemCats().add(itemCatData);
-            if (0 == itemCat.getIsParent()) {
+        List<ItemCat> itemCatListOne = itemCatMap.get(0L);
+        for (ItemCat itemCat : itemCatListOne) {
+            ItemCatData itemCatDataOne = new ItemCatData();
+            itemCatDataOne.setUrl("/products/" + itemCat.getId() + ".html");
+            itemCatDataOne.setName("<a href='" + itemCatDataOne.getUrl() + "'>" + itemCat.getName() + "</a>");
+            result.getItemCats().add(itemCatDataOne);
+            if (NumberEnum.ZERO.getValue() == itemCat.getIsParent()) {
                 continue;
             }
 
             // 封装二级对象
-            List<ItemCat> itemCatList2 = itemCatMap.get(itemCat.getId());
-            List<ItemCatData> itemCatData2 = new ArrayList<>();
-            itemCatData.setItems(itemCatData2);
-            for (ItemCat itemCat2 : itemCatList2) {
-                ItemCatData id2 = new ItemCatData();
-                id2.setName(itemCat2.getName());
-                id2.setUrl("/products/" + itemCat2.getId() + ".html");
-                itemCatData2.add(id2);
-                if (1 == itemCat2.getIsParent()) {
+            List<ItemCat> itemCatListTwo = itemCatMap.get(itemCat.getId());
+            List<ItemCatData> itemCatDataListTwo = new ArrayList<>();
+            itemCatDataOne.setItems(itemCatDataListTwo);
+            for (ItemCat itemCatTwo : itemCatListTwo) {
+                ItemCatData itemCatDataTwo = new ItemCatData();
+                itemCatDataTwo.setName(itemCatTwo.getName());
+                itemCatDataTwo.setUrl("/products/" + itemCatTwo.getId() + ".html");
+                itemCatDataListTwo.add(itemCatDataTwo);
+                if (NumberEnum.ONE.getValue() == itemCatTwo.getIsParent()) {
                     // 封装三级对象
-                    List<ItemCat> itemCatList3 = itemCatMap.get(itemCat2.getId());
-                    List<String> itemCatData3 = new ArrayList<>();
-                    id2.setItems(itemCatData3);
-                    for (ItemCat itemCat3 : itemCatList3) {
-                        itemCatData3.add("/products/" + itemCat3.getId() + ".html|" + itemCat3.getName());
+                    List<ItemCat> itemCatListThree = itemCatMap.get(itemCatTwo.getId());
+                    List<String> itemCatDataThree = new ArrayList<>();
+                    itemCatDataTwo.setItems(itemCatDataThree);
+                    for (ItemCat itemCatThree : itemCatListThree) {
+                        itemCatDataThree.add("/products/" + itemCatThree.getId() + ".html|" + itemCatThree.getName());
                     }
                 }
             }
@@ -117,7 +115,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 
         // 将查询结果集写入缓存,此处将result进行序列化
         try {
-            redisUtil.set(StringEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue(), OBJECT_MAPPER.writeValueAsString(result), NumberEnum.ITEM_CAT_EXPIRE_TIME.getValue());
+            redisUtil.set(KeywordEnum.MALL_MANAGE_ITEM_CAT_ALL.getValue(), OBJECT_MAPPER.writeValueAsString(result), NumberEnum.ITEM_CAT_EXPIRE_TIME.getValue());
         } catch (Exception e) {
             LOGGER.error("商品类目写入缓存失败,原因:" + e.getMessage());
         }

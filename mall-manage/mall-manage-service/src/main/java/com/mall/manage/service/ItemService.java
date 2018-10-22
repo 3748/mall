@@ -2,8 +2,8 @@ package com.mall.manage.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mall.common.bean.Item;
-import com.mall.common.model.ItemModel;
-import com.mall.common.vo.ItemVo;
+import com.mall.common.request.ItemRequest;
+import com.mall.common.response.ItemResponse;
 
 /**
  * 商品管理
@@ -15,26 +15,26 @@ public interface ItemService {
     /**
      * 新增商品
      *
-     * @param itemModel 前台传入商品参数
+     * @param itemRequest 前台传入商品参数
      * @return Boolean
      */
-    Boolean insertItem(ItemModel itemModel);
+    Boolean insertItem(ItemRequest itemRequest);
 
     /**
      * 获取商品信息
      *
      * @param id 商品id
-     * @return ItemVo
+     * @return ItemResponse
      */
-    ItemVo selectItemById(Long id);
+    ItemResponse selectItemById(Long id);
 
     /**
      * 更新商品
      *
-     * @param itemModel 前台传入商品参数
+     * @param itemRequest 前台传入商品参数
      * @return Boolean
      */
-    Boolean updateItem(ItemModel itemModel);
+    Boolean updateItem(ItemRequest itemRequest);
 
     /**
      * 查询商品列表页

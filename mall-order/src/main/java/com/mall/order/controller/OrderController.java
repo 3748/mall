@@ -1,8 +1,8 @@
 package com.mall.order.controller;
 
 import com.mall.common.bean.Order;
-import com.mall.common.vo.MallResult;
-import com.mall.order.pojo.PageResult;
+import com.mall.common.response.MallResponse;
+import com.mall.order.pojo.PageResponse;
 import com.mall.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,12 +25,12 @@ public class OrderController {
      * 创建订单
      *
      * @param json 订单数据
-     * @return MallResult
+     * @return MallResponse
      */
     @ResponseBody
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public MallResult insertOrderModel(@RequestBody String json) {
-        return orderService.insertOrderModel(json);
+    public MallResponse insertOrderRequest(@RequestBody String json) {
+        return orderService.insertOrderRequest(json);
     }
 
     /**
@@ -51,11 +51,11 @@ public class OrderController {
      * @param buyerNick 用户名
      * @param pageNum   页码
      * @param pageSize  每页显示条数
-     * @return PageResult
+     * @return PageResponse
      */
     @ResponseBody
     @RequestMapping("/select/{buyerNick}/{pageNum}/{pageSize}")
-    public PageResult<Order> selectOrderByUserNameAndPage(@PathVariable("buyerNick") String buyerNick, @PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize) {
+    public PageResponse<Order> selectOrderByUserNameAndPage(@PathVariable("buyerNick") String buyerNick, @PathVariable("pageNum") Integer pageNum, @PathVariable("pageSize") Integer pageSize) {
         return orderService.selectOrderByUserNameAndPage(buyerNick, pageNum, pageSize);
     }
 
@@ -67,7 +67,7 @@ public class OrderController {
      */
     @ResponseBody
     @RequestMapping(value = "/updateOrderStatus", method = RequestMethod.POST)
-    public MallResult updateOrderStatus(@RequestBody String json) {
+    public MallResponse updateOrderStatus(@RequestBody String json) {
         return orderService.updateOrderStatus(json);
     }
 }

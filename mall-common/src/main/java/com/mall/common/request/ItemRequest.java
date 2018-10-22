@@ -1,4 +1,4 @@
-package com.mall.common.model;
+package com.mall.common.request;
 
 import com.mall.common.bean.Base;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author gp6
  * @date 2018-07-09
  */
-public class ItemModel extends Base {
+public class ItemRequest extends Base {
 
     /**
      * 商品id

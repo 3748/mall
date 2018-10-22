@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.utils.HttpClientUtil;
 import com.mall.common.utils.RedisUtil;
-import com.mall.common.vo.ItemVo;
+import com.mall.common.response.ItemResponse;
 
 /**
  * @author gp6
@@ -41,16 +41,16 @@ public class ItemService {
      * 因为缓存原因,当后台更改商品时,前台获取的商品不是最新(用MQ解决该问题)
      *
      * @param id 商品id
-     * @return ItemVo
+     * @return ItemResponse
      */
-    public ItemVo selectItemById(Long id) {
+    public ItemResponse selectItemById(Long id) {
 
         // 从缓存中命中
         String key = KeywordEnum.MALL_WEB_ITEM_DETAIL.getValue() + id;
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
-                return OBJECT_MAPPER.readValue(cacheData, ItemVo.class);
+                return OBJECT_MAPPER.readValue(cacheData, ItemResponse.class);
             }
         } catch (Exception e) {
             LOGGER.error("获取商品详情失败,原因:" + e.getMessage());
@@ -66,7 +66,7 @@ public class ItemService {
 
             // 将数据写入到缓存中
             redisUtil.set(key, jsonData, NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
-            return OBJECT_MAPPER.readValue(jsonData, ItemVo.class);
+            return OBJECT_MAPPER.readValue(jsonData, ItemResponse.class);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }

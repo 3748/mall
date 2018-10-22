@@ -1,4 +1,4 @@
-package com.mall.common.vo;
+package com.mall.common.response;
 
 import java.util.List;
 

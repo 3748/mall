@@ -2,16 +2,16 @@ package com.mall.order.pojo;
 
 import java.util.List;
 
-public class PageResult<T> {
+public class PageResponse<T> {
 
 	private Integer totle;
 
 	private List<T> data;
 
-	public PageResult() {
+	public PageResponse() {
 	}
 
-	public PageResult(Integer totle, List<T> data) {
+	public PageResponse(Integer totle, List<T> data) {
 		this.totle = totle;
 		this.data = data;
 	}

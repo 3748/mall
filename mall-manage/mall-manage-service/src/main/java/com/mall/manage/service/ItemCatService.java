@@ -3,7 +3,7 @@ package com.mall.manage.service;
 import java.util.List;
 
 import com.mall.common.bean.ItemCat;
-import com.mall.common.vo.ItemCatVo;
+import com.mall.common.response.ItemCatResponse;
 
 /**
  * 商品类目
@@ -23,7 +23,7 @@ public interface ItemCatService {
     /**
      * 查询全部商品类目，并且生成树状结构
      *
-     * @return ItemCatVo
+     * @return ItemCatResponse
      */
-    ItemCatVo selectAllItemCatListToTree();
+    ItemCatResponse selectAllItemCatListToTree();
 }

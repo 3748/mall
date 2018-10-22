@@ -9,11 +9,11 @@ import com.mall.common.bean.Item;
 import com.mall.common.bean.ItemDesc;
 import com.mall.common.bean.ItemParam;
 import com.mall.common.enums.NumberEnum;
-import com.mall.common.enums.StringEnum;
-import com.mall.common.model.ItemModel;
+import com.mall.common.enums.KeywordEnum;
+import com.mall.common.request.ItemRequest;
 import com.mall.common.utils.DateTimeUtil;
 import com.mall.common.utils.RedisUtil;
-import com.mall.common.vo.ItemVo;
+import com.mall.common.response.ItemResponse;
 import com.mall.manage.mapper.ItemMapper;
 import com.mall.manage.service.ItemDescService;
 import com.mall.manage.service.ItemParamService;
@@ -59,61 +59,61 @@ public class ItemServiceImpl implements ItemService {
     private RabbitTemplate rabbitTemplate;
 
     @Override
-    public Boolean insertItem(ItemModel itemModel) {
+    public Boolean insertItem(ItemRequest itemRequest) {
         boolean flag = true;
-        itemModel.setCreateTime(DateTimeUtil.CURRENTTIME);
-        itemModel.setUpdateTime(itemModel.getCreateTime());
+        itemRequest.setCreateTime(DateTimeUtil.CURRENTTIME);
+        itemRequest.setUpdateTime(itemRequest.getCreateTime());
 
         // 保存商品基本信息
         Item item = new Item();
-        BeanUtils.copyProperties(itemModel, item);
+        BeanUtils.copyProperties(itemRequest, item);
         item.setStatus(NumberEnum.ITEM_STATUS_NORMAL.getValue());
         int countItem = itemMapper.insert(item);
 
         // 保存商品描述
         ItemDesc itemDesc = new ItemDesc();
         itemDesc.setItemId(item.getId());
-        BeanUtils.copyProperties(itemModel, itemDesc);
+        BeanUtils.copyProperties(itemRequest, itemDesc);
         int countItemDesc = itemDescService.saveItemDesc(itemDesc);
 
         // 保存商品规格参数
         ItemParam itemParam = new ItemParam();
         itemParam.setItemId(item.getId());
-        itemParam.setParamData(itemModel.getItemParams().toString());
+        itemParam.setParamData(itemRequest.getItemParams().toString());
         int countItemParam = itemParamService.saveItemParam(itemParam);
 
-        if (1 != countItem || 1 != countItemDesc || 1 != countItemParam) {
+        if (NumberEnum.ONE.getValue() != countItem || NumberEnum.ONE.getValue() != countItemDesc || NumberEnum.ONE.getValue() != countItemParam) {
             flag = false;
         }
 
         // 向MQ发送消息
-        sendMsg(itemModel.getId(), StringEnum.MQ_TYPE_INSERT.getValue());
+        sendMsg(itemRequest.getId(), KeywordEnum.MQ_TYPE_INSERT.getValue());
         return flag;
     }
 
     @Override
-    public ItemVo selectItemById(Long id) {
+    public ItemResponse selectItemById(Long id) {
 
         // 从缓存中命中
-        String key = StringEnum.MALL_MANAGE_ITEM_DETAIL.getValue() + id;
+        String key = KeywordEnum.MALL_MANAGE_ITEM_DETAIL.getValue() + id;
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
-                return OBJECT_MAPPER.readValue(cacheData, ItemVo.class);
+                return OBJECT_MAPPER.readValue(cacheData, ItemResponse.class);
             }
         } catch (Exception e) {
             LOGGER.error("从缓存中获取商品详情失败" + e.getMessage());
         }
 
-        ItemVo itemVo = itemMapper.getItemInfoById(id);
+        ItemResponse itemResponse = itemMapper.getItemInfoById(id);
         try {
-            if (null == itemVo) {
+            if (null == itemResponse) {
                 return null;
             }
 
             // 将数据写入到缓存中
-            redisUtil.set(key, OBJECT_MAPPER.writeValueAsString(itemVo), NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
-            return itemVo;
+            redisUtil.set(key, OBJECT_MAPPER.writeValueAsString(itemResponse), NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
+            return itemResponse;
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
@@ -122,13 +122,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Boolean updateItem(ItemModel itemModel) {
+    public Boolean updateItem(ItemRequest itemRequest) {
         boolean flag = true;
-        itemModel.setUpdateTime(DateTimeUtil.CURRENTTIME);
+        itemRequest.setUpdateTime(DateTimeUtil.CURRENTTIME);
 
         // 更新商品基本信息
         Item item = new Item();
-        BeanUtils.copyProperties(itemModel, item);
+        BeanUtils.copyProperties(itemRequest, item);
 
         // 将不能被修改的字段设置为null,防止前台传入参数,值被修改
         item.setCreateTime(null);
@@ -139,16 +139,16 @@ public class ItemServiceImpl implements ItemService {
 
         // 更新商品描述
         ItemDesc itemDesc = new ItemDesc();
-        itemDesc.setItemId(itemModel.getId());
-        BeanUtils.copyProperties(itemModel, itemDesc);
+        itemDesc.setItemId(itemRequest.getId());
+        BeanUtils.copyProperties(itemRequest, itemDesc);
         itemDesc.setCreateTime(null);
         int countItemDesc = itemDescService.updateItemDesc(itemDesc);
 
         // 更新商品规格参数
         ItemParam itemParam = new ItemParam();
-        itemParam.setItemId(itemModel.getId());
-        itemParam.setParamData(itemModel.getItemParams().toString());
-        itemParam.setUpdateTime(itemModel.getUpdateTime());
+        itemParam.setItemId(itemRequest.getId());
+        itemParam.setParamData(itemRequest.getItemParams().toString());
+        itemParam.setUpdateTime(itemRequest.getUpdateTime());
         itemDesc.setCreateTime(null);
         int countItemParam = itemParamService.updateItemParam(itemParam);
 
@@ -157,7 +157,7 @@ public class ItemServiceImpl implements ItemService {
         }
 
         // 向MQ发送消息
-        sendMsg(itemModel.getId(), StringEnum.MQ_TYPE_UPDATE.getValue());
+        sendMsg(itemRequest.getId(), KeywordEnum.MQ_TYPE_UPDATE.getValue());
         return flag;
     }
 

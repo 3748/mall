@@ -3,7 +3,7 @@ package com.mall.manage.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.enums.ImageTypeEnum;
 import com.mall.common.utils.DateTimeUtil;
-import com.mall.common.vo.UploadImgVo;
+import com.mall.common.response.UploadImgResponse;
 import com.mall.manage.service.PropertiesService;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -60,10 +60,10 @@ public class UploadController {
         }
 
         // 封装Result对象，并且将文件的byte数组放置到result对象中
-        UploadImgVo uploadImgResult = new UploadImgVo();
+        UploadImgResponse uploadImgResponse = new UploadImgResponse();
 
         // 状态
-        uploadImgResult.setError(isLegal ? 0 : 1);
+        uploadImgResponse.setError(isLegal ? 0 : 1);
 
         // 文件新路径
         String filePath = getFilePath(imageFile.getOriginalFilename());
@@ -74,7 +74,7 @@ public class UploadController {
 
         // 生成图片的绝对引用地址
         String picUrl = StringUtils.replace(StringUtils.substringAfter(filePath, propertiesService.uploadDir), "\\", "/");
-        uploadImgResult.setUrl(propertiesService.imageBaseUrl + picUrl);
+        uploadImgResponse.setUrl(propertiesService.imageBaseUrl + picUrl);
 
         File newFile = new File(filePath);
 
@@ -86,8 +86,8 @@ public class UploadController {
         try {
             BufferedImage image = ImageIO.read(newFile);
             if (image != null) {
-                uploadImgResult.setWidth(image.getWidth() + "");
-                uploadImgResult.setHeight(image.getHeight() + "");
+                uploadImgResponse.setWidth(image.getWidth() + "");
+                uploadImgResponse.setHeight(image.getHeight() + "");
                 isLegal = true;
             }
         } catch (IOException e) {
@@ -95,7 +95,7 @@ public class UploadController {
         }
 
         // 状态
-        uploadImgResult.setError(isLegal ? 0 : 1);
+        uploadImgResponse.setError(isLegal ? 0 : 1);
 
         if (!isLegal) {
             // 不合法，将磁盘上的文件删除
@@ -103,7 +103,7 @@ public class UploadController {
         }
 
         // 将一个java对象序列化成json字符串
-        return OBJECT_MAPPER.writeValueAsString(uploadImgResult);
+        return OBJECT_MAPPER.writeValueAsString(uploadImgResponse);
     }
 
     /**

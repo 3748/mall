@@ -2,7 +2,7 @@ package com.mall.manage.mapper;
 
 import com.github.abel533.mapper.Mapper;
 import com.mall.common.bean.Item;
-import com.mall.common.vo.ItemVo;
+import com.mall.common.response.ItemResponse;
 
 /**
  * @author gp6
@@ -15,5 +15,5 @@ public interface ItemMapper extends Mapper<Item> {
      * @param id 商品id
      * @return 商品信息
      */
-    ItemVo getItemInfoById(Long id);
+    ItemResponse getItemInfoById(Long id);
 }

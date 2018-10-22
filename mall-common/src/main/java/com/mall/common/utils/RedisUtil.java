@@ -65,8 +65,8 @@ public class RedisUtil {
             public String callback(ShardedJedis e) {
                 return e.set(key, value);
             }
-        });
-        */
+        });*/
+
         // 使用Lambda表达式代替
         return this.execute(e -> e.set(key, value));
     }

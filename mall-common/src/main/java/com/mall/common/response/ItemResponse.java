@@ -1,4 +1,4 @@
-package com.mall.common.vo;
+package com.mall.common.response;
 
 import com.mall.common.bean.Item;
 
@@ -8,7 +8,7 @@ import com.mall.common.bean.Item;
  * @author gp6
  * @date 2018-08-22
  */
-public class ItemVo extends Item {
+public class ItemResponse extends Item {
 	/**
 	 * 商品描述
 	 */

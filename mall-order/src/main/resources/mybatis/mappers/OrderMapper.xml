@@ -5,7 +5,7 @@
 
     <sql id="tableName">m_order</sql>
 
-    <resultMap type="com.mall.common.model.OrderModel" id="orderModeMap" autoMapping="true">
+    <resultMap type="com.mall.common.request.OrderRequest" id="orderModeMap" autoMapping="true">
         <id column="order_id" property="orderId"/>
 
         <!--MyBatis延时加载-->

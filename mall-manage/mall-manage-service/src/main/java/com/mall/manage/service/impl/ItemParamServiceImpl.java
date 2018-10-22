@@ -2,6 +2,7 @@ package com.mall.manage.service.impl;
 
 import com.github.abel533.entity.Example;
 import com.mall.common.bean.ItemParam;
+import com.mall.common.enums.NumberEnum;
 import com.mall.common.utils.DateTimeUtil;
 import com.mall.manage.mapper.ItemParamMapper;
 import com.mall.manage.service.ItemParamService;
@@ -26,7 +27,7 @@ public class ItemParamServiceImpl implements ItemParamService {
 
     @Override
     public int saveItemParam(ItemParam itemParam) {
-        int count = 0;
+        int count = NumberEnum.ZERO.getValue();
 
         try {
             itemParam.setCreateTime(DateTimeUtil.CURRENTTIME);
@@ -40,7 +41,7 @@ public class ItemParamServiceImpl implements ItemParamService {
 
     @Override
     public int updateItemParam(ItemParam itemParam) {
-        int count = 0;
+        int count = NumberEnum.ZERO.getValue();
 
         try {
             // 指定Where条件

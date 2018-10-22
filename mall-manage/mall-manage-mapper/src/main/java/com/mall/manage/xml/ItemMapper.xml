@@ -21,7 +21,7 @@
 		create_time, update_time
 	</sql>
 	
-	<select id="getItemInfoById" parameterType="java.lang.Long" resultType="com.mall.common.vo.ItemVo">
+	<select id="getItemInfoById" parameterType="java.lang.Long" resultType="com.mall.common.response.ItemResponse">
 		select
 			id, title, sell_point sellPoint, price, num, barcode, image, item_cat_id itemCatId, status,
 			mi.create_time createTime, mi.update_time updateTime,mid.item_desc itemDesc

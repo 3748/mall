@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.github.abel533.mapper.Mapper;
 import com.mall.common.bean.Order;
-import com.mall.common.model.OrderModel;
+import com.mall.common.request.OrderRequest;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -17,11 +17,11 @@ public interface OrderMapper extends Mapper<Order> {
     /**
      * 保存订单信息
      *
-     * @param orderModel 订单信息
+     * @param orderRequest 订单信息
      */
-    void insertOrderInfo(OrderModel orderModel);
+    void insertOrderInfo(OrderRequest orderRequest);
 
-    OrderModel selectOrderById(String orderId);
+    OrderRequest selectOrderById(String orderId);
 
     void paymentOrderScan(@Param("date") Date date);
 

@@ -12,7 +12,7 @@
         <!--忽略没有找到的资源文件-->
         <property name="ignoreResourceNotFound" value="true"/>
 
-        <!-- 配置资源文件 -->
+        <!--配置资源文件-->
         <property name="locations">
             <list>
                 <!--

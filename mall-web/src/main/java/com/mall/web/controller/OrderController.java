@@ -1,10 +1,8 @@
 package com.mall.web.controller;
 
 import com.mall.common.bean.Item;
-import com.mall.common.enums.KeywordEnum;
-import com.mall.common.enums.ResponseMsgEnum;
-import com.mall.common.model.OrderModel;
-import com.mall.common.vo.MallResult;
+import com.mall.common.request.OrderRequest;
+import com.mall.common.response.MallResponse;
 import com.mall.web.service.ItemService;
 import com.mall.web.service.OrderService;
 import org.apache.commons.lang3.StringUtils;
@@ -47,18 +45,18 @@ public class OrderController {
     /**
      * 新增订单
      *
-     * @param orderModel 订单信息
-     * @return MallResult 自定义返回
+     * @param orderRequest 订单信息
+     * @return MallResponse 自定义返回
      */
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     @ResponseBody
-    public MallResult insertOrderModel(@RequestBody OrderModel orderModel) {
+    public MallResponse insertOrderRequest(@RequestBody OrderRequest orderRequest) {
 
-        String orderId = orderService.insertOrderModel(orderModel);
+        String orderId = orderService.insertOrderRequest(orderRequest);
         if (StringUtils.isEmpty(orderId)) {
-            return MallResult.build(HttpStatus.BAD_REQUEST.value(), ResponseMsgEnum.ORDER_INSERT_FAIL.getValue());
+            return MallResponse.build(HttpStatus.BAD_REQUEST.value(), "新增订单失败!");
         } else {
-            return MallResult.ok(orderId);
+            return MallResponse.ok(orderId);
         }
     }
 }

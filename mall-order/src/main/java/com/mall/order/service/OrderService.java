@@ -1,8 +1,8 @@
 package com.mall.order.service;
 
 import com.mall.common.bean.Order;
-import com.mall.common.vo.MallResult;
-import com.mall.order.pojo.PageResult;
+import com.mall.common.response.MallResponse;
+import com.mall.order.pojo.PageResponse;
 
 /**
  * 订单接口
@@ -16,9 +16,9 @@ public interface OrderService {
      * 创建订单
      *
      * @param json 订单信息
-     * @return MallResult
+     * @return MallResponse
      */
-    MallResult insertOrderModel(String json);
+    MallResponse insertOrderRequest(String json);
 
     /**
      * 根据订单ID查询订单
@@ -36,13 +36,13 @@ public interface OrderService {
      * @param count     查询数据条数
      * @return 分页结果集
      */
-    PageResult<Order> selectOrderByUserNameAndPage(String buyerNick, Integer page, Integer count);
+    PageResponse<Order> selectOrderByUserNameAndPage(String buyerNick, Integer page, Integer count);
 
     /**
      * 更改订单状态，由service层控制修改逻辑
      *
      * @param json 订单信息
-     * @return MallResult 返回值
+     * @return MallResponse 返回值
      */
-    MallResult updateOrderStatus(String json);
+    MallResponse updateOrderStatus(String json);
 }

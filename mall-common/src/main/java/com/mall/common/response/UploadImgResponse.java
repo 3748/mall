@@ -1,4 +1,4 @@
-package com.mall.common.vo;
+package com.mall.common.response;
 
 /**
  * 图片上传返回实体类
@@ -6,7 +6,7 @@ package com.mall.common.vo;
  * @author gp6
  * @date 2018-07-10
  */
-public class UploadImgVo {
+public class UploadImgResponse {
     /**
      * 图片上传结果 0:成功 1:失败
      */
