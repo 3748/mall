@@ -1,5 +1,7 @@
 package com.mall.common.bean;
 
+import org.apache.solr.client.solrj.beans.Field;
+
 /**
  * 基础实体类
  *
@@ -15,6 +17,7 @@ public class Base {
     /**
      * 更新时间
      */
+    @Field("updateTime")
     private Long updateTime;
 
     public Long getCreateTime() {

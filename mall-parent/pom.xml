@@ -64,13 +64,17 @@
         <!--时间操作组件-->
         <joda-time.version>2.5</joda-time.version>
 
+        <jstl.version>1.2</jstl.version>
         <servlet-api.version>2.4</servlet-api.version>
+        <jsp-api.version>2.0</jsp-api.version>
 
         <!--plugin的属性定义 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.8</jdk.version>
 
         <quartz.version>2.2.1</quartz.version>
+
+        <solrj.version>4.10.2</solrj.version>
     </properties>
 
     <!--
@@ -93,6 +97,12 @@
                 <scope>test</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.solr</groupId>
+                <artifactId>solr-solrj</artifactId>
+                <version>${solrj.version}</version>
+            </dependency>
+
             <!--定时任务-->
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
@@ -113,11 +123,33 @@
                 <version>${apache.commons-codec.version}</version>
             </dependency>
 
+            <!--jsp相关-->
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>${jsp-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+
+                <groupId>javax.servlet.jsp.jstl</groupId>
+
+                <artifactId>jstl</artifactId>
+
+                <version>1.2</version>
+
             </dependency>
 
             <!--表单校验工具-->

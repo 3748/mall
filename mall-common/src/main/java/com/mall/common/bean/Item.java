@@ -1,5 +1,7 @@
 package com.mall.common.bean;
 
+import org.apache.solr.client.solrj.beans.Field;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,21 +22,25 @@ public class Item extends Base {
      */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Field("id")
     private Long id;
 
     /**
      * 商品标题
      */
+    @Field("title")
     private String title;
 
     /**
      * 商品卖点
      */
+    @Field("sellPoint")
     private String sellPoint;
 
     /**
      * 商品价格，单位为：分
      */
+    @Field("price")
     private Long price;
 
     /**
@@ -50,16 +56,19 @@ public class Item extends Base {
     /**
      * 商品图片
      */
+    @Field("image")
     private String image;
 
     /**
      * 所属类目，叶子类目
      */
-    private Integer itemCatId;
+    @Field("itemCatId")
+    private Long itemCatId;
 
     /**
      * 商品状态，1-正常，2-下架，3-删除
      */
+    @Field("status")
     private Integer status;
 
     /**
@@ -193,7 +202,7 @@ public class Item extends Base {
      *
      * @return itemCatId 所属类目，叶子类目
      */
-    public Integer getItemCatId() {
+    public Long getItemCatId() {
         return itemCatId;
     }
 
@@ -202,7 +211,7 @@ public class Item extends Base {
      *
      * @param itemCatId 所属类目，叶子类目
      */
-    public void setItemCatId(Integer itemCatId) {
+    public void setItemCatId(Long itemCatId) {
         this.itemCatId = itemCatId;
     }
 
