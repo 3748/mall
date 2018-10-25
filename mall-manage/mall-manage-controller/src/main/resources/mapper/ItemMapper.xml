@@ -10,7 +10,7 @@
 		<result column="num" jdbcType="INTEGER" property="num" />
 		<result column="barcode" jdbcType="VARCHAR" property="barcode" />
 		<result column="image" jdbcType="VARCHAR" property="image" />
-		<result column="item_cat_id" jdbcType="INTEGER" property="itemCatId" />
+		<result column="item_cat_id" jdbcType="BIGINT" property="itemCatId" />
 		<result column="status" jdbcType="INTEGER" property="status" />
 		<result column="create_time" jdbcType="BIGINT" property="createTime" />
 		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
@@ -21,7 +21,7 @@
 		create_time, update_time
 	</sql>
 	
-	<select id="getItemInfoById" parameterType="java.lang.Long" resultType="com.mall.common.response.ItemResponse">
+	<select id="selectItemById" parameterType="java.lang.Long" resultType="com.mall.common.response.ItemResponse">
 		select
 			id, title, sell_point sellPoint, price, num, barcode, image, item_cat_id itemCatId, status,
 			mi.create_time createTime, mi.update_time updateTime,mid.item_desc itemDesc

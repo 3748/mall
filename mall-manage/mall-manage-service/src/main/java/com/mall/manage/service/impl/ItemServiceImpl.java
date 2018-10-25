@@ -87,12 +87,12 @@ public class ItemServiceImpl implements ItemService {
         }
 
         // 向MQ发送消息
-        sendMsg(itemRequest.getId(), KeywordEnum.MQ_TYPE_INSERT.getValue());
+        sendMsg(item.getId(), KeywordEnum.MQ_TYPE_INSERT.getValue());
         return flag;
     }
 
     @Override
-    public ItemResponse selectItemById(Long id) {
+    public ItemResponse selectItemResponseById(Long id) {
 
         // 从缓存中命中
         String key = KeywordEnum.MALL_MANAGE_ITEM_DETAIL.getValue() + id;
@@ -105,7 +105,7 @@ public class ItemServiceImpl implements ItemService {
             LOGGER.error("从缓存中获取商品详情失败" + e.getMessage());
         }
 
-        ItemResponse itemResponse = itemMapper.getItemInfoById(id);
+        ItemResponse itemResponse = itemMapper.selectItemById(id);
         try {
             if (null == itemResponse) {
                 return null;
@@ -119,6 +119,11 @@ public class ItemServiceImpl implements ItemService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Item selectItemById(Long id) {
+        return itemMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -180,13 +185,13 @@ public class ItemServiceImpl implements ItemService {
     private void sendMsg(Long itemId, String type) {
         try {
             // 封装MQ传递的参数
-            Map<String, Object> data = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
-            data.put("itemId", itemId);
-            data.put("type", type);
-            data.put("date", System.currentTimeMillis());
+            Map<String, Object> map = new HashMap<>(NumberEnum.FOUR.getValue());
+            map.put("itemId", itemId);
+            map.put("type", type);
+            map.put("date", DateTimeUtil.CURRENTTIME);
 
             // 发送MQ,通知其他系统更新缓存中的商品信息(尽量少的传递信息)
-            rabbitTemplate.convertAndSend("item." + type, OBJECT_MAPPER.writeValueAsString(data));
+            rabbitTemplate.convertAndSend("item." + type, OBJECT_MAPPER.writeValueAsString(map));
         } catch (Exception e) {
             LOGGER.error("MQ消息发送失败", e.getMessage());
         }

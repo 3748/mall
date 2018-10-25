@@ -21,12 +21,19 @@ public interface ItemService {
     Boolean insertItem(ItemRequest itemRequest);
 
     /**
-     * 获取商品信息
+     * 据id查询商品信息(包括商品描述和商品详情)
      *
      * @param id 商品id
      * @return ItemResponse
      */
-    ItemResponse selectItemById(Long id);
+    ItemResponse selectItemResponseById(Long id);
+
+    /**
+     * 据id查询商品信息
+     * @param id 商品id
+     * @return 商品信息
+     */
+    Item selectItemById(Long id);
 
     /**
      * 更新商品

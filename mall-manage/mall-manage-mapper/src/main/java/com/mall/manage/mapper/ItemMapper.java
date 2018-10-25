@@ -15,5 +15,5 @@ public interface ItemMapper extends Mapper<Item> {
      * @param id 商品id
      * @return 商品信息
      */
-    ItemResponse getItemInfoById(Long id);
+    ItemResponse selectItemById(Long id);
 }

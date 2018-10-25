@@ -12,7 +12,7 @@
     <!--2: 定义MQ的管理，包括队列、交换器等,用来完成队列/交换机的自动声明-->
     <rabbit:admin connection-factory="connectionFactory"/>
 
-    <!--3: 定义交换机(自动声明,默认持久化),自动声明不是在启动时声明,而是在使用时声明-->
+    <!--3: 定义交换机(自动声明,默认持久化),自动声明不是在项目启动时声明,而是在使用时声明-->
     <rabbit:topic-exchange name="mall-manage-item-exchange" auto-declare="true"/>
 
     <!--4: 定义Rabbit模板，指定连接工厂以及定义交换机(exchange)-->

@@ -73,7 +73,7 @@ public class ItemCatServiceImpl implements ItemCatService {
         ItemCatResponse result = new ItemCatResponse();
 
         // 转为map存储，key为父节点ID，value为数据集合
-        Map<Long, List<ItemCat>> itemCatMap = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
+        Map<Long, List<ItemCat>> itemCatMap = new HashMap<>(NumberEnum.SIXTEEN.getValue());
         for (ItemCat itemCat : cats) {
             if (!itemCatMap.containsKey(itemCat.getParentId())) {
                 itemCatMap.put(itemCat.getParentId(), new ArrayList<>());

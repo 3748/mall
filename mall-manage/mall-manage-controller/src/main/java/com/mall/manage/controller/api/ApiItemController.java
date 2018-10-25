@@ -1,5 +1,6 @@
 package com.mall.manage.controller.api;
 
+import com.mall.common.bean.Item;
 import com.mall.common.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,16 +26,30 @@ public class ApiItemController {
     private ItemService itemService;
 
     /**
-     * 根据id查询商品信息
+     * 根据id查询商品信息(包括商品描述和商品详情)
+     *
+     * @param id 商品id
+     * @return ResponseEntity<Item>
+     */
+    @RequestMapping(value = "response/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ItemResponse> selectItemResponseById(@PathVariable("id") Long id) {
+        ItemResponse itemResponse = itemService.selectItemResponseById(id);
+
+        BeanUtil<ItemResponse> beanUtil = new BeanUtil<>();
+        return beanUtil.isNull(itemResponse);
+    }
+
+    /**
+     * 根据id查询商品信息(包括商品描述和商品详情)
      *
      * @param id 商品id
      * @return ResponseEntity<Item>
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResponseEntity<ItemResponse> selectItemById(@PathVariable("id") Long id) {
-        ItemResponse itemResponse = itemService.selectItemById(id);
+    public ResponseEntity<Item> selectItemById(@PathVariable("id") Long id) {
+        Item item = itemService.selectItemById(id);
 
-        BeanUtil<ItemResponse> beanUtil = new BeanUtil<>();
-        return beanUtil.isNull(itemResponse);
+        BeanUtil<Item> beanUtil = new BeanUtil<>();
+        return beanUtil.isNull(item);
     }
 }
