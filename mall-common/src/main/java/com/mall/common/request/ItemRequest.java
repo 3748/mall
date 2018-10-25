@@ -51,7 +51,7 @@ public class ItemRequest extends Base {
     /**
      * 所属类目，叶子类目
      */
-    private Integer itemCatId;
+    private Long itemCatId;
 
     /**
      * 商品描述
@@ -119,11 +119,11 @@ public class ItemRequest extends Base {
         this.image = image;
     }
 
-    public Integer getItemCatId() {
+    public Long getItemCatId() {
         return itemCatId;
     }
 
-    public void setItemCatId(Integer itemCatId) {
+    public void setItemCatId(Long itemCatId) {
         this.itemCatId = itemCatId;
     }
 

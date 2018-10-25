@@ -27,8 +27,8 @@ public enum KeywordEnum {
      * MQ
      */
     MQ_TYPE_UPDATE("MQ操作类型--update", "update"),
-
     MQ_TYPE_INSERT("MQ操作类型--insert", "insert"),
+    MQ_TYPE_DELETE("MQ操作类型--delete", "delete"),
 
 
     /**
