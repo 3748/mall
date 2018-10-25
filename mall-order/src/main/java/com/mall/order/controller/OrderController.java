@@ -63,7 +63,7 @@ public class OrderController {
      * 修改订单状态
      *
      * @param json 订单数据
-     * @return ResultMsg
+     * @return MallResponse
      */
     @ResponseBody
     @RequestMapping(value = "/updateOrderStatus", method = RequestMethod.POST)

@@ -2,7 +2,7 @@ package com.mall.order.service;
 
 import com.mall.common.bean.Order;
 import com.mall.common.response.MallResponse;
-import com.mall.order.pojo.PageResponse;
+import com.mall.common.response.PageResponse;
 
 /**
  * 订单接口
