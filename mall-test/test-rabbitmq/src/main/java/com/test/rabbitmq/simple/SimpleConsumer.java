@@ -30,11 +30,12 @@ public class SimpleConsumer {
         // 监听队列
         channel.basicConsume(QUEUE_NAME, true, consumer);
 
-        // 获取消息
+        // 获取消息后,消息即删除
         while (true) {
+            // 此处会阻塞,等待消息
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
             String message = new String(delivery.getBody());
-            System.out.println(" [x] Received '" + message + "'");
+            System.out.println(" SimpleConsumer '" + message + "'");
         }
     }
 }

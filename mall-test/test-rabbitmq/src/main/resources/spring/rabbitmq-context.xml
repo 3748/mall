@@ -20,7 +20,7 @@
         <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="fanoutExchange" routing-key="foo.bar" />
     -->
 
-    <!--MQ的管理，包括队列、交换器等,用来完成队列/交换机的自动声明-->
+    <!--MQ的管理,包括队列、交换器等,用来完成队列/交换机的自动声明-->
     <rabbit:admin connection-factory="connectionFactory"/>
 
     <!--定义队列，自动声明(默认持久化,durable="false"改为非持久化)  -->

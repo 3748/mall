@@ -35,6 +35,7 @@ public class TopicConsumer {
 
         // 定义队列的消费者
         QueueingConsumer consumer = new QueueingConsumer(channel);
+
         // 监听队列，手动返回完成
         channel.basicConsume(QUEUE_NAME, false, consumer);
 

@@ -22,7 +22,7 @@ public class RoutingProvider {
         channel.exchangeDeclare(EXCHANGE_NAME, "direct");
 
         // 消息内容
-        String message = "Hello World!";
+        String message = "I am RoutingProvider!";
         channel.basicPublish(EXCHANGE_NAME, "key2", null, message.getBytes());
         System.out.println(" RoutingProvider '" + message + "'");
 

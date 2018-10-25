@@ -24,7 +24,7 @@ public class PsProvider {
 		channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
 		// 消息内容
-		String message = "Hello World!";
+		String message = "I am ps_exchange_name!";
 		channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
 		System.out.println(" PsProvider '" + message + "'");
 

@@ -18,15 +18,17 @@ public class SimpleProducer {
     public static void main(String[] argv) throws Exception {
         // 获取到连接以及mq通道
         Connection connection = ConnectionUtil.getConnection();
-        // 从连接中创建通道
+
+        // 从连接中创建通道,相当于JDBC中的statement
         Channel channel = connection.createChannel();
+
         // 声明（创建）队列
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
         // 消息内容
-        String message = "Hello World!";
+        String message = "I am simple_queue!";
         channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-        System.out.println(" [x] Sent '" + message + "'");
+        System.out.println(" SimpleProducer '" + message + "'");
 
         // 关闭通道和连接
         channel.close();

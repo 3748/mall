@@ -12,10 +12,10 @@ import com.test.rabbitmq.util.ConnectionUtil;
  * @author gp6
  * @date 2018/9/10
  */
-public class PsCommonMethod {
+class PsCommonMethod {
     private final static String EXCHANGE_NAME = "ps_exchange_name";
 
-    public PsCommonMethod(String queueName) throws Exception {
+    PsCommonMethod(String queueName) throws Exception {
         // 获取到连接以及mq通道
         Connection connection = ConnectionUtil.getConnection();
         Channel channel = connection.createChannel();

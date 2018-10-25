@@ -14,7 +14,7 @@ import com.rabbitmq.client.QueueingConsumer;
  */
 public class RoutingConsumer {
 
-    private final static String QUEUE_NAME = "test_queue_work";
+    private final static String QUEUE_NAME = "test_queue_routing";
 
     private final static String EXCHANGE_NAME = "test_exchange_direct";
 
@@ -29,6 +29,8 @@ public class RoutingConsumer {
 
         // 绑定队列到交换机
         channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "key");
+
+        channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "key2");
 
         // 同一时刻服务器只会发一条消息给消费者
         channel.basicQos(1);

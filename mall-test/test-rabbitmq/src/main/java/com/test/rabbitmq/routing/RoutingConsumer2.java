@@ -14,7 +14,7 @@ import com.rabbitmq.client.QueueingConsumer;
  */
 public class RoutingConsumer2 {
 
-    private final static String QUEUE_NAME = "test_queue_work2";
+    private final static String QUEUE_NAME = "test_queue_routing2";
 
     private final static String EXCHANGE_NAME = "test_exchange_direct";
 

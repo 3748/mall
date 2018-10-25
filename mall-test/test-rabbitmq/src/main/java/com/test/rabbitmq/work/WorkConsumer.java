@@ -40,7 +40,7 @@ public class WorkConsumer {
             System.out.println(" WorkConsumer '" + message + "'");
             // 休眠
             Thread.sleep(10);
-            // 返回确认状态
+            // 手动模式下,返回确认状态
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         }
     }
