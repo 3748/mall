@@ -2,7 +2,7 @@ package com.mall.order.controller;
 
 import com.mall.common.bean.Order;
 import com.mall.common.response.MallResponse;
-import com.mall.order.pojo.PageResponse;
+import com.mall.common.response.PageResponse;
 import com.mall.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

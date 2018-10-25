@@ -52,7 +52,7 @@ public class LoginController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> login(User user, HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
+        Map<String, Object> result = new HashMap<>(NumberEnum.TWO.getValue());
         try {
             String token = loginService.login(user.getUserName(), user.getPassword());
             if (StringUtils.isEmpty(token)) {

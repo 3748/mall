@@ -77,7 +77,7 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> register(@Valid @RequestBody User user, BindingResult bindingResult) {
-        Map<String, Object> result = new HashMap<>(NumberEnum.MAP_INIT_SIZE.getValue());
+        Map<String, Object> result = new HashMap<>(NumberEnum.FOUR.getValue());
 
         // bindingResult接收@Valid校验的结果
         if (bindingResult.hasErrors()) {
