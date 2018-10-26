@@ -1,5 +1,6 @@
 package com.mall.web.service;
 
+import com.mall.common.bean.Item;
 import com.mall.common.enums.NumberEnum;
 import com.mall.common.enums.KeywordEnum;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mall.common.utils.HttpClientUtil;
 import com.mall.common.utils.RedisUtil;
-import com.mall.common.response.ItemResponse;
 
 /**
  * @author gp6
@@ -43,18 +43,19 @@ public class ItemService {
      * @param id 商品id
      * @return ItemResponse
      */
-    public ItemResponse selectItemById(Long id) {
+    public Item selectItemById(Long id) {
 
         // 从缓存中命中
         String key = KeywordEnum.MALL_WEB_ITEM_DETAIL.getValue() + id;
         try {
             String cacheData = redisUtil.get(key);
             if (StringUtils.isNotEmpty(cacheData)) {
-                return OBJECT_MAPPER.readValue(cacheData, ItemResponse.class);
+                return OBJECT_MAPPER.readValue(cacheData, Item.class);
             }
         } catch (Exception e) {
             LOGGER.error("获取商品详情失败,原因:" + e.getMessage());
         }
+
 
         String jsonData;
         try {
@@ -66,9 +67,9 @@ public class ItemService {
 
             // 将数据写入到缓存中
             redisUtil.set(key, jsonData, NumberEnum.ITEM_DETAIL_EXPIRE_TIME.getValue());
-            return OBJECT_MAPPER.readValue(jsonData, ItemResponse.class);
+            return OBJECT_MAPPER.readValue(jsonData, Item.class);
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("商品写入缓存失败,商品id:{},原因:{}", id, e.getMessage());
         }
         return null;
     }

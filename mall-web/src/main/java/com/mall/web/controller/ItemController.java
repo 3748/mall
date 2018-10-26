@@ -1,5 +1,6 @@
 package com.mall.web.controller;
 
+import com.mall.common.bean.Item;
 import com.mall.common.utils.BeanUtil;
 import com.mall.common.response.ItemResponse;
 import com.mall.web.service.ItemService;
@@ -31,11 +32,11 @@ public class ItemController {
      * @return ResponseEntity<ItemResponse>
      */
     @RequestMapping(value = "test/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ItemResponse> getItemInfoById406(@PathVariable("id") Long id) {
-        ItemResponse itemResponse = itemService.selectItemById(id);
+    public ResponseEntity<Item> getItemInfoById(@PathVariable("id") Long id) {
+        Item item = itemService.selectItemById(id);
 
-        BeanUtil<ItemResponse> beanUtil = new BeanUtil<>();
-        return beanUtil.isNull(itemResponse);
+        BeanUtil<Item> beanUtil = new BeanUtil<>();
+        return beanUtil.isNull(item);
     }
 
     /**
@@ -45,12 +46,11 @@ public class ItemController {
      * @return ResponseEntity<ItemResponse>
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ModelAndView selectItemById(@PathVariable("id") Long id) {
-        ItemResponse itemResponse = itemService.selectItemById(id);
+    public ResponseEntity<Item> selectItemById(@PathVariable("id") Long id) {
+        Item item = itemService.selectItemById(id);
 
-        ModelAndView modelAndView = new ModelAndView("item");
-        modelAndView.addObject("ItemResponse", itemResponse);
-        return modelAndView;
+        BeanUtil<Item> beanUtil = new BeanUtil<>();
+        return beanUtil.isNull(item);
     }
 
 }

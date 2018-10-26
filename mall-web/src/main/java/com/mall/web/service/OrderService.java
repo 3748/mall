@@ -7,7 +7,7 @@ import com.mall.common.enums.KeywordEnum;
 import com.mall.common.http.client.HttpResult;
 import com.mall.common.request.OrderRequest;
 import com.mall.common.utils.HttpClientUtil;
-import com.mall.web.threadlocal.UserThreadLocal;
+import com.mall.common.threadlocal.UserThreadLocal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

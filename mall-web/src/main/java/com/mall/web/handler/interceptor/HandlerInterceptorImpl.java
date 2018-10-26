@@ -2,10 +2,10 @@ package com.mall.web.handler.interceptor;
 
 import com.mall.common.bean.User;
 import com.mall.common.enums.KeywordEnum;
+import com.mall.common.threadlocal.UserThreadLocal;
 import com.mall.common.utils.CookieUtils;
 import com.mall.web.service.PropertiesService;
 import com.mall.web.service.UserService;
-import com.mall.web.threadlocal.UserThreadLocal ;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
