@@ -116,7 +116,6 @@ public class ItemServiceImpl implements ItemService {
             return itemResponse;
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getMessage());
-            e.printStackTrace();
         }
         return null;
     }

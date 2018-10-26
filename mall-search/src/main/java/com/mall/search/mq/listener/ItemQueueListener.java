@@ -45,8 +45,7 @@ public class ItemQueueListener {
                 httpSolrServer.commit();
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.error(e.getMessage());
+            LOGGER.error("搜索系统MQ消费者处理商品失败,原因:{}", e.getMessage());
         }
     }
 }
