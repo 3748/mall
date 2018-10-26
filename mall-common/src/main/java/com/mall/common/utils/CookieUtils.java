@@ -41,7 +41,7 @@ public class CookieUtils {
      * @param isDecoder  是否编码
      * @return String
      */
-    private static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) {
+    public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) {
         Cookie[] cookieList = request.getCookies();
         if (cookieList == null || cookieName == null) {
             return null;
@@ -116,7 +116,7 @@ public class CookieUtils {
     /**
      * 设置Cookie的值 在指定时间内生效, 编码参数
      */
-    private static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
     }
 

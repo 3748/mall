@@ -33,7 +33,10 @@ public enum NumberEnum {
     ORDER_STATUS_SHIPPING("已发货", 4), ORDER_STATUS_TRADE_SUCC("交易成功", 5), ORDER_STATUS_TRADE_CLOSE("交易关闭", 6),
 
     // 买家是否评价
-    BUYER_UNASSESS("未评价", 0), BUYER_ASSESS("已评价", 1);
+    BUYER_UNASSESS("未评价", 0), BUYER_ASSESS("已评价", 1),
+
+    // 购物车中Cookie过期时间,一年
+    COOKIE_TIME("购物车中Cookie过期时间",31536000);
 
     private String name;
 

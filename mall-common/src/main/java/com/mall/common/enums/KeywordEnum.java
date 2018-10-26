@@ -24,6 +24,11 @@ public enum KeywordEnum {
     MALL_SSO_TOKEN("登录系统Token", "MALL_SSO_TOKEN"),
 
     /**
+     * Cookie
+     */
+    MALL_CART_COOKIE("购物车系统Cookie","MALL_CART_COOKIE"),
+
+    /**
      * MQ
      */
     MQ_TYPE_UPDATE("MQ操作类型--update", "update"),
