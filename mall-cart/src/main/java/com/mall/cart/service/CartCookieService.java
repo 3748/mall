@@ -100,6 +100,14 @@ public class CartCookieService {
         CookieUtils.setCookie(request, response, KeywordEnum.MALL_CART_COOKIE.getValue(), OBJECT_MAPPER.writeValueAsString(cartList), NumberEnum.COOKIE_TIME.getValue(), true);
     }
 
+    /**
+     * 将商品从购物车删除
+     *
+     * @param itemId   商品id
+     * @param request  HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws Exception 异常
+     */
     public void delete(Long itemId, HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Cart> cartList = queryCartList(request);
 
@@ -119,7 +127,11 @@ public class CartCookieService {
         CookieUtils.setCookie(request, response, KeywordEnum.MALL_CART_COOKIE.getValue(), OBJECT_MAPPER.writeValueAsString(cartList), NumberEnum.COOKIE_TIME.getValue(), true);
     }
 
-
+    /**
+     * @param request HttpServletRequest
+     * @return List
+     * @throws Exception 异常
+     */
     private List<Cart> queryCartList(HttpServletRequest request) throws Exception {
         // 从Cookie中获取数据
         String jsonData = CookieUtils.getCookieValue(request, KeywordEnum.MALL_CART_COOKIE.getValue(), true);

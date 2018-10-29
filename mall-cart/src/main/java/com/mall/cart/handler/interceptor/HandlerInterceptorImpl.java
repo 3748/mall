@@ -28,7 +28,7 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         // 清空当前线程中的User对象
-        UserThreadLocal.set(null);
+        UserThreadLocal.remove();
 
         // 从Cookie中获取token
         String token = CookieUtils.getCookieValue(httpServletRequest, KeywordEnum.MALL_SSO_TOKEN.getValue());

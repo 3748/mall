@@ -11,13 +11,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PropertiesService {
-    @Value("${MALL_SSO_URL}")
-    public String mallSsoUrl;
+    @Value("${SSO_URL}")
+    public String ssoUrl;
 
-    @Value("${MALL_ORDER_URL}")
-    public String mallOrderUrl;
+    @Value("${ORDER_URL}")
+    public String orderUrl;
 
-    @Value("MALL_SSO_USER_URL")
-    public String mallSsoUserUrl;
+    @Value("${SSO_USER_URL}")
+    public String ssoUserUrl;
+
+    @Value("${MANAGE_URL}")
+    public String manageUrl;
+
+    @Value("${MANAGE_ITEM_URL}")
+    public String manageItemUrl;
 
 }
