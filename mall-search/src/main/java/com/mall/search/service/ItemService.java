@@ -18,14 +18,14 @@ public class ItemService {
     @Autowired
     private HttpClientUtil httpClientUtil;
 
-    @Value("${MALL_MANAGE_URL}")
-    private String mallManageUrl;
+    @Autowired
+    private PropertiesService propertiesService;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public Item selectItemById(Long itemId) {
         try {
-            String url = mallManageUrl + "/rest/api/item/" + itemId;
+            String url = propertiesService.manageUrl + propertiesService.manageItemUrl + itemId;
             String jsonData = httpClientUtil.doGet(url);
             if (StringUtils.isNotEmpty(jsonData)) {
                 return OBJECT_MAPPER.readValue(jsonData, Item.class);

@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,20 +27,14 @@ public class IndexService {
     @Autowired
     private HttpClientUtil httpClientUtil;
 
-    @Value("${MANAGE_MALL_URL}")
-    private String manageMallUrl;
-
-    @Value("${INDEX_AD1_URL}")
-    private String indexAd1Url;
-
-    @Value("${INDEX_AD2_URL}")
-    private String indexAd2Url;
+    @Autowired
+    private PropertiesService propertiesService;
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public String queryIndexAD1() {
+    public String selectBigIndexAD() {
         try {
-            String url = this.manageMallUrl + this.indexAd1Url;
+            String url = propertiesService.manageUrl + propertiesService.manageIndexBigAdUrl;
             String jsonData = httpClientUtil.doGet(url);
 
             if (StringUtils.isEmpty(jsonData)) {
@@ -76,9 +69,9 @@ public class IndexService {
         return null;
     }
 
-    public String queryIndexAD2() {
+    public String selectSmallIndexAD() {
         try {
-            String url = this.manageMallUrl + this.indexAd2Url;
+            String url = propertiesService.manageUrl + propertiesService.manageIndexSmallAdUrl;
             String jsonData = httpClientUtil.doGet(url);
             if (StringUtils.isEmpty(jsonData)) {
                 return null;

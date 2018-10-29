@@ -31,7 +31,7 @@ public class HandlerInterceptorImpl implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         // 登录页面
-        String loginUrl = propertiesService.mallSsoUrl + "/login.html";
+        String loginUrl = propertiesService.ssoUrl + propertiesService.webLoginUrl;
 
         // 从Cookie中获取token
         String token = CookieUtils.getCookieValue(httpServletRequest, KeywordEnum.MALL_SSO_TOKEN.getValue());

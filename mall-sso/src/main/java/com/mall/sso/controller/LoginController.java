@@ -68,9 +68,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = {"{token}"}, method = RequestMethod.GET)
-    public ResponseEntity<User> queryUserByToken(@PathVariable("token") String token) {
+    public ResponseEntity<User> selectUserByToken(@PathVariable("token") String token) {
         User user = new User();
         user.setUserName(token + "该服务没有了，以后别调用了，请访问ssoquery.mall.com或dubbo中的服务。");
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(user);
+        return ResponseEntity.ok(user);
     }
 }

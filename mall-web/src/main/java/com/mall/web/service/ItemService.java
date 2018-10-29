@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,17 +24,14 @@ public class ItemService {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    @Value("${MANAGE_MALL_URL}")
-    private String manageMallUrl;
-
-    @Value("${ITEM_DETAIL}")
-    private String itemDetail;
-
     @Autowired
     private HttpClientUtil httpClientUtil;
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private PropertiesService propertiesService;
 
     /**
      * 因为缓存原因,当后台更改商品时,前台获取的商品不是最新(用MQ解决该问题)
@@ -56,10 +52,9 @@ public class ItemService {
             LOGGER.error("获取商品详情失败,原因:" + e.getMessage());
         }
 
-
         String jsonData;
         try {
-            String url = manageMallUrl + itemDetail;
+            String url = propertiesService.manageUrl + propertiesService.manageItemDetail;
             jsonData = httpClientUtil.doGet(url);
             if (StringUtils.isEmpty(jsonData)) {
                 return null;

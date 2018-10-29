@@ -16,7 +16,6 @@
         <!--配置资源文件-->
         <property name="locations">
             <list>
-                <value>classpath:properties/env.properties</value>
                 <value>classpath:properties/redis.properties</value>
                 <value>classpath:properties/jdbc.properties</value>
             </list>

@@ -8,9 +8,9 @@ import com.mall.web.service.OrderService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 订单管理
@@ -29,17 +29,15 @@ public class OrderController {
     private ItemService itemService;
 
     /**
-     * 点击购买,跳转订单确认页
+     * 点击购买,返回商品详情
      *
      * @param itemId 商品id
-     * @return ModelAndView
+     * @return ResponseEntity
      */
     @RequestMapping(value = {"{itemId}"}, method = RequestMethod.GET)
-    public ModelAndView toOrder(@PathVariable("itemId") Long itemId) {
-        ModelAndView mv = new ModelAndView("order");
+    public ResponseEntity<Item> toOrder(@PathVariable("itemId") Long itemId) {
         Item item = itemService.selectItemById(itemId);
-        mv.addObject("item", item);
-        return mv;
+        return ResponseEntity.ok(item);
     }
 
     /**

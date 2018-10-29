@@ -31,7 +31,7 @@ public class OrderService {
     private HttpClientUtil httpClientUtil;
 
     public String insertOrderRequest(OrderRequest orderRequest) {
-        String url = propertiesService.mallOrderUrl + "/order/insert";
+        String url = propertiesService.orderUrl + propertiesService.orderInsertUrl;
 
         // 从本地线程中获取user对象
         User user = UserThreadLocal.get();
