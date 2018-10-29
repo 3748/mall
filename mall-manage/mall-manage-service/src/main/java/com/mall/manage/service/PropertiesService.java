@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PropertiesService {
 
-    @Value("${image_base_url}")
-    public String imageBaseUrl;
+    @Value("${MANAGE_IMAGE_BASE_URL}")
+    public String manageImageBaseUrl;
 
-    @Value("${upload_dir}")
-    public String uploadDir;
+    @Value("${MANAGE_UPLOAD_DIR}")
+    public String manageUploadDir;
 }
