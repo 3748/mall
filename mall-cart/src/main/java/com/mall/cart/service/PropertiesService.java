@@ -18,6 +18,6 @@ public class PropertiesService {
     public String mallOrderUrl;
 
     @Value("MALL_SSO_USER_URL")
-    public String MallSsoUserUrl;
+    public String mallSsoUserUrl;
 
 }

@@ -29,7 +29,7 @@ public class UserService {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public User selectUserByToken(String token) {
-        String url = propertiesService.mallSsoUrl + propertiesService.MallSsoUserUrl + token;
+        String url = propertiesService.mallSsoUrl + propertiesService.mallSsoUserUrl + token;
         String getResponse;
         try {
             getResponse = httpClientUtil.doGet(url);
