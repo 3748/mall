@@ -8,7 +8,7 @@ package com.mall.common.enums;
  */
 public enum NumberEnum {
     // 项目中用到的数字
-    ZERO(0), ONE(1), TWO(2), THREE(3), FOUR(4),SEVEN(7),SIXTEEN(16),
+    ZERO(0), ONE(1), TWO(2), THREE(3), FOUR(4),SEVEN(7),EIGHT(8),SIXTEEN(16),
 
     // Redis中登录系统
     TOKEN_EXPIRE_TIME("Token有效时间,30分钟", 60 * 30),
