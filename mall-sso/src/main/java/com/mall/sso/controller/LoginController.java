@@ -67,6 +67,12 @@ public class LoginController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 根据token获取用户信息
+     *
+     * @param token 用户token
+     * @return 用户信息
+     */
     @RequestMapping(value = {"{token}"}, method = RequestMethod.GET)
     public ResponseEntity<User> selectUserByToken(@PathVariable("token") String token) {
         User user = new User();

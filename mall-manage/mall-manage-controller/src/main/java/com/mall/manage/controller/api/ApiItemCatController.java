@@ -1,11 +1,11 @@
 package com.mall.manage.controller.api;
 
-import com.mall.common.utils.BeanUtil;
 import com.mall.common.response.ItemCatResponse;
 import com.mall.manage.service.ItemCatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,7 +68,14 @@ public class ApiItemCatController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<ItemCatResponse> selectItemCatListToTree() {
         ItemCatResponse itemCatResponse = itemCatService.selectAllItemCatListToTree();
-        BeanUtil<ItemCatResponse> beanUtil = new BeanUtil<>();
-        return beanUtil.isNull(itemCatResponse);
+        try {
+            if (null == itemCatResponse) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+            return ResponseEntity.ok(itemCatResponse);
+        } catch (Exception e) {
+            LOGGER.error("获取首页左侧商品类目失败,原因:" + e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 }
