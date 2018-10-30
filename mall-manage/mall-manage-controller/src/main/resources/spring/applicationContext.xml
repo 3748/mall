@@ -57,9 +57,10 @@
     -->
     <!--<context:annotation-config/>-->
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <!--主数据源-->
+    <bean id="masterDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
-        <property name="url" value="${jdbc.url}"/>
+        <property name="url" value="${jdbc.master.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
         <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
@@ -79,5 +80,44 @@
         <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/>
         <property name="logAbandoned" value="${logAbandoned}"/>
         <property name="connectionInitSqls" value="${connectionInitSqls}"/>
+    </bean>
+
+    <!--从数据源-->
+    <bean id="slaveDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.slave.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+        <property name="filters" value="${filters}"/>
+        <property name="maxActive" value="${maxActive}"/>
+        <property name="initialSize" value="${initialSize}"/>
+        <property name="maxWait" value="${maxWait}"/>
+        <property name="minIdle" value="${minIdle}"/>
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/>
+        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="testWhileIdle" value="${testWhileIdle}"/>
+        <property name="testOnBorrow" value="${testOnBorrow}"/>
+        <property name="testOnReturn" value="${testOnReturn}"/>
+        <property name="poolPreparedStatements" value="${poolPreparedStatements}"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${maxPoolPreparedStatementPerConnectionSize}"/>
+        <property name="removeAbandoned" value="${removeAbandoned}"/>
+        <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/>
+        <property name="logAbandoned" value="${logAbandoned}"/>
+        <property name="connectionInitSqls" value="${connectionInitSqls}"/>
+    </bean>
+
+    <!--定义数据源,使用自己实现的数据源-->
+    <bean id="dataSource" class="com.mall.common.datasource.DynamicDataSource">
+        <!--设置多个数据源 -->
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <!--这个key需要和程序中的key一致-->
+                <entry key="master" value-ref="masterDataSource"/>
+                <entry key="slave" value-ref="slaveDataSource"/>
+            </map>
+        </property>
+        <!--设置默认的数据源，这里默认走写库-->
+        <property name="defaultTargetDataSource" ref="masterDataSource"/>
     </bean>
 </beans>
