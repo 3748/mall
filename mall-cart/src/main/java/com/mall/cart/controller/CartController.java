@@ -32,6 +32,8 @@ public class CartController {
     private CartCookieService cartCookieService;
 
     /**
+     * 将商品加入购物车
+     *
      * @param itemId   商品id
      * @param request  HttpServletRequest
      * @param response HttpServletResponse

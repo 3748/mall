@@ -49,7 +49,6 @@ public class OrderController {
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     @ResponseBody
     public MallResponse insertOrderRequest(@RequestBody OrderRequest orderRequest) {
-
         String orderId = orderService.insertOrderRequest(orderRequest);
         if (StringUtils.isEmpty(orderId)) {
             return MallResponse.build(HttpStatus.BAD_REQUEST.value(), "新增订单失败!");

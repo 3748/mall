@@ -31,6 +31,7 @@ public class IndexController {
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> index() {
         Map<String, Object> map = new HashMap<>(NumberEnum.FOUR.getValue());
+        
         // 大广告位数据
         String indexBigAD = indexService.selectBigIndexAD();
         map.put("indexBigAD", indexBigAD);

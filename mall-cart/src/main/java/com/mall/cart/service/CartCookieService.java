@@ -39,7 +39,7 @@ public class CartCookieService {
      * @throws Exception 异常信息
      */
     public void insertItemToCart(Long itemId, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Cart> cartList = queryCartList(request);
+        List<Cart> cartList = selectCartList(request);
 
         Cart cart = null;
         for (Cart c : cartList) {
@@ -81,7 +81,7 @@ public class CartCookieService {
      * @throws Exception 异常信息
      */
     public void updateNum(Long itemId, Integer num, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Cart> cartList = queryCartList(request);
+        List<Cart> cartList = selectCartList(request);
 
         Cart cart = null;
         for (Cart c : cartList) {
@@ -109,7 +109,7 @@ public class CartCookieService {
      * @throws Exception 异常
      */
     public void delete(Long itemId, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Cart> cartList = queryCartList(request);
+        List<Cart> cartList = selectCartList(request);
 
         Cart cart = null;
         for (Cart c : cartList) {
@@ -132,7 +132,7 @@ public class CartCookieService {
      * @return List
      * @throws Exception 异常
      */
-    private List<Cart> queryCartList(HttpServletRequest request) throws Exception {
+    private List<Cart> selectCartList(HttpServletRequest request) throws Exception {
         // 从Cookie中获取数据
         String jsonData = CookieUtils.getCookieValue(request, KeywordEnum.MALL_CART_COOKIE.getValue(), true);
 

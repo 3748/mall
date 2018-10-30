@@ -36,7 +36,6 @@ public class ItemController {
     @RequestMapping(value = "test/{id}", method = RequestMethod.GET)
     public ResponseEntity<Item> getItemInfoById(@PathVariable("id") Long id) {
         Item item = itemService.selectItemById(id);
-
         try {
             if (null == item) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -68,5 +67,4 @@ public class ItemController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
-
 }
