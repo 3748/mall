@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 用户
@@ -13,7 +14,8 @@ import javax.persistence.Table;
  * @date 2018-08-23
  */
 @Table(name = "m_user")
-public class User extends Base {
+public class User extends Base implements Serializable {
+    private static final long serialVersionUID = 3161403483964300314L;
     /**
      *
      */

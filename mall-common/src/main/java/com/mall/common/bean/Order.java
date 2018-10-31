@@ -2,6 +2,7 @@ package com.mall.common.bean;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 订单表
@@ -10,7 +11,8 @@ import javax.persistence.Table;
  * @date 2018-10-16
  */
 @Table(name = "m_order")
-public class Order {
+public class Order implements Serializable {
+    private static final long serialVersionUID = -3738742377474116439L;
     /**
      * 订单id
      */

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 商品
@@ -14,7 +15,8 @@ import javax.persistence.Table;
  * @date 2018-07-09
  */
 @Table(name = "m_item")
-public class Item extends Base {
+public class Item extends Base implements Serializable {
+    private static final long serialVersionUID = -7553244885446475281L;
     /**
      * 商品id，同时也是商品编号
      * <p>

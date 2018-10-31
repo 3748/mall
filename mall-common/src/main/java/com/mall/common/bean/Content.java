@@ -1,6 +1,7 @@
 package com.mall.common.bean;
 
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 首页内容
@@ -9,7 +10,8 @@ import javax.persistence.Table;
  * @date 2018-08-21
  */
 @Table(name = "m_content")
-public class Content extends Base {
+public class Content extends Base implements Serializable {
+	private static final long serialVersionUID = 3676170204984802772L;
 	/**
 	 *
 	 */

@@ -3,6 +3,7 @@ package com.mall.common.bean;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 收货信息表
@@ -11,7 +12,8 @@ import javax.persistence.Table;
  * @date 2018-10-12
  */
 @Table(name = "m_order_shipping")
-public class OrderShipping extends Base {
+public class OrderShipping extends Base implements Serializable {
+    private static final long serialVersionUID = -4748564402949367938L;
     /**
      * 订单ID
      */

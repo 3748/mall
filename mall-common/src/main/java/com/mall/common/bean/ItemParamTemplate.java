@@ -1,6 +1,7 @@
 package com.mall.common.bean;
 
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 商品规格参数模板
@@ -9,7 +10,8 @@ import javax.persistence.Table;
  * @date 2018-09-27
  */
 @Table(name = "m_item_param_template")
-public class ItemParamTemplate extends Base {
+public class ItemParamTemplate extends Base implements Serializable {
+    private static final long serialVersionUID = -6243936334467602958L;
     /**
      *
      */

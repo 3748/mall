@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * 首页内容分类
@@ -12,7 +13,8 @@ import javax.persistence.Table;
  * @date 2018-08-21
  */
 @Table(name = "m_content_cat")
-public class ContentCat extends Base {
+public class ContentCat extends Base implements Serializable {
+    private static final long serialVersionUID = -2144982985150792554L;
     /**
      * 类目ID
      */
