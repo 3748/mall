@@ -13,10 +13,10 @@
     <dubbo:protocol name="dubbo" port="20880"/>
 
     <!-- 将该接口暴露到dubbo中 -->
-    <dubbo:service interface="com.mall.sso.query.api.UserServiceApi" ref="userServiceApiImpl"/>
+    <dubbo:service interface="com.mall.sso.query.api.UserServiceApi" ref="userServiceApi"/>
 
     <!-- 将具体的实现类加入到Spring容器中 -->
-    <bean id="userServiceApiImpl" class="com.mall.sso.query.provider.service.impl.UserServiceApiImpl"/>
+    <bean id="userServiceApi" class="com.mall.sso.query.provider.service.impl.UserServiceApiImpl"/>
 
     <!--registry:在注册中心中自动查找监控服务-->
     <dubbo:monitor protocol="registry"/>

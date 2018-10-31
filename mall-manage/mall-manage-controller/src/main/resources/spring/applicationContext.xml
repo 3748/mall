@@ -109,7 +109,7 @@
 
     <!--定义数据源,使用自己实现的数据源-->
     <bean id="dataSource" class="com.mall.common.datasource.DynamicDataSource">
-        <!--设置多个数据源 -->
+        <!--设置多个数据源-->
         <property name="targetDataSources">
             <map key-type="java.lang.String">
                 <!--这个key需要和程序中的key一致-->

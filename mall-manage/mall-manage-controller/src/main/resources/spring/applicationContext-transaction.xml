@@ -29,7 +29,7 @@
         </tx:attributes>
     </tx:advice>
 
-    <!-- 定义AOP切面处理器 -->
+    <!--定义AOP切面处理器-->
     <bean class="com.mall.common.datasource.DataSourceAspect" id="dataSourceAspect"/>
 
     <aop:config>

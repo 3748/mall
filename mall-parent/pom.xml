@@ -75,6 +75,11 @@
         <quartz.version>2.2.1</quartz.version>
 
         <solrj.version>4.10.2</solrj.version>
+
+        <zookeeper.version>3.3.3</zookeeper.version>
+        <zkclient.version>0.1</zkclient.version>
+
+        <dubbo.version>2.5.3</dubbo.version>
     </properties>
 
     <!--
@@ -89,6 +94,23 @@
     -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.sgroschupf</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
             <!--单元测试-->
             <dependency>
                 <groupId>junit</groupId>
