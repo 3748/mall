@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    /*@Autowired
+    /*
+    使用Http获取
+    @Autowired
     private PropertiesService propertiesService;
 
     @Autowired
@@ -31,6 +33,12 @@ public class UserService {
     @Autowired
     private UserServiceApi userServiceApi;
 
+    /**
+     * 使用DUBBO获取
+     *
+     * @param token 用户登录token
+     * @return 用户信息
+     */
     public User selectUserByToken(String token) {
         return userServiceApi.selectUserByToken(token);
     }

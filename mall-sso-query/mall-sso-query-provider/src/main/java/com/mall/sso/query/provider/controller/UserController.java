@@ -2,6 +2,8 @@ package com.mall.sso.query.provider.controller;
 
 import com.mall.common.bean.User;
 import com.mall.sso.query.provider.service.impl.UserServiceApiImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("user")
 public class UserController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserServiceApiImpl userServiceApiImpl;
 
@@ -37,7 +42,7 @@ public class UserController {
             }
             return ResponseEntity.ok(user);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("根据token查询用户信息失败,原因:" + e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
