@@ -35,7 +35,7 @@ public class ContentCatServiceImpl implements ContentCatService {
         contentCat.setIsParent(NumberEnum.CONCAT_CAT_IS_NOT_PARENT.getValue());
         contentCat.setSortOrder(1);
         contentCat.setStatus(NumberEnum.CONCAT_CAT_STATUS_NORMAL.getValue());
-        contentCat.setCreateTime(DateTimeUtil.CURRENTTIME);
+        contentCat.setCreateTime(DateTimeUtil.CURRENT_TIME);
         contentCat.setUpdateTime(contentCat.getCreateTime());
         contentCatMapper.insert(contentCat);
 

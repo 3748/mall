@@ -18,22 +18,22 @@ public class DateTimeUtil {
     /**
      * 获取指定格式(YYYYMMDDHHMMSS)的当前时间 eg:20181231123456
      */
-    public static final Long CURRENTTIME = getCurrentTime();
+    public static final Long CURRENT_TIME = getCurrentTime();
 
     /**
      * 获取当前年
      */
-    public static final String CURRENTYEAR = getCurrentYear();
+    public static final String CURRENT_YEAR = getCurrentYear();
 
     /**
      * 获取当前月
      */
-    public static final String CURRENTMOUTH = getCurrentMouth();
+    public static final String CURRENT_MOUTH = getCurrentMouth();
 
     /**
      * 获取当前日
      */
-    public static final String CURRENTDATE = getCurrentDate();
+    public static final String CURRENT_DATE = getCurrentDate();
 
     private static Long getCurrentTime() {
         SimpleDateFormat formatter = new SimpleDateFormat(YYYYMMDDHHMMSS);

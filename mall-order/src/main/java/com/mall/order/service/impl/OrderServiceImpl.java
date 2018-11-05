@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
 
             // 设置订单的初始状态为未付款
             orderRequest.setStatus(NumberEnum.ORDER_STATUS_UNPAID.getValue());
-            orderRequest.setCreateTime(DateTimeUtil.CURRENTTIME);
+            orderRequest.setCreateTime(DateTimeUtil.CURRENT_TIME);
             orderRequest.setUpdateTime(orderRequest.getCreateTime());
 
             // 设置买家评价状态，初始为未评价

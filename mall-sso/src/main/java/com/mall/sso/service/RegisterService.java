@@ -39,7 +39,7 @@ public class RegisterService {
 	}
 
 	public Boolean register(User user) {
-		user.setCreateTime(DateTimeUtil.CURRENTTIME);
+		user.setCreateTime(DateTimeUtil.CURRENT_TIME);
 		user.setUpdateTime(user.getCreateTime());
 		// 密码加密
 		user.setPassword(DigestUtils.md5Hex(user.getPassword()));

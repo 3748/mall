@@ -51,7 +51,7 @@ public class CartCookieService {
 
         if (null == cart) {
             cart = new Cart();
-            cart.setCreateTime(DateTimeUtil.CURRENTTIME);
+            cart.setCreateTime(DateTimeUtil.CURRENT_TIME);
             cart.setUpdateTime(cart.getCreateTime());
 
             Item item = itemService.selectItemById(itemId);
@@ -64,7 +64,7 @@ public class CartCookieService {
             cartList.add(cart);
         } else {
             cart.setNum(cart.getNum() + 1);
-            cart.setUpdateTime(DateTimeUtil.CURRENTTIME);
+            cart.setUpdateTime(DateTimeUtil.CURRENT_TIME);
         }
 
         // 将商品数据写入Cookie
@@ -93,7 +93,7 @@ public class CartCookieService {
 
         if (cart != null) {
             cart.setNum(num);
-            cart.setUpdateTime(DateTimeUtil.CURRENTTIME);
+            cart.setUpdateTime(DateTimeUtil.CURRENT_TIME);
         } else {
             return;
         }

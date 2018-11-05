@@ -42,7 +42,7 @@ public class CartService {
             // 该商品在购物车中不存在,将商品加入购物车
             cart = new Cart();
             cart.setUserId(user.getId());
-            cart.setCreateTime(DateTimeUtil.CURRENTTIME);
+            cart.setCreateTime(DateTimeUtil.CURRENT_TIME);
             cart.setUpdateTime(cart.getCreateTime());
 
             Item item = itemService.selectItemById(itemId);
@@ -57,7 +57,7 @@ public class CartService {
         } else {
             // 该商品在购物车中存在,修改购物车中商品数量
             cart.setNum(cart.getNum() + 1);
-            cart.setUpdateTime(DateTimeUtil.CURRENTTIME);
+            cart.setUpdateTime(DateTimeUtil.CURRENT_TIME);
             cartMapper.updateByPrimaryKeySelective(cart);
         }
     }
@@ -69,7 +69,7 @@ public class CartService {
     public void updateNum(Long itemId, Integer num) {
         Cart cart = new Cart();
         cart.setNum(num);
-        cart.setUpdateTime(DateTimeUtil.CURRENTTIME);
+        cart.setUpdateTime(DateTimeUtil.CURRENT_TIME);
 
         Example example = new Example(Cart.class);
         example.createCriteria().andEqualTo("itemId", itemId).andEqualTo("userId", UserThreadLocal.get().getId());

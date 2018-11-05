@@ -30,7 +30,7 @@ public class ItemParamServiceImpl implements ItemParamService {
         int count = NumberEnum.ZERO.getValue();
 
         try {
-            itemParam.setCreateTime(DateTimeUtil.CURRENTTIME);
+            itemParam.setCreateTime(DateTimeUtil.CURRENT_TIME);
             itemParam.setUpdateTime(itemParam.getCreateTime());
             count = itemParamMapper.insert(itemParam);
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class ItemParamServiceImpl implements ItemParamService {
             Example example = new Example(ItemParam.class);
             Example.Criteria criteria = example.createCriteria();
             criteria.andEqualTo("itemId", itemParam.getItemId());
-            itemParam.setUpdateTime(DateTimeUtil.CURRENTTIME);
+            itemParam.setUpdateTime(DateTimeUtil.CURRENT_TIME);
 
             // updateByExampleSelective(修改实体类中不为null的字段)
             count = itemParamMapper.updateByExampleSelective(itemParam, example);

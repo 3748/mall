@@ -115,14 +115,14 @@ public class UploadController {
     private String getFilePath(String sourceFileName) {
         String baseFolder = propertiesService.manageUploadDir + File.separator + "images";
         // 目录格式 yyyy/MM/dd
-        String fileFolder = baseFolder + File.separator + DateTimeUtil.CURRENTYEAR + File.separator + DateTimeUtil.CURRENTMOUTH + File.separator + DateTimeUtil.CURRENTDATE;
+        String fileFolder = baseFolder + File.separator + DateTimeUtil.CURRENT_YEAR + File.separator + DateTimeUtil.CURRENT_MOUTH + File.separator + DateTimeUtil.CURRENT_DATE;
         File file = new File(fileFolder);
         if (!file.isDirectory()) {
             // 如果目录不存在，则创建目录
             file.mkdirs();
         }
         // 生成新的文件名,当前时间+随机数
-        String fileName = DateTimeUtil.CURRENTTIME.toString() + RandomUtils.nextInt(100, 9999) + "."
+        String fileName = DateTimeUtil.CURRENT_TIME.toString() + RandomUtils.nextInt(100, 9999) + "."
                 + StringUtils.substringAfterLast(sourceFileName, ".");
 
         return fileFolder + File.separator + fileName;

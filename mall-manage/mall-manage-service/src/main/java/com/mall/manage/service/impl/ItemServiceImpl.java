@@ -61,7 +61,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Boolean insertItem(ItemRequest itemRequest) {
         boolean flag = true;
-        itemRequest.setCreateTime(DateTimeUtil.CURRENTTIME);
+        itemRequest.setCreateTime(DateTimeUtil.CURRENT_TIME);
         itemRequest.setUpdateTime(itemRequest.getCreateTime());
 
         // 保存商品基本信息
@@ -128,7 +128,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Boolean updateItem(ItemRequest itemRequest) {
         boolean flag = true;
-        itemRequest.setUpdateTime(DateTimeUtil.CURRENTTIME);
+        itemRequest.setUpdateTime(DateTimeUtil.CURRENT_TIME);
 
         // 更新商品基本信息
         Item item = new Item();
@@ -187,7 +187,7 @@ public class ItemServiceImpl implements ItemService {
             Map<String, Object> map = new HashMap<>(NumberEnum.FOUR.getValue());
             map.put("itemId", itemId);
             map.put("type", type);
-            map.put("date", DateTimeUtil.CURRENTTIME);
+            map.put("date", DateTimeUtil.CURRENT_TIME);
 
             // 发送MQ,通知其他系统更新缓存中的商品信息(尽量少的传递信息)
             rabbitTemplate.convertAndSend("item." + type, OBJECT_MAPPER.writeValueAsString(map));
