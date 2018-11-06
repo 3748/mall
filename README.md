@@ -3,8 +3,8 @@
 #### 项目启动:
 	1: 首先启动	mall-manage
 	2: mall-manage启动后,进行商品更新或者新增操作,会在MQ中声明一个交换机
-	3: 启动	mall-web 和	mall-search,会自动声明两个队列 , mall-web-item-queue 和 mall-search-item-queue
-	3: 将队列手工绑定到交换机中,绑定规则:
+	3: 启动	mall-web(必须先启动dubbo服务----sso-query) 和	mall-search,会自动声明两个队列 , mall-web-item-queue 和 mall-search-item-queue
+	4: 将队列手工绑定到交换机中,绑定规则:
 			To-queue : mall-web-item-queue
 			Routing key : item_update
 
@@ -21,13 +21,16 @@
 			To-queue : mall-search-item-queue
 			Routing key : item_delete
 
+
+
+
 #### 简介:
 	1: Mall商城是一个综合性的B2C平台
 	2: 会员可以在商城浏览商品并下单,参加各种活动
 	3: 管理员和运营可以在平台后台管理系统中管理商品,订单和会员
 	4: 客服可以在后台管理系统中处理用户咨询和投诉
 
-#### 用到的技术:
+#### 使用技术:
 	Git
 	Spring+SpringMVC+Mybatis
 	Maven
