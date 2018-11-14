@@ -92,6 +92,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--分页助手-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+
         <!--Apache工具组件-->
         <dependency>
             <groupId>org.apache.commons</groupId>
